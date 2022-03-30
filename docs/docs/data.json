@@ -1710,7 +1710,7 @@
             "tag": "module",
             "file": "source\\core\\Nunu.js",
             "line": 17,
-            "description": "nunuStudio core main file.\n\nStore development version, timestamp and contains global method to check browser feature support."
+            "description": "Freedom World Editor core main file.\n\nStore development version, timestamp and contains global method to check browser feature support."
         },
         "Files": {
             "name": "Files",
@@ -1724,7 +1724,7 @@
             "tag": "module",
             "file": "source\\core\\FileSystem.js",
             "line": 6,
-            "description": "FileSystem is used to read and write files using nunuStudio.\n\nIts implements multiple solutions for each method depending on the platform (NodeJS, brower or cordova).\n\nSome operations are platform specific and might not work everywhere.",
+            "description": "FileSystem is used to read and write files using Freedom World Editor.\n\nIts implements multiple solutions for each method depending on the platform (NodeJS, brower or cordova).\n\nSome operations are platform specific and might not work everywhere.",
             "static": 1
         }
     },
@@ -4590,7 +4590,7 @@
             "namespace": "",
             "file": "source\\core\\three\\core\\Object3D.js",
             "line": 451,
-            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https:// threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js."
+            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https:// threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll Freedom World Editor objects extend the Object3D class of some other higher level class from three.js."
         },
         "Material": {
             "name": "Material",
@@ -5008,7 +5008,7 @@
             "namespace": "",
             "file": "source\\core\\FileSystem.js",
             "line": 6,
-            "description": "FileSystem is used to read and write files using nunuStudio.\n\nIts implements multiple solutions for each method depending on the platform (NodeJS, brower or cordova).\n\nSome operations are platform specific and might not work everywhere."
+            "description": "FileSystem is used to read and write files using Freedom World Editor.\n\nIts implements multiple solutions for each method depending on the platform (NodeJS, brower or cordova).\n\nSome operations are platform specific and might not work everywhere."
         },
         "Nunu": {
             "name": "Nunu",
@@ -5022,7 +5022,7 @@
             "namespace": "",
             "file": "source\\core\\Nunu.js",
             "line": 17,
-            "description": "nunuStudio core main file.\n\nStore development version, timestamp and contains global method to check browser feature support."
+            "description": "Freedom World Editor core main file.\n\nStore development version, timestamp and contains global method to check browser feature support."
         }
     },
     "elements": {},
@@ -17252,7 +17252,7 @@
         {
             "file": "source\\core\\texture\\Texture.js",
             "line": 143,
-            "description": "Create JSON description for texture, serializes image used in the texture\nTexture serialization is different inside nunuStudio, the Texture class does not serialize any image data.",
+            "description": "Create JSON description for texture, serializes image used in the texture\nTexture serialization is different inside Freedom World Editor, the Texture class does not serialize any image data.",
             "params": [
                 {
                     "name": "meta",
@@ -20841,7 +20841,7 @@
             "itemtype": "attribute",
             "name": "NAME",
             "type": "{string}",
-            "default": "\"nunuStudio\"",
+            "default": "\"Freedom World Editor\"",
             "class": "Nunu",
             "module": "Runtime"
         },
