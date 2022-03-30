@@ -15,7 +15,7 @@ import "./three/scenes/Fog.js";
 import "./three/textures/Texture.js";
 
 /**
- * nunuStudio core main file.
+ * Freedom World Editor core main file.
  *
  * Store development version, timestamp and contains global method to check browser feature support.
  *
@@ -29,9 +29,9 @@ function FWE() {}
  *
  * @attribute NAME
  * @type {string}
- * @default "nunuStudio"
+ * @default "FWE"
  */
-FWE.NAME = "nunuStudio";
+FWE.NAME = "Freedom World Editor";
 
 /**
  * Stores the runtime version.

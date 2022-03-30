@@ -162,7 +162,7 @@ Loaders.loadTexture = function(file, onLoad)
 			}).catch(function(error)
 			{
 				Editor.alert("Error decoding basis texture.");
-				console.error("nunuStudio: Error decoding basis texture.", error);
+				console.error("Freedom World Editor: Error decoding basis texture.", error);
 			});
 
 			renderer.dispose();
@@ -307,7 +307,7 @@ Loaders.loadSpineAnimation = function(file)
 		if (atlasFile === null)
 		{
 			Editor.alert(Locale.failedLoadSpine);
-			console.warn("nunuStudio: No atlas file found in the directory.");
+			console.warn("Freedom World Editor: No atlas file found in the directory.");
 			return;
 		}
 
@@ -394,7 +394,7 @@ Loaders.loadModel = function(file, parent)
 
 					if (FileSystem.fileExists(mtl))
 					{
-						console.log("nunuStudio: MTL file found.", path);
+						console.log("Freedom World Editor: MTL file found.", path);
 						var mtlLoader = new MTLLoader();
 						mtlLoader.setPath(path);
 						materials = mtlLoader.parse(FileSystem.readFile(mtl), path);
@@ -403,7 +403,7 @@ Loaders.loadModel = function(file, parent)
 				catch (f)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + f + ")");
-					console.error("nunuStudio: Error loading file", f);
+					console.error("Freedom World Editor: Error loading file", f);
 				}
 			}
 
@@ -427,7 +427,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 
@@ -451,7 +451,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -504,7 +504,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -526,7 +526,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -547,7 +547,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -568,7 +568,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -598,7 +598,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsText(file);
@@ -623,7 +623,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -645,7 +645,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -681,7 +681,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsText(file);
@@ -718,7 +718,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -764,7 +764,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -791,7 +791,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsText(file);
@@ -817,7 +817,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -844,7 +844,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -871,7 +871,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsText(file);
@@ -904,7 +904,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -990,7 +990,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -1013,7 +1013,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -1054,7 +1054,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsText(file);
@@ -1079,7 +1079,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsArrayBuffer(file);
@@ -1129,7 +1129,7 @@ Loaders.loadModel = function(file, parent)
 				catch (e)
 				{
 					Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-					console.error("nunuStudio: Error loading file", e);
+					console.error("Freedom World Editor: Error loading file", e);
 				}
 			};
 			reader.readAsText(file);
@@ -1138,14 +1138,14 @@ Loaders.loadModel = function(file, parent)
 		{
 			modal.destroy();
 			Editor.alert(Locale.unknownFileFormat);
-			console.warn("nunuStudio: Unknown file format");
+			console.warn("Freedom World Editor: Unknown file format");
 		}
 	}
 	catch (e)
 	{
 		modal.destroy();
 		Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-		console.error("nunuStudio: Error loading file", e);
+		console.error("Freedom World Editor: Error loading file", e);
 	}
 };
 

@@ -652,7 +652,7 @@ Editor.deleteObject = function(object)
 		// Unknown
 		else
 		{
-			console.warn("nunuStudio: Cant delete type of object.");
+			console.warn("Freedom World Editor: Cant delete type of object.");
 		}
 	}
 
@@ -1037,7 +1037,7 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 	catch (e)
 	{
 		Editor.alert(Locale.errorSavingFile + "\n(" + e + ")");
-		console.error("nunuStudio: Error saving file", e);
+		console.error("Freedom World Editor: Error saving file", e);
 	}
 };
 
@@ -1123,7 +1123,7 @@ Editor.loadProgram = function(file, binary)
 		catch (e)
 		{
 			Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-			console.error("nunuStudio: Error loading file", e);
+			console.error("Freedom World Editor: Error loading file", e);
 		}
 
 		modal.destroy();
@@ -1235,7 +1235,7 @@ Editor.prompt = function(message, defaultValue)
 };
 
 /**
- * Try to update nunuStudio editor version using build from github repo.
+ * Try to update Freedom World Editor editor version using build from github repo.
  *
  * The version timestamp (TIMESTAMP) is parsed compared to the local timestamp.
  *
@@ -1244,6 +1244,8 @@ Editor.prompt = function(message, defaultValue)
  */
 Editor.updateFWE = function(silent)
 {
+	return Editor.alert('TODO');
+	/*
 	if (silent === undefined)
 	{
 		silent = true;
@@ -1280,6 +1282,7 @@ Editor.updateFWE = function(silent)
 			Editor.alert(Locale.updateFailed);
 		}
 	}
+	*/
 };
 
 /**

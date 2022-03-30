@@ -286,7 +286,7 @@ Settings.prototype.load = function()
 	}
 	catch (e)
 	{
-		console.warn("nunuStudio: Failed to load configuration file");
+		console.warn("Freedom World Editor: Failed to load configuration file");
 	}
 };
 export {Settings};

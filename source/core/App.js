@@ -130,7 +130,7 @@ App.prototype.run = function()
 {
 	if (this.program === null)
 	{
-		console.warn("nunuStudio: no program is loaded [app.loadPogram(fname)]");
+		console.warn("Freedom World Editor: no program is loaded [app.loadPogram(fname)]");
 		return;
 	}
 
@@ -480,7 +480,7 @@ App.prototype.toggleVR = function()
 	}
 	else
 	{
-		console.warn("nunuStudio: Loaded program is not VR enabled.");
+		console.warn("Freedom World Editor: Loaded program is not VR enabled.");
 	}
 };
 
@@ -515,7 +515,7 @@ App.prototype.toggleAR = function()
 	}
 	else
 	{
-		console.warn("nunuStudio: Loaded program is not AR enabled.");
+		console.warn("Freedom World Editor: Loaded program is not AR enabled.");
 	}
 };
 

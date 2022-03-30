@@ -228,7 +228,7 @@ ProjectExporters.exportAndroid = function(mode, outputPath)
 	var output = system.execSync("cordova create temp " + packageName + " " + name).toString();
 	if (output.indexOf("Creating") === -1)
 	{
-		console.error("nunuStudio: Failed to create cordova project.");
+		console.error("Freedom World Editor: Failed to create cordova project.");
 	}
 
 	ProjectExporters.exportCordovaProject(ProjectExporters.TEMP + "/www");
@@ -239,7 +239,7 @@ ProjectExporters.exportAndroid = function(mode, outputPath)
 		var output = system.execSync("cordova platform add android", {cwd: ProjectExporters.TEMP}).toString();
 		if (output.indexOf("Android project created") === -1)
 		{
-			console.error("nunuStudio: Failed to create cordova android project.");
+			console.error("Freedom World Editor: Failed to create cordova android project.");
 		}
 
 		// Check requirements
@@ -248,14 +248,14 @@ ProjectExporters.exportAndroid = function(mode, outputPath)
 		if (output.indexOf("Java JDK: installed") === -1)
 		{
 			Editor.alert("Missing java JDK (get it at http:// www.oracle.com/technetwork/java/javase/downloads/index.html)");
-			console.error("nunuStudio: Missing java JDK (get it at http:// www.oracle.com/technetwork/java/javase/downloads/index.html)");
+			console.error("Freedom World Editor: Missing java JDK (get it at http:// www.oracle.com/technetwork/java/javase/downloads/index.html)");
 			clenanUp();
 			return;
 		}
 		if (output.indexOf("Android SDK: installed true") === -1)
 		{
 			Editor.alert("Missing Android SDK (get it at https:// developer.android.com/studio/)");
-			console.error("nunuStudio: Missing Android SDK (get it at https:// developer.android.com/studio/)");
+			console.error("Freedom World Editor: Missing Android SDK (get it at https:// developer.android.com/studio/)");
 			clenanUp();
 			return;
 		}
@@ -277,7 +277,7 @@ ProjectExporters.exportAndroid = function(mode, outputPath)
 			output = system.execSync("cordova build android", {cwd: ProjectExporters.TEMP}).toString();
 			if (output.indexOf("SUCCESSFUL") === -1)
 			{
-				console.error("nunuStudio: Failed to build android project.");
+				console.error("Freedom World Editor: Failed to build android project.");
 				clenanUp();
 				return;
 			}
@@ -286,7 +286,7 @@ ProjectExporters.exportAndroid = function(mode, outputPath)
 			output = system.execSync("cordova run android", {cwd: ProjectExporters.TEMP}).toString();
 			if (output.indexOf("SUCCESS") === -1)
 			{
-				console.error("nunuStudio: Failed to launch android application on device.");
+				console.error("Freedom World Editor: Failed to launch android application on device.");
 				clenanUp();
 				return;
 			}
@@ -297,7 +297,7 @@ ProjectExporters.exportAndroid = function(mode, outputPath)
 			output = system.execSync("cordova build android", {cwd: ProjectExporters.TEMP}).toString();
 			if (output.indexOf("SUCCESSFUL") === -1)
 			{
-				console.error("nunuStudio: Failed to build android project.");
+				console.error("Freedom World Editor: Failed to build android project.");
 				clenanUp();
 				return;
 			}
@@ -310,7 +310,7 @@ ProjectExporters.exportAndroid = function(mode, outputPath)
 			output = system.execSync("cordova build android --release -- --keystore=\"..\\android.keystore\" --storePassword=android --alias=mykey", {cwd: ProjectExporters.TEMP}).toString();
 			if (output.indexOf("SUCCESSFUL") === -1)
 			{
-				console.error("nunuStudio: Failed to build android project.");
+				console.error("Freedom World Editor: Failed to build android project.");
 				clenanUp();
 				return;
 			}

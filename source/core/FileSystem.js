@@ -4,7 +4,7 @@ import {ArraybufferUtils} from "./utils/binary/ArraybufferUtils.js";
 import {FWE} from "./FWE.js";
 
 /**
- * FileSystem is used to read and write files using nunuStudio.
+ * FileSystem is used to read and write files using Freedom World Editor.
  * 
  * Its implements multiple solutions for each method depending on the platform (NodeJS, brower or cordova).
  *
