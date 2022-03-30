@@ -9,7 +9,7 @@ export class ExamplePage implements OnInit {
 	@ViewChild('bar', {static: true}) public bar: ElementRef;
 
 	// @ts-ignore
-	public app: Nunu.App;
+	public app: FWE.App;
 
 	public ngOnInit(): void
 	{
@@ -21,7 +21,7 @@ export class ExamplePage implements OnInit {
 				let entry: string = unescape(parameters[0].split("=")[1]).replace(new RegExp("\"", "g"), "");
 
 				// @ts-ignore
-				this.app = new Nunu.App(this.canvas.nativeElement);
+				this.app = new FWE.App(this.canvas.nativeElement);
 				this.app.loadRunProgram(entry, undefined, (progress, event) => {
 					this.bar.nativeElement.style.width = progress + "%";
 				});

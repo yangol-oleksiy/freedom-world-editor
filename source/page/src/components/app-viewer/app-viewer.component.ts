@@ -33,11 +33,11 @@ export class AppViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
 
 
 	// @ts-ignore
-	public app: Nunu.App;
+	public app: FWE.App;
 
 	public ngOnInit(): void {
 		// @ts-ignore
-		this.app = new Nunu.App(this.canvas.nativeElement);
+		this.app = new FWE.App(this.canvas.nativeElement);
 		this.app.loadRunProgram(this.fname, () => {
 			if (this.canvasSection.nativeElement !== null) {
 				this.canvasSection.nativeElement.style.display = "block";

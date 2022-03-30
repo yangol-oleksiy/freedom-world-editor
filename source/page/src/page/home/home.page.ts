@@ -34,14 +34,14 @@ export class HomePage {
 	@ViewChild('bar', {static: true}) public bar: ElementRef;
 
 	// @ts-ignore
-	public app: Nunu.App;
+	public app: FWE.App;
 
 	constructor(public router: Router) {
 	}
 
 	public ngOnInit(): void {
 		// @ts-ignore
-		this.app = new Nunu.App(this.canvas.nativeElement);
+		this.app = new FWE.App(this.canvas.nativeElement);
 		this.app.loadRunProgram("examples/nunu.nsp", () => {
 			this.bar.nativeElement.parentElement.style.display = "none";
 		}, (progress) => {
@@ -83,8 +83,8 @@ export class HomePage {
 
 	public examples: HomePageExampleOption[] = [
 		{
-			title: 'nunuStudio',
-			description: 'nunuStudio physically based rendering home screen demo.',
+			title: 'Freedom World Editor',
+			description: 'Freedom World Editor physically based rendering home screen demo.',
 			file: 'nunu.nsp',
 			image: 'nunu.jpg'
 		},
@@ -220,7 +220,7 @@ export class HomePage {
 		},
 		{
 			title: 'Multi-platform editor',
-			description: 'nunuStudio was build on top of nwjs it works on windows, linux and OS X.',
+			description: 'Freedom World Editor started as a nunuStudio fork which was build on top of nwjs it works on windows, linux and OS X.',
 			image: 'assets/screenshot/3.jpg'
 		}
 	];

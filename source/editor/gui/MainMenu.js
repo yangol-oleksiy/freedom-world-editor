@@ -5,7 +5,7 @@ import {SubdivisionModifier} from "three/examples/jsm/modifiers/SubdivisionModif
 import {Locale} from "../locale/LocaleManager.js";
 import {UnitConverter} from "../../core/utils/UnitConverter.js";
 import {Mesh} from "../../core/objects/mesh/Mesh.js";
-import {Nunu} from "../../core/Nunu.js";
+import {FWE} from "../../core/FWE.js";
 import {ObjectLoader} from "../../core/loaders/ObjectLoader.js";
 import {TwistModifier} from "../../core/geometries/modifiers/TwistModifier.js";
 import {FileSystem} from "../../core/FileSystem.js";
@@ -134,7 +134,7 @@ function MainMenu(parent)
 	// Publish
 	var publish = fileMenu.addMenu(Locale.publish, Global.FILE_PATH + "icons/misc/publish.png");
 
-	if (Nunu.runningOnDesktop())
+	if (FWE.runningOnDesktop())
 	{
 		// Publish web
 		publish.addOption("Web", function()
@@ -188,7 +188,7 @@ function MainMenu(parent)
 			});
 		}
 
-		if (Nunu.runningOnDesktop())
+		if (FWE.runningOnDesktop())
 		{
 			// Publish windows
 			publish.addOption("Windows", function()
@@ -386,7 +386,7 @@ function MainMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
 	// Exit
-	if (Nunu.runningOnDesktop())
+	if (FWE.runningOnDesktop())
 	{
 		fileMenu.addOption(Locale.exit, function()
 		{

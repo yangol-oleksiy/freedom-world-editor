@@ -1,4 +1,4 @@
-import {Nunu} from "../../Nunu.js";
+import {FWE} from "../../FWE.js";
 
 // Serialization does not serialize any image data.
 THREE.Texture.prototype.toJSON = function(meta)

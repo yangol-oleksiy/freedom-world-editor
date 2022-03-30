@@ -11,7 +11,7 @@ import {Scene} from "../core/objects/Scene.js";
 import {Program} from "../core/objects/Program.js";
 import {Sky} from "../core/objects/misc/Sky.js";
 import {Mesh} from "../core/objects/mesh/Mesh.js";
-import {Nunu} from "../core/Nunu.js";
+import {FWE} from "../core/FWE.js";
 import {ObjectLoader} from "../core/loaders/ObjectLoader.js";
 import {Keyboard} from "../core/input/Keyboard.js";
 import {FileSystem} from "../core/FileSystem.js";
@@ -56,7 +56,7 @@ function Editor() {}
 Editor.initialize = function()
 {
 	// Check WebGL Support
-	if (!Nunu.webGLAvailable())
+	if (!FWE.webGLAvailable())
 	{
 		Editor.alert(Locale.webglNotSupported);
 		Editor.exit();
@@ -90,7 +90,7 @@ Editor.initialize = function()
 		Editor.resize();
 	});
 
-	if (Nunu.runningOnDesktop())
+	if (FWE.runningOnDesktop())
 	{
 		var gui = window.require("nw.gui");
 		Editor.clipboard = gui.Clipboard.get();
@@ -108,7 +108,7 @@ Editor.initialize = function()
 		// Try to update the editor
 		if (Editor.settings.general.autoUpdate)
 		{
-			Editor.updateNunu();
+			Editor.updateFWE();
 		}
 	}
 	else
@@ -119,7 +119,7 @@ Editor.initialize = function()
 		// Arguments
 		Editor.args = [];
 
-		var parameters = Nunu.getQueryParameters();
+		var parameters = FWE.getQueryParameters();
 		for (var i in parameters)
 		{
 			Editor.args.push(parameters[i]);
@@ -456,7 +456,7 @@ Editor.isSelected = function(object)
  */
 Editor.resize = function()
 {
-	if (!Nunu.isFullscreen())
+	if (!FWE.isFullscreen())
 	{
 		Editor.gui.updateInterface();
 	}
@@ -1172,7 +1172,7 @@ Editor.setOpenFile = function(file)
 	{
 		if (file instanceof window.File)
 		{
-			if (Nunu.runningOnDesktop())
+			if (FWE.runningOnDesktop())
 			{
 				Editor.openFile = file.path;
 			}
@@ -1186,12 +1186,12 @@ Editor.setOpenFile = function(file)
 			Editor.openFile = file;
 		}
 
-		document.title = Nunu.NAME + " " + VERSION + " (" + TIMESTAMP + ") (" + Editor.openFile + ")";
+		document.title = FWE.NAME + " " + VERSION + " (" + TIMESTAMP + ") (" + Editor.openFile + ")";
 	}
 	else
 	{
 		Editor.openFile = null;
-		document.title = Nunu.NAME + " " + VERSION + " (" + TIMESTAMP + ")";
+		document.title = FWE.NAME + " " + VERSION + " (" + TIMESTAMP + ")";
 	}
 };
 
@@ -1240,9 +1240,9 @@ Editor.prompt = function(message, defaultValue)
  * The version timestamp (TIMESTAMP) is parsed compared to the local timestamp.
  *
  * @static
- * @method updateNunu
+ * @method updateFWE
  */
-Editor.updateNunu = function(silent)
+Editor.updateFWE = function(silent)
 {
 	if (silent === undefined)
 	{
@@ -1303,7 +1303,7 @@ Editor.getRendererConfig = function()
  */
 Editor.exit = function()
 {
-	if (Nunu.runningOnDesktop())
+	if (FWE.runningOnDesktop())
 	{
 		Editor.settings.store();
 

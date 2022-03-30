@@ -3,7 +3,7 @@ import {Component} from "../editor/components/Component.js";
 import {EventManager} from "./utils/EventManager.js";
 import {Program} from "./objects/Program.js";
 import {PerspectiveCamera} from "./objects/cameras/PerspectiveCamera.js";
-import {Nunu} from "./Nunu.js";
+import {FWE} from "./FWE.js";
 import {ObjectLoader} from "./loaders/ObjectLoader.js";
 import {FileSystem} from "./FileSystem.js";
 
@@ -103,7 +103,7 @@ App.loadApp = function(url, canvas)
 
 	window.addEventListener("resize", function()
 	{
-		if (Nunu.isFullscreen())
+		if (FWE.isFullscreen())
 		{
 			app.canvas.width = window.innerWidth;
 			app.canvas.height = window.innerHeight;
@@ -527,14 +527,14 @@ App.prototype.toggleAR = function()
  */
 App.prototype.toggleFullscreen = function(element)
 {
-	var fullscreen = Nunu.isFullscreen();
+	var fullscreen = FWE.isFullscreen();
 
 	if (element === undefined)
 	{
 		element = this.canvas;
 	}
 
-	Nunu.setFullscreen(!fullscreen, element);
+	FWE.setFullscreen(!fullscreen, element);
 };
 
 export {App};

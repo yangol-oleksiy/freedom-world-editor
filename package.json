@@ -1,11 +1,11 @@
 {
-	"name": "nunu-studio",
-	"description": "nunuStudio is a web based game engine for 3D and 2D game development with support for VR and AR",
+	"name": "freedom-world-editor",
+	"description": "Freedom World Editor is a web based world editing software for 3D online role playing game World of Freedom",
 	"main": "index.html",
-	"version": "0.98.31",
-	"author": "Tentone",
+	"version": "0.99.0",
+	"author": "Tentone, Oleksiy Pustovit, Oleksiy Zamkoviy",
 	"license": "MIT",
-	"homepage": "https://www.nunustudio.org",
+	"homepage": "",
 	"directories": {
 		"doc": "docs"
 	},
@@ -30,7 +30,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/tentone/nunuStudio.git"
+		"url": "git+https://github.com/yangol-oleksiy/freedom-world-editor.git"
 	},
 	"keywords": [
 		"webgl",
@@ -40,7 +40,7 @@
 		"webxr"
 	],
 	"bugs": {
-		"url": "https://github.com/tentone/nunuStudio/issues"
+		"url": ""
 	},
 	"napa": {
 		"js.blend": "git+https://github.com/acweathersby/js.blend.git"
@@ -123,7 +123,7 @@
 	},
 	"build": {
 		"nwVersion": "0.51.2",
-		"appId": "io.tentone.nunustudio",
+		"appId": "io.world-of-freedom.editor",
 		"output": "./build/desktop/",
 		"outputPattern": "${NAME}_${VERSION}_${PLATFORM}_${ARCH}",
 		"ffmpegIntegration": false,
@@ -143,16 +143,16 @@
 			"build"
 		],
 		"win": {
-			"productName": "nunuStudio",
-			"companyName": "tentone",
+			"productName": "Freedom World Editor",
+			"companyName": "Freedom Games",
 			"copyright": "MIT",
 			"icon": "files/icon.ico",
 			"versionStrings": {}
 		},
 		"mac": {
-			"name": "nunuStudio",
-			"displayName": "nunuStudio",
-			"companyName": "tentone",
+			"name": "Freedom World Editor",
+			"displayName": "Freedom World Editor",
+			"companyName": "Freedom Games",
 			"copyright": "MIT"
 		}
 	}

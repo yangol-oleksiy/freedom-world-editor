@@ -1,7 +1,7 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {PositionalAudio} from "../../../../../core/objects/audio/PositionalAudio.js";
 import {AudioEmitter} from "../../../../../core/objects/audio/AudioEmitter.js";
-import {Nunu} from "../../../../../core/Nunu.js";
+import {FWE} from "../../../../../core/FWE.js";
 import {FileSystem} from "../../../../../core/FileSystem.js";
 import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
@@ -67,7 +67,7 @@ function AudioAsset(parent)
 
 		context.addOption(Locale.export, function()
 		{
-			if (Nunu.runningOnDesktop())
+			if (FWE.runningOnDesktop())
 			{
 				FileSystem.chooseFile(function(files)
 				{

@@ -1,7 +1,7 @@
 import {BufferUtils} from "./utils/binary/BufferUtils.js";
 import {Base64Utils} from "./utils/binary/Base64Utils.js";
 import {ArraybufferUtils} from "./utils/binary/ArraybufferUtils.js";
-import {Nunu} from "./Nunu.js";
+import {FWE} from "./FWE.js";
 
 /**
  * FileSystem is used to read and write files using nunuStudio.
@@ -467,7 +467,7 @@ FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
  */
 FileSystem.chooseFileWrite = function(onLoad, filter)
 {
-	if (Nunu.runningOnDesktop())
+	if (FWE.runningOnDesktop())
 	{
 		FileSystem.chooseFile(function(files)
 		{

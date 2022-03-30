@@ -134,9 +134,9 @@ module.exports = [
 	},
 	Merge(runtime[0], {
 		output: {
-			filename: "nunu.min.js",
+			filename: "fwe.min.js",
 			path: output + "/files/runtime",
-			library: "Nunu",
+			library: "FWE",
 			libraryTarget: "umd"
 		}
 	})

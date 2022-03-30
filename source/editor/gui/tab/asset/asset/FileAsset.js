@@ -1,5 +1,5 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {Nunu} from "../../../../../core/Nunu.js";
+import {FWE} from "../../../../../core/FWE.js";
 import {FileSystem} from "../../../../../core/FileSystem.js";
 import {RemoveResourceAction} from "../../../../history/action/resources/RemoveResourceAction.js";
 import {ChangeAction} from "../../../../history/action/ChangeAction.js";
@@ -49,7 +49,7 @@ function FileAsset(parent)
 
 		context.addOption(Locale.export, function()
 		{
-			if (Nunu.runningOnDesktop())
+			if (FWE.runningOnDesktop())
 			{
 				FileSystem.chooseFile(function(files)
 				{

@@ -1,7 +1,7 @@
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Program} from "../../../../core/objects/Program.js";
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
-import {Nunu} from "../../../../core/Nunu.js";
+import {FWE} from "../../../../core/FWE.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
@@ -164,7 +164,7 @@ RunProject.prototype.setFullscreen = function(fullscreen)
 {
 	if (fullscreen)
 	{
-		Nunu.setFullscreen(true, this.element);
+		FWE.setFullscreen(true, this.element);
 
 		this.position.set(0, 0);
 		this.size.set(window.screen.width, window.screen.height);
@@ -172,7 +172,7 @@ RunProject.prototype.setFullscreen = function(fullscreen)
 	}
 	else
 	{
-		Nunu.setFullscreen(false);
+		FWE.setFullscreen(false);
 		Editor.gui.updateInterface();
 	}
 };

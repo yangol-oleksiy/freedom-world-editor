@@ -1,7 +1,7 @@
 import {Material, AnimationClip} from "three";
 import {ResourceContainer} from "../../resources/ResourceContainer.js";
 import {Scene} from "../../objects/Scene.js";
-import {Nunu} from "../../Nunu.js";
+import {FWE} from "../../FWE.js";
 import {AnimationMixer} from "../../animation/AnimationMixer.js";
 
 /**

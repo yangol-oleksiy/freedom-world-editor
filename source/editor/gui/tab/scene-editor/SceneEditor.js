@@ -22,7 +22,7 @@ import {Loaders} from "../../../Loaders.js";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {Model} from "../../../../core/resources/Model.js";
 import {Mouse} from "../../../../core/input/Mouse.js";
-import {Nunu} from "../../../../core/Nunu.js";
+import {FWE} from "../../../../core/FWE.js";
 import {ObjectIcons} from "../../../utils/ObjectIcons.js";
 import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
@@ -874,7 +874,7 @@ SceneEditor.prototype.update = function()
 		}
 
 		// Lock mouse when camera is moving
-		if (Editor.settings.editor.lockMouse && Nunu.runningOnDesktop())
+		if (Editor.settings.editor.lockMouse && FWE.runningOnDesktop())
 		{
 			if (!isEditingObject && (this.mouse.buttonJustPressed(Mouse.LEFT) || this.mouse.buttonJustPressed(Mouse.RIGHT) || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
 			{

@@ -19,10 +19,10 @@ import "./three/textures/Texture.js";
  *
  * Store development version, timestamp and contains global method to check browser feature support.
  *
- * @class Nunu
+ * @class FWE
  * @module Runtime
  */
-function Nunu() {}
+function FWE() {}
 
 /**
  * Aplication name (might be usefull if getting the module as a unnamed export)
@@ -31,7 +31,7 @@ function Nunu() {}
  * @type {string}
  * @default "nunuStudio"
  */
-Nunu.NAME = "nunuStudio";
+FWE.NAME = "nunuStudio";
 
 /**
  * Stores the runtime version.
@@ -80,7 +80,7 @@ Nunu.NAME = "nunuStudio";
  * @attribute NWJS
  * @type {number}
  */
-Nunu.NWJS = 200;
+FWE.NWJS = 200;
 
 /**
  * Running inside of a regular web browser.
@@ -89,7 +89,7 @@ Nunu.NWJS = 200;
  * @attribute BROWSER
  * @type {number}
  */
-Nunu.BROWSER = 201;
+FWE.BROWSER = 201;
 
 /**
  * Cordova platform, used for mobile versions.
@@ -98,7 +98,7 @@ Nunu.BROWSER = 201;
  * @attribute CORDOVA
  * @type {number}
  */
-Nunu.CORDOVA = 202;
+FWE.CORDOVA = 202;
 
 /**
  * Import stuff from a namespace to another target namespace.
@@ -108,7 +108,7 @@ Nunu.CORDOVA = 202;
  * @static
  * @method copyNamespace
  */
-Nunu.copyNamespace = function(namespace, target)
+FWE.copyNamespace = function(namespace, target)
 {
 	if (target === undefined)
 	{
@@ -130,7 +130,7 @@ Nunu.copyNamespace = function(namespace, target)
  * @method getQueryParameters
  * @return {Object} Object with parameters read from the URL.
  */
-Nunu.getQueryParameters = function()
+FWE.getQueryParameters = function()
 {
 	var values = location.search.substring(1).split("&");
 	var parameters = {};
@@ -159,7 +159,7 @@ Nunu.getQueryParameters = function()
  * @param {Function} onMessage On message worker callback.
  * @return {Worker} Returns a worker instance (for comunication).
  */
-Nunu.createWorker = function(code, onMessage)
+FWE.createWorker = function(code, onMessage)
 {
 	var blob = new Blob([code], {type: "application/javascript"});
 	var worker = new Worker(URL.createObjectURL(blob));
@@ -178,7 +178,7 @@ Nunu.createWorker = function(code, onMessage)
  * @method webAudioAvailable
  * @return {boolean} True if WebAudio is available.
  */
-Nunu.webAudioAvailable = function()
+FWE.webAudioAvailable = function()
 {
 	return window.AudioContext !== undefined || window.webkitAudioContext !== undefined;
 };
@@ -189,7 +189,7 @@ Nunu.webAudioAvailable = function()
  * @method webglAvailable
  * @return {boolean} True if WebGL is available.
  */
-Nunu.webGLAvailable = function()
+FWE.webGLAvailable = function()
 {
 	try
 	{
@@ -208,25 +208,25 @@ Nunu.webGLAvailable = function()
  * Check in wich platform the enviroment is running.
  *
  * Possible return values are:
- * - Nunu.NWJS
- * - Nunu.BROWSER
- * - Nunu.CORDOVA
+ * - FWE.NWJS
+ * - FWE.BROWSER
+ * - FWE.CORDOVA
  *
  * @method getPlatform
  * @return {number} Indicates the platform type.
  */
-Nunu.getPlatform = function()
+FWE.getPlatform = function()
 {
 	if (window.nw !== undefined)
 	{
-		return Nunu.NWJS;
+		return FWE.NWJS;
 	}
 	else if (window.cordova !== undefined)
 	{
-		return Nunu.CORDOVA;
+		return FWE.CORDOVA;
 	}
 
-	return Nunu.BROWSER;
+	return FWE.BROWSER;
 };
 
 /**
@@ -235,7 +235,7 @@ Nunu.getPlatform = function()
  * @method runningOnDesktop
  * @return {boolean} True if running inside NWJS
  */
-Nunu.runningOnDesktop = function()
+FWE.runningOnDesktop = function()
 {
 	return window.nw !== undefined;
 };
@@ -249,9 +249,9 @@ Nunu.runningOnDesktop = function()
  *
  * @method openWebpage
  */
-Nunu.openWebpage = function(url)
+FWE.openWebpage = function(url)
 {
-	if (Nunu.runningOnDesktop())
+	if (FWE.runningOnDesktop())
 	{
 		window.require("nw.gui").Shell.openExternal(url);
 	}
@@ -269,7 +269,7 @@ Nunu.openWebpage = function(url)
  * @method isFullscreen
  * @return {boolean} True if there is some element in fullscreen mode.
  */
-Nunu.isFullscreen = function()
+FWE.isFullscreen = function()
 {
 	return document.webkitIsFullScreen === true || document.mozFullScreen === true || document.webkitIsFullScreen === true || document.webkitIsFullScreen === true || document.fullscreen === true || false;
 };
@@ -283,9 +283,9 @@ Nunu.isFullscreen = function()
  * @param {boolean} fullscreen If true the application will enter fullscreen mode, if false it will exit, if undefine it will toggle the value.
  * @param {Component} element DOM element to put into fullscreen.
  */
-Nunu.setFullscreen = function(fullscreen, element)
+FWE.setFullscreen = function(fullscreen, element)
 {
-	var isFullscreen = Nunu.isFullscreen();
+	var isFullscreen = FWE.isFullscreen();
 
 	if (fullscreen === undefined)
 	{
@@ -323,4 +323,4 @@ Nunu.setFullscreen = function(fullscreen, element)
 	}
 };
 
-export {Nunu};
+export {FWE};

@@ -26,7 +26,7 @@ import {SVGLoader} from "three/examples/jsm/loaders/SVGLoader";
 import {VOXLoader} from "three/examples/jsm/loaders/VOXLoader";
 import {InstancedMesh} from "../core/objects/mesh/InstancedMesh.js";
 import {FileSystem} from "../core/FileSystem.js";
-import {Nunu} from "../core/Nunu.js";
+import {FWE} from "../core/FWE.js";
 import {Group} from "../core/objects/misc/Group.js";
 import {SpineAnimation} from "../core/objects/spine/SpineAnimation.js";
 import {Audio} from "../core/resources/Audio.js";
@@ -386,7 +386,7 @@ Loaders.loadModel = function(file, parent)
 			var materials = null;
 			
 			// Look for MTL file
-			if (Nunu.runningOnDesktop())
+			if (FWE.runningOnDesktop())
 			{
 				try
 				{

@@ -45,15 +45,15 @@ const config = {
 module.exports = [
 	Object.assign({
 		output: {
-			filename: "nunu.min.js",
+			filename: "fwe.min.js",
 			path: output,
-			library: "Nunu",
+			library: "FWE",
 			libraryTarget: "umd"
 		}
 	}, config),
 	Object.assign({
 		output: {
-			filename: "nunu.module.min.js",
+			filename: "fwe.module.min.js",
 			path: output,
 			libraryTarget: "umd"
 		}

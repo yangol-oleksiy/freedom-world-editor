@@ -1,7 +1,7 @@
 import {LocalStorage} from "../core/utils/LocalStorage.js";
 import {RendererConfiguration} from "../core/renderer/RendererConfiguration.js";
 import {Viewport} from "../core/objects/cameras/Viewport.js";
-import {Nunu} from "../core/Nunu.js";
+import {FWE} from "../core/FWE.js";
 import {FileSystem} from "../core/FileSystem.js";
 
 /** 
@@ -242,7 +242,7 @@ Settings.prototype.store = function()
 	data.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
 	
 	// Store file
-	if (Nunu.runningOnDesktop())
+	if (FWE.runningOnDesktop())
 	{
 		FileSystem.writeFile(Settings.CONFIG_FILE, data);
 	}
@@ -262,7 +262,7 @@ Settings.prototype.load = function()
 {
 	try
 	{
-		if (Nunu.runningOnDesktop())
+		if (FWE.runningOnDesktop())
 		{
 			var data = JSON.parse(FileSystem.readFile(Settings.CONFIG_FILE));
 		}
