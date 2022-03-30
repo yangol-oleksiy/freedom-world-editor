@@ -35,7 +35,7 @@ LegacyGeometryLoader.prototype.load = function(url, onLoad, onProgress, onError)
 			{
 				if (type.toLowerCase() === "object")
 				{
-					console.error("nunuStudio: LegacyGeometryLoader: " + url + " should be loaded with ObjectLoader instead.");
+					console.error("Freedom World Editor: LegacyGeometryLoader: " + url + " should be loaded with ObjectLoader instead.");
 					return;
 				}
 			}
@@ -369,7 +369,7 @@ LegacyGeometryLoader.prototype.parse = (function()
 
 		if (geometry.bones && geometry.bones.length > 0 && (geometry.skinWeights.length !== geometry.skinIndices.length || geometry.skinIndices.length !== geometry.vertices.length))
 		{
-			console.warn("nunuStudio: When skinning, number of vertices (" + geometry.vertices.length + "), skinIndices (" + geometry.skinIndices.length + "), and skinWeights (" + geometry.skinWeights.length + ") should match.");
+			console.warn("Freedom World Editor: When skinning, number of vertices (" + geometry.vertices.length + "), skinIndices (" + geometry.skinIndices.length + "), and skinWeights (" + geometry.skinWeights.length + ") should match.");
 		}
 	}
 

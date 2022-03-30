@@ -408,7 +408,7 @@ Script.prototype.compileCode = function(code, onReady)
 
 			code += "\nfunction include(name)\
 			{\
-				console.warn(\"nunuStudio: Script running in append mode, \" + name + \" cannot be included in runtime.\");\
+				console.warn(\"Freedom World Editor: Script running in append mode, \" + name + \" cannot be included in runtime.\");\
 			}";
 		}
 		// Declare include method
@@ -426,7 +426,7 @@ Script.prototype.compileCode = function(code, onReady)
 					}\
 					else\
 					{\
-						console.warn(\"nunuStudio: Javascript file \" + name + \" not found.\");\
+						console.warn(\"Freedom World Editor: Javascript file \" + name + \" not found.\");\
 					}\
 				}\
 				else\
@@ -510,7 +510,7 @@ Script.prototype.compileCode = function(code, onReady)
 		catch (e)
 		{
 			this.script = {};
-			console.warn("nunuStudio: Error initializing script code", e);
+			console.warn("Freedom World Editor: Error initializing script code", e);
 			throw new Error("Error initializing script code");
 		}
 
@@ -522,7 +522,7 @@ Script.prototype.compileCode = function(code, onReady)
 	catch (e)
 	{
 		this.script = {};
-		console.warn("nunuStudio: Error compiling script code", e);
+		console.warn("Freedom World Editor: Error compiling script code", e);
 		throw new Error("Error compiling script code");
 	}
 };

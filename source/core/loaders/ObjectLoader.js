@@ -393,7 +393,7 @@ ObjectLoader.prototype.bindSkeletons = function(object)
 			var skeleton = self.skeletons[child.skeletonUUID];
 			if (skeleton === undefined)
 			{
-				console.warn("nunuStudio: ObjectLoader Skeleton not found.", child.skeletonUUID);
+				console.warn("Freedom World Editor: ObjectLoader Skeleton not found.", child.skeletonUUID);
 				return;
 			}
 
@@ -902,7 +902,7 @@ ObjectLoader.prototype.parseObject = function(data)
 	}
 	catch (e)
 	{
-		console.error("nunuStudio: Error parsing and creating object " + data.uuid + ", object skiped.", e, data);
+		console.error("Freedom World Editor: Error parsing and creating object " + data.uuid + ", object skiped.", e, data);
 		object = new Group();
 	}
 

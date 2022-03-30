@@ -120,7 +120,7 @@ TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
 			onError(e);
 		}
 
-		console.warn("nunuStudio: Texture not found", e);
+		console.warn("Freedom World Editor: Texture not found", e);
 		return new Texture();
 	}
 };
@@ -162,12 +162,12 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	{
 		if (json.video === undefined)
 		{
-			console.warn("nunuStudio: TextureLoader, No video specified for", json.uuid);
+			console.warn("Freedom World Editor: TextureLoader, No video specified for", json.uuid);
 		}
 
 		if (this.videos[json.video] === undefined)
 		{
-			console.warn("nunuStudio: TextureLoader, Undefined video", json.video);
+			console.warn("Freedom World Editor: TextureLoader, Undefined video", json.video);
 		}
 
 		texture = new VideoTexture(this.videos[json.video]);
@@ -230,7 +230,7 @@ TextureLoader.prototype.parse = function(json, onLoad)
 		{
 			if (this.images[json.images[i]] === undefined)
 			{
-				console.warn("nunuStudio: TextureLoader, undefined image", json.images[i]);
+				console.warn("Freedom World Editor: TextureLoader, undefined image", json.images[i]);
 			}
 
 			images.push(this.images[json.images[i]]);
@@ -257,12 +257,12 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	{
 		if (json.image === undefined)
 		{
-			console.warn("nunuStudio: TextureLoader, no image specified for", json.uuid);
+			console.warn("Freedom World Editor: TextureLoader, no image specified for", json.uuid);
 		}
 
 		if (this.images[json.image] === undefined)
 		{
-			console.warn("nunuStudio: TextureLoader, undefined image", json.image);
+			console.warn("Freedom World Editor: TextureLoader, undefined image", json.image);
 		}
 
 		// SpriteSheet texture

@@ -576,7 +576,7 @@ Program.prototype.setScene = function(scene)
 	}
 	else
 	{
-		console.warn("nunuStudio: Program setScene scene is null.");
+		console.warn("Freedom World Editor: Program setScene scene is null.");
 	}
 };
 
@@ -613,7 +613,7 @@ Program.prototype.remove = function(scene)
 	}
 	else
 	{
-		console.warn("nunuStudio: Trying to remove Object3D from program, only Scene objects allowed.");
+		console.warn("Freedom World Editor: Trying to remove Object3D from program, only Scene objects allowed.");
 	}
 };
 
@@ -634,7 +634,7 @@ Program.prototype.add = function(scene)
 	}
 	else
 	{
-		console.warn("nunuStudio: Trying to add Object3D to program, only Scene objects allowed.");
+		console.warn("Freedom World Editor: Trying to add Object3D to program, only Scene objects allowed.");
 	}
 };
 
@@ -696,7 +696,7 @@ Program.prototype.dispose = function()
 	}
 	else
 	{
-		console.warn("nunuStudio: Program dispose() scene is null.", this);
+		console.warn("Freedom World Editor: Program dispose() scene is null.", this);
 	}
 
 	ResourceManager.prototype.dispose.call(this);
@@ -726,7 +726,7 @@ Program.prototype.receiveDataApp = function(data)
 	// Show warning message
 	if (!found)
 	{
-		console.warn("nunuStudio: No script with onAppData found", data);
+		console.warn("Freedom World Editor: No script with onAppData found", data);
 	}
 };
 
@@ -746,12 +746,12 @@ Program.prototype.sendDataApp = function(data)
 		}
 		else
 		{
-			console.warn("nunuStudio: Send app data communication", data);
+			console.warn("Freedom World Editor: Send app data communication", data);
 		}
 	}
 	else
 	{
-		console.warn("nunuStudio: Data sent to app", data);
+		console.warn("Freedom World Editor: Data sent to app", data);
 	}
 };
 

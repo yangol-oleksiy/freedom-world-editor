@@ -453,7 +453,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
  *
  * This page provides documentation for some of the main features of this class, the original documentation of this class can be found at https:// threejs.org/docs/index.html#Reference/Core/Object3D.
  *
- * All nunuStudio objects extend the Object3D class of some other higher level class from three.js.
+ * All Freedom World Editor objects extend the Object3D class of some other higher level class from three.js.
  *
  * @class Object3D
  * @module THREE

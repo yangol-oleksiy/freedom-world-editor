@@ -30,7 +30,7 @@ function BSP(geometry)
 	}
 	else
 	{
-		throw new Error("nunuStudio: Given geometry is unsupported");
+		throw new Error("Freedom World Editor: Given geometry is unsupported");
 	}
 
 	for (var i = 0, length = geometry.faces.length; i < length; i++)

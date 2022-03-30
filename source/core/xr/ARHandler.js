@@ -86,7 +86,7 @@ ARHandler.enterAR = function(renderer, onSuccess)
 			renderer.xr.setReferenceSpaceType("local");
 			renderer.xr.setSession(session);
 
-			console.log("nunuStudio: New AR WebXR session created", session);
+			console.log("Freedom World Editor: New AR WebXR session created", session);
 
 			ARHandler.webXRSession = session;
 
@@ -96,12 +96,12 @@ ARHandler.enterAR = function(renderer, onSuccess)
 			}
 		}).catch(function(error)
 		{
-			console.warn("nunuStudio: Failed to start AR WebXR session.", error);
+			console.warn("Freedom World Editor: Failed to start AR WebXR session.", error);
 		});
 	}
 	else
 	{
-		console.warn("nunuStudio: AR support is not available.");
+		console.warn("Freedom World Editor: AR support is not available.");
 	}
 };
 

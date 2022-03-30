@@ -278,7 +278,7 @@ RendererConfiguration.prototype.createRenderer = function(canvas)
 		}
 		catch (e)
 		{
-			console.warn("nunuStudio: Failed to create WebGL2 context", e);
+			console.warn("Freedom World Editor: Failed to create WebGL2 context", e);
 		}
 	}
 

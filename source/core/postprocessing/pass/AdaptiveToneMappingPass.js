@@ -53,7 +53,7 @@ function AdaptiveToneMappingPass(adaptive, resolution)
 
 	if (ToneMapShader === undefined)
 	{
-		console.error("nunuStudio: AdaptiveToneMappingPass relies on ToneMapShader");
+		console.error("Freedom World Editor: AdaptiveToneMappingPass relies on ToneMapShader");
 	}
 
 	this.materialToneMap = new ShaderMaterial(

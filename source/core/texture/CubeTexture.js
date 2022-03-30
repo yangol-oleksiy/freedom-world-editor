@@ -160,7 +160,7 @@ CubeTexture.prototype.setSize = function(size)
 {
 	if ((size & size - 1) !== 0)
 	{
-		console.warn("nunuStudio: CubeTexture new size is not a power of two.");
+		console.warn("Freedom World Editor: CubeTexture new size is not a power of two.");
 		return;
 	}
 

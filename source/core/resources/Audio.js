@@ -78,7 +78,7 @@ Audio.prototype.getAudioBuffer = function(context, callback)
 {
 	context.decodeAudioData(this.data.slice(0), callback, function(error)
 	{
-		console.error("nunuStudio: Cannot decode audio buffer (" + error + ")");
+		console.error("Freedom World Editor: Cannot decode audio buffer (" + error + ")");
 	});
 };
 

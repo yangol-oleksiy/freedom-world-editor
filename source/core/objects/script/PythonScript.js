@@ -241,7 +241,7 @@ PythonScript.prototype.compileCode = function(code)
 	catch (e)
 	{
 		this.script = {};
-		console.warn("nunuStudio: Error initializing script code", e);
+		console.warn("Freedom World Editor: Error initializing script code", e);
 		throw new Error("Error initializing script code");
 	}
 };

@@ -30,7 +30,7 @@ LightProbe.prototype.generate = function()
 	var scene = this.getScene();
 	if (scene === null)
 	{
-		console.warn("nunuStudio: LightProbe cannot generate, no scene.", this);
+		console.warn("Freedom World Editor: LightProbe cannot generate, no scene.", this);
 		return;
 	}
 
