@@ -153,7 +153,7 @@ export class LearnPage {
 		},
 		{
 			title: 'Tutorials',
-			description: 'These tutorials will help you to build your first fully functional games and experiences inside nunuStudio with step by step guides. Before starting these i recommend you to first experiment with some of the beginner guides.',
+			description: 'These tutorials will help you to build your first fully functional games and experiences inside Freedom World Editor with step by step guides. Before starting these i recommend you to first experiment with some of the beginner guides.',
 			options: [
 				{
 					title: 'Platformer Game',
@@ -171,11 +171,11 @@ export class LearnPage {
 		},
 		{
 			title: 'Integration',
-			description: 'These guides will help you to integrate nunuStudio applications inside you webpage, how to transfer data between the webpage and the application, etc. For these guides more advanced javascript knowledge is required.',
+			description: 'These guides will help you to integrate Freedom World Editor applications inside you webpage, how to transfer data between the webpage and the application, etc. For these guides more advanced javascript knowledge is required.',
 			options: [
 				{
 					title: 'Embedding',
-					description: 'This guide will help you to embedded nunuStudio applications inside your webpage.',
+					description: 'This guide will help you to embedded Freedom World Editor applications inside your webpage.',
 					url: '/learn/integration/embedding',
 					image: 'assets/learn/integration/embedding/thumb.png'
 				},

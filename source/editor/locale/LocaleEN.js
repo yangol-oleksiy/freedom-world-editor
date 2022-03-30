@@ -565,7 +565,7 @@ var LocaleEN = {
 	errorRunInitialize: "Error while initializing program.",
 	errorRunpdate: "Error while running program.",
 	errorRunRender: "Error while rendering program.",
-	webglNotSupported: "WebGL is not supported or is disabled.\nnunuStudio cannot run.",
+	webglNotSupported: "WebGL is not supported or is disabled.\nFreedom World Editor cannot run.",
 	unknownFileFormat: "Unknown file format.",
 	failedLoadSpine: "Failed to load Spine animation, make sure that .json and .atlas have the same name.",
 
@@ -594,8 +594,8 @@ var LocaleEN = {
 	hintPhysicsType: "Defines how the physics object is update, static do not move, kinematic have constant velocity and dynamic are fully updated.",
 
 	// Update
-	updatedRestart: "nunuStudio updated\nRestart the editor",
-	alreadyUpdated: "nunuStudio already up to date.",
+	updatedRestart: "Freedom World Editor updated\nRestart the editor",
+	alreadyUpdated: "Freedom World Editor already up to date.",
 	updateFailed: "Failed to download update files."
 };
 

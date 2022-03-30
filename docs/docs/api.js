@@ -203,7 +203,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Files",
             "name": "Files",
-            "description": "FileSystem is used to read and write files using nunuStudio.\n\nIts implements multiple solutions for each method depending on the platform (NodeJS, brower or cordova).\n\nSome operations are platform specific and might not work everywhere."
+            "description": "FileSystem is used to read and write files using Freedom World Editor.\n\nIts implements multiple solutions for each method depending on the platform (NodeJS, brower or cordova).\n\nSome operations are platform specific and might not work everywhere."
         },
         {
             "displayName": "Input",
@@ -253,7 +253,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Runtime",
             "name": "Runtime",
-            "description": "nunuStudio core main file.\n\nStore development version, timestamp and contains global method to check browser feature support."
+            "description": "Freedom World Editor core main file.\n\nStore development version, timestamp and contains global method to check browser feature support."
         },
         {
             "displayName": "Script",

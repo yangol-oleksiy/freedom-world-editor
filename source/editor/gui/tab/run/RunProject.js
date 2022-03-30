@@ -247,7 +247,7 @@ RunProject.prototype.runProgram = function()
 	catch (error)
 	{
 		Editor.alert(Locale.errorRunInitialize + "\n(" + error + ")");
-		console.warn("nunuStudio: Error while initializing program.", error);
+		console.warn("Freedom World Editor: Error while initializing program.", error);
 		this.close();
 		return;
 	}
@@ -308,7 +308,7 @@ RunProject.prototype.runProgram = function()
 		catch (error)
 		{
 			Editor.alert(Locale.errorRunRender + "\n(" + error + ")");
-			console.warn("nunuStudio: Error while running program.", error);
+			console.warn("Freedom World Editor: Error while running program.", error);
 			self.close();
 			return;
 		}
@@ -320,7 +320,7 @@ RunProject.prototype.runProgram = function()
 		catch (error)
 		{
 			Editor.alert(Locale.errorRunRender + "\n(" + error + ")");
-			console.warn("nunuStudio: Error while rendering program.", error);
+			console.warn("Freedom World Editor: Error while rendering program.", error);
 			self.close();
 			return;
 		}

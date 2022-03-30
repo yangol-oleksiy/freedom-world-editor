@@ -29,7 +29,7 @@ export class MenuPage {
 		{
 			label: 'Github',
 			route: undefined,
-			url: 'https://www.github.com/tentone/nunuStudio'
+			url: 'https://www.github.com/yangol-oleksiy/freedom-world-editor'
 		},
 	]
 }

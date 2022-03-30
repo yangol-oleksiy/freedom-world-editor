@@ -210,7 +210,7 @@ export class HomePage {
 		},
 		{
 			title: 'Spine animations',
-			description: 'Create 2D animations using Esoteric spine animation tool and import them to nunuStudio.',
+			description: 'Create 2D animations using Esoteric spine animation tool and import them to Freedom World Editor.',
 			image: 'assets/screenshot/9.jpg'
 		},
 		{
@@ -220,7 +220,7 @@ export class HomePage {
 		},
 		{
 			title: 'Multi-platform editor',
-			description: 'Freedom World Editor started as a nunuStudio fork which was build on top of nwjs it works on windows, linux and OS X.',
+			description: 'Freedom World Editor started as a Freedom World Editor fork which was build on top of nwjs it works on windows, linux and OS X.',
 			image: 'assets/screenshot/3.jpg'
 		}
 	];

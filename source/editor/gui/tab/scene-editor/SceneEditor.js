@@ -53,7 +53,7 @@ import {EditorFreeControls} from "./controls/EditorFreeControls.js";
 import {WireframeHelper} from "./helpers/WireframeHelper.js";
 
 /** 
- * The scene editor is the core of the nunuStudio editor.
+ * The scene editor is the core of the Freedom World Editor editor.
  *
  * It is used to edit the scenes and apply changes to the objects using helper objects.
  *
@@ -935,7 +935,7 @@ SceneEditor.prototype.render = function()
 {
 	if (this.canvas.renderer === null)
 	{
-		console.warn("nunuStudio: SceneEditor renderer is null.", this);
+		console.warn("Freedom World Editor: SceneEditor renderer is null.", this);
 		return;
 	}
 

@@ -240,7 +240,7 @@ RendererCanvas.prototype.forceContextLoss = function()
 	catch (e)
 	{
 		this.renderer = null;
-		console.log("nunuStudio: Failed to destroy WebGL context.");
+		console.log("Freedom World Editor: Failed to destroy WebGL context.");
 	}
 };
 

@@ -188,7 +188,7 @@ TreeView.prototype.removeObject = function(object, parent)
 	}
 	else
 	{
-		console.warn("nunuStudio: Failed to remove node from tree view.", object, parent, node, parentNode);
+		console.warn("Freedom World Editor: Failed to remove node from tree view.", object, parent, node, parentNode);
 	}
 
 	this.updateChildPosition();
