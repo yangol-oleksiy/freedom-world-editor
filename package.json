@@ -2,7 +2,7 @@
 	"name": "freedom-world-editor",
 	"description": "Freedom World Editor is a web based world editing software for 3D online role playing game World of Freedom",
 	"main": "index.html",
-	"version": "0.100.2",
+	"version": "0.100.3",
 	"author": "Tentone, Oleksiy Pustovit, Oleksiy Zamkoviy",
 	"license": "MIT",
 	"homepage": "",

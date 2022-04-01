@@ -228,7 +228,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 	{
 		if (this.smooth === true)
 		{
-			this.speedCenter.y += this.speed * Editor.settings.editor.mouseLookSensitivity * mouse.delta.y * this.distance;
+			this.speedCenter[this.coordsSystem == 'xyz' ? 'y' : 'z'] += this.speed * Editor.settings.editor.mouseLookSensitivity * mouse.delta.y * this.distance;
 		}
 		else
 		{
