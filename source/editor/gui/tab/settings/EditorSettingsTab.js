@@ -49,7 +49,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.add(this.gridEnabled);
 	this.form.nextRow();
 
-	// Grid size 
+	// Grid size
 	this.form.addText("Grid size");
 	this.gridSize = new NumberBox(this.form);
 	this.gridSize.size.set(60, 18);
@@ -218,7 +218,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.add(this.navigation);
 	this.form.nextRow();
 
-	// Invert navigation
+	// Invert vertical navigation
 	this.form.addText("Invert Vertical");
 	this.invertNavigation = new CheckBox(this.form);
 	this.invertNavigation.size.set(18, 18);
@@ -227,6 +227,17 @@ function EditorSettingsTab(parent, closeable, container, index)
 		Editor.settings.editor.invertNavigation = self.invertNavigation.getValue();
 	});
 	this.form.add(this.invertNavigation);
+	this.form.nextRow();
+
+	// Invert navigation
+	this.form.addText("Invert Horizontal");
+	this.invertHorizontalNavigation = new CheckBox(this.form);
+	this.invertHorizontalNavigation.size.set(18, 18);
+	this.invertHorizontalNavigation.setOnChange(function()
+	{
+		Editor.settings.editor.invertHorizontalNavigation = self.invertHorizontalNavigation.getValue();
+	});
+	this.form.add(this.invertHorizontalNavigation);
 	this.form.nextRow();
 
 	// Mouse look sensitivity
@@ -370,7 +381,7 @@ function EditorSettingsTab(parent, closeable, container, index)
 		Editor.updateSettings();
 	});
 	this.form.add(this.filePreviewSize);
-	
+
 	// Update form
 	this.form.updateInterface();
 }
@@ -384,7 +395,7 @@ EditorSettingsTab.prototype.activate = function()
 	this.showUUID.setValue(Editor.settings.general.showUUID);
 	this.showType.setValue(Editor.settings.general.showType);
 	this.showStats.setValue(Editor.settings.general.showStats);
-	
+
 	// Editor
 	this.snap.setValue(Editor.settings.editor.snap);
 	this.snapAngle.setValue(Editor.settings.editor.snapAngle);
@@ -399,6 +410,7 @@ EditorSettingsTab.prototype.activate = function()
 	this.lockMouse.setValue(Editor.settings.editor.lockMouse);
 	this.navigation.setValue(Editor.settings.editor.navigation);
 	this.invertNavigation.setValue(Editor.settings.editor.invertNavigation);
+	this.invertHorizontalNavigation.setValue(Editor.settings.editor.invertHorizontalNavigation);
 	this.keyboardNavigation.setValue(Editor.settings.editor.keyboardNavigation);
 	this.keyboardNavigationSpeed.setValue(Editor.settings.editor.keyboardNavigationSpeed);
 	this.mouseLookSensitivity.setValue(Editor.settings.editor.mouseLookSensitivity);
@@ -418,7 +430,7 @@ EditorSettingsTab.prototype.activate = function()
 EditorSettingsTab.prototype.updateSize = function()
 {
 	TabComponent.prototype.updateSize.call(this);
-	
+
 	this.form.size.copy(this.size);
 	this.form.updateInterface();
 };

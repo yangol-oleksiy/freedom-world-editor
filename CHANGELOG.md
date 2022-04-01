@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.101
+
+- Implemented "Invert Horizontal Navigation" setting
+
 ### V0.100
 
 - Implemented XZY coordinate system scenes

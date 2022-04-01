@@ -4,7 +4,7 @@ import {Viewport} from "../core/objects/cameras/Viewport.js";
 import {FWE} from "../core/FWE.js";
 import {FileSystem} from "../core/FileSystem.js";
 
-/** 
+/**
  * Settings store all user configurable settings of the editor.
  *
  * Everything regarding editor, code analysis, rendering etc is stored in this object.
@@ -66,7 +66,7 @@ Settings.prototype.loadDefault = function()
 {
 	// General
 	this.general =
-	{		
+	{
 		autoUpdate: false,
 		theme: "dark",
 		filePreviewSize: 70,
@@ -112,6 +112,7 @@ Settings.prototype.loadDefault = function()
 		transformationSpace: "world",
 		navigation: Settings.ORBIT,
 		invertNavigation: false,
+		invertHorizontalNavigation: false,
 		keyboardNavigation: false,
 		keyboardNavigationSpeed: 0.5,
 		mouseLookSensitivity: 0.002,
@@ -240,7 +241,7 @@ Settings.prototype.store = function()
 
 	// Make json file human readable
 	data.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
-	
+
 	// Store file
 	if (FWE.runningOnDesktop())
 	{
