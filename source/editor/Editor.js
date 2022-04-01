@@ -806,12 +806,12 @@ Editor.undo = function()
 };
 
 /**
- * Create default resouces to be used when creating new objects.
+ * Create default resources to be used when creating new objects.
  *
  * @static
- * @method createDefaultResouces
+ * @method createDefaultResources
  */
-Editor.createDefaultResouces = function()
+Editor.createDefaultResources = function()
 {
 	Editor.defaultImage = new Image(Global.FILE_PATH + "uv_color.jpg");
 	Editor.defaultFont = new Font(Global.FILE_PATH + "default.json");
@@ -897,11 +897,60 @@ Editor.createNewProgram = function()
 {
 	var program = new Program();
 
-	Editor.createDefaultResouces();
+	Editor.createDefaultResources();
 	Editor.setProgram(program);
 	Editor.addDefaultScene(Editor.defaultMaterial);
 	Editor.setOpenFile(null);
 };
+
+/**
+ * Create a program and set to the editor.
+ *
+ * @method createNewXYZProgram
+ */
+Editor.createNewXYZProgram = function()
+{
+	var program = new Program();
+  program.coordsSystem = Program.CS_XYZ;
+
+	Editor.createDefaultResources();
+	Editor.setProgram(program);
+	Editor.addXYZScene(Editor.defaultMaterial);
+	Editor.setOpenFile(null);
+};
+
+/**
+ * Create a program with XZY coordinate system set and set to the editor.
+ *
+ * @method createNewProgram
+ */
+Editor.createNewXZYProgram = function()
+{
+	var program = new Program();
+  program.coordsSystem = Program.CS_XZY;
+
+	Editor.createDefaultResources();
+	Editor.setProgram(program);
+	Editor.addXZYScene(Editor.defaultMaterial);
+	Editor.setOpenFile(null);
+};
+
+/**
+ * Create standard material if no material given
+ *
+ * @method maybeCreateStandardMaterial
+ * @param {Material} material Material used by objects, if empty a new material is created
+ */
+Editor.maybeCreateStandardMaterial = function(material)
+{
+  if (material === undefined)
+	{
+		material = new MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
+		material.name = "default";
+	}
+
+  return material;
+}
 
 /**
  * Create a scene using a default template.
@@ -913,17 +962,26 @@ Editor.createNewProgram = function()
  */
 Editor.addDefaultScene = function(material)
 {
-	if (material === undefined)
-	{
-		material = new MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
-		material.name = "default";
-	}
+  Editor.addXZYScene(material);
+}
+
+/**
+ * Create a scene using a XYZ coordinate system template.
+ *
+ * @method addXYZScene
+ * @param {Material} material Default material used by objects, if empty a new material is created
+ */
+Editor.addXYZScene = function(material)
+{
+  THREE.Object3D.DefaultUp.set(0, 1, 0);
+
+  material = this.maybeCreateStandardMaterial(material);
 
 	// Create new scene
 	var scene = new Scene();
 
 	// Sky
-	var sky = new Sky();
+	var sky = new Sky(undefined, undefined, undefined, undefined, 'xyz');
 	sky.autoUpdate = false;
 	scene.add(sky);
 
@@ -939,6 +997,53 @@ Editor.addDefaultScene = function(material)
 	model = new Mesh(ground, material);
  	model.position.set(0, -1.0, 0);
 	model.name = "ground";
+	scene.add(model);
+
+	// Add scene to program
+	Editor.addObject(scene, Editor.program);
+
+	// Open scene
+	var tab = Editor.gui.tab.addTab(SceneEditor, true);
+	tab.attach(scene);
+};
+
+/**
+ *  Create a scene using a XZY coordinate system template.
+ *
+ * This is the scene used when creating a new program or scene inside the editor.
+ *
+ * @method addXZYScene
+ * @param {Material} material Default material used by objects, if empty a new material is created
+ */
+Editor.addXZYScene = function(material)
+{
+  THREE.Object3D.DefaultUp.set(0, 0, 1);
+
+  material = this.maybeCreateStandardMaterial(material);
+
+	// Create new scene
+	var scene = new Scene();
+
+	// Sky
+  var sky = new Sky(undefined, undefined, undefined, undefined, 'xzy');
+	sky.autoUpdate = false;
+
+  sky.rotation.x = 90 / 180 * 3.14;//XXX
+
+	scene.add(sky);
+
+	// Box
+	var model = new Mesh(Editor.defaultGeometry, material);
+	model.name = "box";
+	scene.add(model);
+
+	// Floor
+	var ground = new BoxBufferGeometry(20, 20, 1);
+	ground.name = "ground";
+
+	model = new Mesh(ground, material);
+ 	model.position.set(0, 0, -1.0);
+	model.name = "ground" ;
 	scene.add(model);
 
 	// Add scene to program

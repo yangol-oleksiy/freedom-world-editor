@@ -1,18 +1,19 @@
 import {Group, Color, HemisphereLight, SphereBufferGeometry, ShaderMaterial, BackSide, Mesh, Object3D} from "three";
 import {MathUtils} from "../../utils/MathUtils.js";
 import {DirectionalLight} from "../lights/DirectionalLight.js";
-import SkyFragmentShader from "./sky_fragment.glsl";
+import SkyFragmentShaderXYZ from "./sky_fragment_xyz.glsl";
+import SkyFragmentShaderXZY from "./sky_fragment_xzy.glsl";
 import SkyVertexShader from "./sky_vertex.glsl";
 
 /**
  * Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.
- * 
+ *
  * This object is composed by 3 internal objects
  * 	- Hemisphere light
  * 	- Directional Light
  * 	- Mesh
- * 
- * @param {boolean} autoUpdate If true sky auto updated its state 
+ *
+ * @param {boolean} autoUpdate If true sky auto updated its state
  * @param {number} dayTime Day duration in seconds
  * @param {number} sunDistance Distance of the sun
  * @param {number} time Starting time
@@ -20,8 +21,8 @@ import SkyVertexShader from "./sky_vertex.glsl";
  * @extends {Object3D}
  * @module Lights
  */
-function Sky(autoUpdate, dayTime, sunDistance, time)
-{	
+function Sky(autoUpdate, dayTime, sunDistance, time, coordsSystem)
+{
 	Group.call(this);
 
 	this.name = "sky";
@@ -99,7 +100,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 		offset:	{type: "f", value: 20},
 		exponent: {type: "f", value: 0.2}
 	};
-	
+
 	uniforms.topColor.value.copy(this.hemisphere.color);
 
 	// Sky
@@ -107,7 +108,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	var material = new ShaderMaterial(
 		{
 			vertexShader: SkyVertexShader,
-			fragmentShader: SkyFragmentShader,
+			fragmentShader: coordsSystem == 'xyz' ? SkyFragmentShaderXYZ : SkyFragmentShaderXZY,
 			uniforms: uniforms,
 			side: BackSide
 		});
@@ -161,7 +162,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	 * @type {number}
 	 */
 	this.time = time !== undefined ? time : 75;
-	
+
 	this.updateSky();
 }
 
@@ -170,7 +171,7 @@ Sky.prototype = Object.create(Group.prototype);
 Sky.prototype.initialize = function()
 {
 	this.updateSky();
-	
+
 	Object3D.prototype.initialize.call(this);
 };
 
@@ -198,9 +199,9 @@ Sky.prototype.update = function(delta)
 
 /**
  * Update sky color and sun position.
- * 
+ *
  * If autoUpdate set to true is automatically called by the update method.
- * 
+ *
  * @method updateSky
  */
 Sky.prototype.updateSky = function()
@@ -301,7 +302,7 @@ Sky.prototype.updateSky = function()
 	else if (time < 0.80)
 	{
 		var t = (time - 0.70) * 10;
-		
+
 		if (t < 0.5)
 		{
 			var f = 2 - t*2;
@@ -331,20 +332,20 @@ Sky.prototype.updateSky = function()
 	else
 	{
 		this.sun.position.x = this.sunDistance * Math.cos(rotation + Math.PI);
-		this.sun.position.y = this.sunDistance * Math.sin(rotation + Math.PI);	
+		this.sun.position.y = this.sunDistance * Math.sin(rotation + Math.PI);
 	}
 };
 
 Sky.prototype.toJSON = function(meta)
 {
 	var data = Object3D.prototype.toJSON.call(this, meta);
-	
+
 	data.object.colorTop = [];
 	for (var i = 0; i < this.colorTop.length; i++)
 	{
 		data.object.colorTop.push(this.colorTop[i].toJSON());
 	}
-	
+
 	data.object.colorBottom = [];
 	for (var i = 0; i < this.colorBottom.length; i++)
 	{

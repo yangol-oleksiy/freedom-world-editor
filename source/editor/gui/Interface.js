@@ -25,7 +25,7 @@ function Interface()
 {
 	/**
 	 * Main tab container that has all the interface tabs.
-	 * 
+	 *
 	 * @attribute tab
 	 * @type {TabContainer}
 	 */
@@ -86,7 +86,7 @@ Interface.prototype.saveProgram = function()
 	}
 };
 
-/** 
+/**
  * Load new project from file.
  *
  * Creates the necessary GUI elements to select the file.
@@ -114,9 +114,32 @@ Interface.prototype.loadProgram = function()
  */
 Interface.prototype.newProgram = function()
 {
+	this.newXZYProgram();
+};
+
+/**
+ * Create new program.
+ *
+ * @method newXYZProgram
+ */
+Interface.prototype.newXYZProgram = function()
+{
 	if (Editor.confirm(Locale.changesWillBeLost + " " + Locale.createProject))
 	{
-		Editor.createNewProgram();
+		Editor.createNewXYZProgram();
+	}
+};
+
+/**
+ * Create new program with XZY coordinate system.
+ *
+ * @method newXZYProgram
+ */
+Interface.prototype.newXZYProgram = function()
+{
+	if (Editor.confirm(Locale.changesWillBeLost + " " + Locale.createProject))
+	{
+		Editor.createNewXZYProgram();
 	}
 };
 

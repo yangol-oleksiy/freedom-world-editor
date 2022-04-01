@@ -43,7 +43,7 @@ function EditorOrbitControls()
 	 *
 	 * @property orientation
 	 * @type {Vector2}
-	 */	 
+	 */
 	this.orientation = new Vector2();
 
 	/**
@@ -61,7 +61,7 @@ function EditorOrbitControls()
 	 * @type {number}
 	 */
 	this.minDistance = 1e-10;
-	
+
 	/**
 	 * Maximum angle allowed in the y (vertical) orientation.
 	 *
@@ -77,7 +77,7 @@ function EditorOrbitControls()
 	 * @type {number}
 	 */
 	this.limitDown = -1.57;
-	
+
 	/**
 	 * Indicates if the orbit controls needed an update on the last update.
 	 *
@@ -93,7 +93,7 @@ function EditorOrbitControls()
 	 *
 	 * @property smooth
 	 * @type {boolean}
-	 */	
+	 */
 	this.smooth = false;
 
 	/**
@@ -103,7 +103,7 @@ function EditorOrbitControls()
 	 *
 	 * @property friction
 	 * @type {number}
-	 */	
+	 */
 	this.friction = 0.8;
 
 	/**
@@ -113,7 +113,7 @@ function EditorOrbitControls()
 	 *
 	 * @property speed
 	 * @type {number}
-	 */	
+	 */
 	this.speed = 0.3;
 	this.speedDistance = 0;
 	this.speedCenter = new Vector3(0, 0, 0);
@@ -121,12 +121,10 @@ function EditorOrbitControls()
 
 	this.tempVector = new Vector3(0, 0, 0);
 	this.tempMatrix = new Matrix4();
-
-	this.reset();
-	this.updateControls();
 }
 
-EditorOrbitControls.UP = new Vector3(0, 1, 0);
+EditorOrbitControls.UP_XYZ = new Vector3(0, 1, 0);
+EditorOrbitControls.UP_XZY = new Vector3(0, 0, 1);
 
 EditorOrbitControls.prototype = Object.create(EditorControls.prototype);
 
@@ -141,7 +139,7 @@ EditorOrbitControls.prototype.reset = function()
 EditorOrbitControls.prototype.focusObject = function(object)
 {
 	var box = ObjectUtils.calculateBoundingBox(object);
-	
+
 	if (box !== null)
 	{
 		box.applyMatrix4(object.matrixWorld);
@@ -198,6 +196,14 @@ EditorOrbitControls.prototype.setOrientation = function(code)
 	this.updateControls();
 };
 
+EditorOrbitControls.prototype.getUpDirectionVector = function() {
+  if (!this.coordsSystem) {
+    throw 'No coords system where it should be (case 2)';
+  }
+
+  return this.coordsSystem == 'xyz' ? EditorOrbitControls.UP_XYZ : EditorOrbitControls.UP_XZY;
+}
+
 EditorOrbitControls.prototype.update = function(mouse, keyboard)
 {
 	this.needsUpdate = false;
@@ -228,7 +234,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		{
 			this.center.y += mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
 		}
-	
+
 		this.needsUpdate = true;
 	}
 
@@ -244,7 +250,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 			var y = this.speed * mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
 			this.speedCenter.x += up ? -direction.x * y : direction.x * y;
 			this.speedCenter.z += up ? -direction.z * y : direction.z * y;
-			
+
 			direction.applyAxisAngle(OrbitControls.UP, Math.PI/2);
 
 			var x = this.speed * mouse.delta.x * Editor.settings.editor.mouseLookSensitivity * this.distance;
@@ -256,8 +262,8 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 			var y = mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
 			this.center.x += up ? -direction.x * y : direction.x * y;
 			this.center.z += up ? -direction.z * y : direction.z * y;
-			
-			direction.applyAxisAngle(EditorOrbitControls.UP, Math.PI/2);
+
+			direction.applyAxisAngle(this.getUpDirectionVector(), Math.PI/2);
 
 			var x = mouse.delta.x * Editor.settings.editor.mouseLookSensitivity * this.distance;
 			this.center.x -= direction.x * x;
@@ -277,17 +283,17 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		{
 			this.distance += mouse.wheel * this.distance * Editor.settings.editor.mouseWheelSensitivity;
 		}
-	
+
 		this.needsUpdate = true;
 	}
-	
+
 	// Keyboard movement
 	if (Editor.settings.editor.keyboardNavigation && this.keyboardMovement(keyboard))
 	{
 		this.needsUpdate = true;
 	}
 
-	// If smooth always update 
+	// If smooth always update
 	if (this.smooth === true)
 	{
 		this.distance += this.speedDistance;
@@ -344,7 +350,7 @@ OrbitControls.prototype.keyboardMovement = function(keyboard)
 		var direction = this.getWorldDirection(this.tempVector);
 		direction.y = 0;
 		direction.normalize();
-		direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
+		direction.applyAxisAngle(this.getUpDirectionVector(), 1.57);
 
 		this.center.x -= direction.x * Editor.settings.editor.keyboardNavigationSpeed;
 		this.center.z -= direction.z * Editor.settings.editor.keyboardNavigationSpeed;
@@ -355,7 +361,7 @@ OrbitControls.prototype.keyboardMovement = function(keyboard)
 		var direction = this.getWorldDirection(this.tempVector);
 		direction.y = 0;
 		direction.normalize();
-		direction.applyAxisAngle(EditorOrbitControls.UP, 1.57);
+		direction.applyAxisAngle(this.getUpDirectionVector(), 1.57);
 
 		this.center.x += direction.x * Editor.settings.editor.keyboardNavigationSpeed;
 		this.center.z += direction.z * Editor.settings.editor.keyboardNavigationSpeed;
@@ -391,10 +397,20 @@ EditorOrbitControls.prototype.updateControls = function()
 	this.applyLimits();
 
 	var cos = this.distance * Math.cos(this.orientation.y);
-	this.position.set(Math.cos(this.orientation.x) * cos, this.distance * Math.sin(this.orientation.y), Math.sin(this.orientation.x) * cos);
+
+  if (!this.coordsSystem) {
+    throw 'No coords system where it should be';
+  }
+
+  if (this.coordsSystem == 'xyz') {
+	   this.position.set(Math.cos(this.orientation.x) * cos, this.distance * Math.sin(this.orientation.y), Math.sin(this.orientation.x) * cos);
+  } else {
+    this.position.set(-Math.cos(this.orientation.x) * cos, Math.sin(this.orientation.x) * cos, this.distance * Math.sin(this.orientation.y));
+  }
+
 	this.position.add(this.center);
 
-	this.tempMatrix.lookAt(this.position, this.center, EditorOrbitControls.UP);
+  this.tempMatrix.lookAt(this.position, this.center, this.getUpDirectionVector());
 	this.quaternion.setFromRotationMatrix(this.tempMatrix);
 
 	this.updateMatrixWorld(true);
@@ -404,6 +420,20 @@ EditorOrbitControls.prototype.updateControls = function()
 		this.camera.size = this.distance;
 		this.camera.updateProjectionMatrix();
 	}
+};
+
+EditorOrbitControls.prototype.attach = function(camera)
+{
+  while (this.children.length > 0)
+	{
+		this.remove(this.children[0]);
+	}
+	this.add(camera);
+
+	this.camera = camera;
+
+  this.reset();
+  this.updateControls();
 };
 
 export {EditorOrbitControls};

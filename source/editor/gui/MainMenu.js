@@ -65,10 +65,16 @@ function MainMenu(parent)
 	fileMenu.size.set(120, this.size.y);
 	fileMenu.position.set(0, 0);
 
-	// New project
-	fileMenu.addOption(Locale.new, function()
+	// New XYZ project
+	fileMenu.addOption(Locale.newXYZ, function()
 	{
-		Editor.gui.newProgram();
+		Editor.gui.newXYZProgram();
+	}, Global.FILE_PATH + "icons/misc/new.png");
+
+  // New XZY project
+	fileMenu.addOption(Locale.newXZY, function()
+	{
+		Editor.gui.newXZYProgram();
 	}, Global.FILE_PATH + "icons/misc/new.png");
 
 	// Save project
@@ -225,7 +231,7 @@ function MainMenu(parent)
 					}
 				}, "", Editor.program.name);
 			}, Global.FILE_PATH + "icons/platform/linux.png");
-	
+
 
 			// Publish macos
 			publish.addOption("macOS", function()
@@ -276,7 +282,7 @@ function MainMenu(parent)
 			{
 				var file = files[0];
 				var binary = FileSystem.getFileExtension(file.name) !== "isp";
-				
+
 				var loader = new ObjectLoader();
 				var reader = new FileReader();
 
@@ -321,7 +327,7 @@ function MainMenu(parent)
 
 	// Export OBJ
 	exportMenu.addOption("OBJ", function()
-	{	
+	{
 		Exporters.exportOBJ(Editor.getScene());
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
@@ -333,7 +339,7 @@ function MainMenu(parent)
 
 	// Export GLB
 	exportMenu.addOption("GLB", function()
-	{	
+	{
 		Exporters.exportGLTF(Editor.getScene(), true);
 	}, Global.FILE_PATH + "icons/gltf.png");
 
@@ -381,7 +387,7 @@ function MainMenu(parent)
 
 	// Export Binary STL
 	exportMenu.addOption("STL (" + Locale.binary + ")", function()
-	{	
+	{
 		Exporters.exportSTL(Editor.program, true);
 	}, Global.FILE_PATH + "icons/misc/scene.png");
 
@@ -418,7 +424,7 @@ function MainMenu(parent)
 	{
 		Editor.copyObject();
 	}, Global.FILE_PATH + "icons/misc/copy.png");
-	
+
 	editMenu.addOption(Locale.cut, function()
 	{
 		Editor.cutObject();
@@ -456,7 +462,7 @@ function MainMenu(parent)
 		{
 			geometry = geometry.clone();
 		}
-		
+
 		geometry.applyMatrix4(object.matrixWorld);
 
 		return new BSP(geometry);
@@ -658,7 +664,7 @@ function MainMenu(parent)
 		var geometry = new Geometry();
 
 		for (var i = 0; i < Editor.selection.length; i++)
-		{	
+		{
 			var obj = Editor.selection[i];
 			if (obj.geometry !== undefined)
 			{

@@ -2,6 +2,7 @@ import {AxesHelper, Bone, BoxHelper, BufferGeometry, Camera, CameraHelper, Direc
 import {ActionBundle} from "../../../history/action/ActionBundle.js";
 import {AddResourceAction} from "../../../history/action/resources/AddResourceAction.js";
 import {Audio} from "../../../../core/resources/Audio.js";
+import {Program} from "../../../../core/objects/Program.js";
 import {AudioEmitter} from "../../../../core/objects/audio/AudioEmitter.js";
 import {ButtonIcon} from "../../../components/buttons/ButtonIcon.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
@@ -52,7 +53,7 @@ import {EditorOrbitControls} from "./controls/EditorOrbitControls.js";
 import {EditorFreeControls} from "./controls/EditorFreeControls.js";
 import {WireframeHelper} from "./helpers/WireframeHelper.js";
 
-/** 
+/**
  * The scene editor is the core of the Freedom World Editor editor.
  *
  * It is used to edit the scenes and apply changes to the objects using helper objects.
@@ -146,7 +147,7 @@ function SceneEditor(parent, closeable, container, index)
 
 				Editor.addAction(new ActionBundle(
 					[
-						new AddResourceAction(material, Editor.program, "materials"), 
+						new AddResourceAction(material, Editor.program, "materials"),
 						new ChangeAction(object, "material", material)
 					]));
 			}
@@ -193,7 +194,7 @@ function SceneEditor(parent, closeable, container, index)
 							}
 						}
 					}
-					
+
 					// Model
 					if (Model.fileIsModel(file))
 					{
@@ -333,7 +334,7 @@ function SceneEditor(parent, closeable, container, index)
 	 */
 	this.keyboard = new Keyboard();
 
-	/** 
+	/**
 	 * Mouse input object
 	 *
 	 * It is attached to the window object to capture movement outside of the tab division.
@@ -343,7 +344,7 @@ function SceneEditor(parent, closeable, container, index)
 	 */
 	this.mouse = new Mouse(window, true);
 
-	/** 
+	/**
 	 * Raycaster object used for object picking.
 	 *
 	 * @attribute raycaster
@@ -369,14 +370,14 @@ function SceneEditor(parent, closeable, container, index)
 	 */
 	this.scene = null;
 
-	/** 
+	/**
 	 * The tool bar contains the selector for the transform tools and object placing icons.
 	 *
 	 * @attribute sideBar
 	 * @type {SideBar}
 	 */
 	this.sideBar = new SideBar(this);
-	
+
 	/**
 	 * Camera orientation cube.
 	 *
@@ -399,12 +400,24 @@ function SceneEditor(parent, closeable, container, index)
 	/**
 	 * Grid helper configured to match editor settings.
 	 *
-	 * @attribute gridHelper
+	 * @attribute gridHelperXYZ
 	 * @type {GridHelper}
 	 */
-	this.gridHelper = new GridHelper(Editor.settings.editor.gridSize, Editor.settings.editor.gridSpacing, 0x888888);
-	this.gridHelper.visible = Editor.settings.editor.gridEnabled;
-	this.helperScene.add(this.gridHelper);
+	this.gridHelperXYZ = new GridHelper(Editor.settings.editor.gridSize, Editor.settings.editor.gridSpacing, 0x888888);
+	this.gridHelperXYZ.visible = Editor.settings.editor.gridEnabled;
+
+  /**
+	 * Grid helper configured to match editor settings.
+	 *
+	 * @attribute gridHelperXZY
+	 * @type {GridHelper}
+	 */
+	this.gridHelperXZY = new GridHelper(Editor.settings.editor.gridSize, Editor.settings.editor.gridSpacing, 0x888888);
+	this.gridHelperXZY.visible = Editor.settings.editor.gridEnabled;
+  this.gridHelperXZY.rotateX(90 * THREE.Math.DEG2RAD);
+
+	this.helperScene.add(this.gridHelperXZY);
+  this.helperScene.add(this.gridHelperXYZ);
 
 	/**
 	 * Axes helper configured to match editor settings.
@@ -446,7 +459,7 @@ function SceneEditor(parent, closeable, container, index)
 	 */
 	this.mode = SceneEditor.SELECT;
 
-	/** 
+	/**
 	 * Transform controls tool.
 	 *
 	 * @attribute transform
@@ -467,8 +480,8 @@ function SceneEditor(parent, closeable, container, index)
 	 * @type {Camera}
 	 */
 	this.camera = null;
-	
-	/** 
+
+	/**
 	 * Camera controls object used to manipulate the camera position.
 	 *
 	 * Can be EditorFreeControls, EditorOrbitControls or EditorPlanarControls.
@@ -731,19 +744,23 @@ SceneEditor.prototype.deactivate = function()
 
 /**
  * Update camera controller object.
- * 
+ *
  * Select a new controls object based on the mode passed as argument and attach the editor camera to it.
  *
  * @method updateCameraControls
  * @param {number} mode Camera mode.
  */
-SceneEditor.prototype.updateCameraControls = function(mode)
+SceneEditor.prototype.updateCameraControls = function(mode, coordsSystem)
 {
 	if (this.controlsMode === mode)
 	{
 		return;
 	}
-	
+
+  if (!coordsSystem) {
+    throw 'No coords system where it should be (case 3)';
+  }
+
 	this.controlsMode = mode;
 
 	if (mode === Settings.FIRST_PERSON)
@@ -759,16 +776,23 @@ SceneEditor.prototype.updateCameraControls = function(mode)
 		this.controls = new EditorPlanarControls(mode);
 	}
 
-	this.controls.attach(this.camera);
+  this.controls.coordsSystem = coordsSystem;
+  this.controls.attach(this.camera);
 };
 
 SceneEditor.prototype.updateSettings = function()
 {
-	// Grid
-	this.gridHelper.visible = Editor.settings.editor.gridEnabled;
-	this.gridHelper.setSize(Editor.settings.editor.gridSize);
-	this.gridHelper.setSpacing(Editor.settings.editor.gridSpacing);
-	this.gridHelper.update();
+	// Grid XYZ
+	this.gridHelperXYZ.visible = Editor.settings.editor.gridEnabled;
+	this.gridHelperXYZ.setSize(Editor.settings.editor.gridSize);
+	this.gridHelperXYZ.setSpacing(Editor.settings.editor.gridSpacing);
+	this.gridHelperXYZ.update();
+
+  // Grid XZY
+	this.gridHelperXZY.visible = Editor.settings.editor.gridEnabled;
+	this.gridHelperXZY.setSize(Editor.settings.editor.gridSize);
+	this.gridHelperXZY.setSpacing(Editor.settings.editor.gridSpacing);
+	this.gridHelperXZY.update();
 
 	// Axis
 	this.axisHelper.visible = Editor.settings.editor.axisEnabled;
@@ -779,7 +803,6 @@ SceneEditor.prototype.updateSettings = function()
 
 	// Controls
 	this.navigation.setValue(Editor.settings.editor.navigation);
-	this.updateCameraControls(Editor.settings.editor.navigation);
 
 	// Tool
 	this.transformationSpace.setValue(Editor.settings.editor.transformationSpace);
@@ -811,6 +834,29 @@ SceneEditor.prototype.attach = function(scene)
 	{
 		this.scene.defaultCamera = this.camera;
 	}
+
+  if (scene.parent.coordsSystem == Program.CS_XYZ) {
+    this.camera.rotation.reorder('XYZ');
+  } else {
+    this.camera.rotation.reorder('XZY');
+  }
+
+  var coordsSystem = scene.parent.coordsSystem == Program.CS_XYZ ? 'xyz' : 'xzy';
+
+  if (Editor.settings.editor.gridEnabled) {
+    if (coordsSystem == 'xyz') {
+      this.gridHelperXZY.visible = false;
+      this.gridHelperXYZ.visible = true;
+    } else {
+      this.gridHelperXZY.visible = true;
+      this.gridHelperXYZ.visible = false;
+    }
+  } else {
+    this.gridHelperXZY.visible = false;
+    this.gridHelperXYZ.visible = false;
+  }
+
+  this.updateCameraControls(Editor.settings.editor.navigation, coordsSystem);
 };
 
 /**
@@ -870,7 +916,7 @@ SceneEditor.prototype.update = function()
 			if (this.mouse.buttonDoubleClicked(Mouse.LEFT))
 			{
 				this.selectObjectWithMouse();
-			}	
+			}
 		}
 
 		// Lock mouse when camera is moving
@@ -896,8 +942,12 @@ SceneEditor.prototype.update = function()
 			this.controls.update(this.mouse, this.keyboard);
 
 			// Update grid helper position
-			this.gridHelper.position.x = this.controls.position.x - this.controls.position.x % Editor.settings.editor.gridSpacing;
-			this.gridHelper.position.z = this.controls.position.z - this.controls.position.z % Editor.settings.editor.gridSpacing;
+			this.gridHelperXYZ.position.x = this.controls.position.x - this.controls.position.x % Editor.settings.editor.gridSpacing;
+			this.gridHelperXYZ.position.z = this.controls.position.z - this.controls.position.z % Editor.settings.editor.gridSpacing;
+
+      // Update grid helper position
+      this.gridHelperXZY.position.x = this.controls.position.x - this.controls.position.x % Editor.settings.editor.gridSpacing;
+      this.gridHelperXZY.position.y = this.controls.position.y - this.controls.position.y % Editor.settings.editor.gridSpacing;
 		}
 	}
 
@@ -912,11 +962,11 @@ SceneEditor.prototype.update = function()
 				Editor.selection[i].updateMatrix();
 			}
 		}
-		
+
 		// Update object helper
 		this.objectHelper.traverse(function(children)
 		{
-			children.update();	
+			children.update();
 		});
 	}
 
@@ -928,7 +978,7 @@ SceneEditor.prototype.update = function()
  * Render all the editor scenes to the canvas using the renderer.
  *
  * Draws the attached scene/object after that it renders the helpers and tool scenes, the overlay orientation cube and then the camera previews.
- * 
+ *
  * @method render
  */
 SceneEditor.prototype.render = function()
@@ -967,7 +1017,7 @@ SceneEditor.prototype.render = function()
 	if (Editor.settings.editor.cameraRotationCube)
 	{
 		var code = this.orientation.raycast(this.mouse, canvas);
-		
+
 		if (code !== null && (this.mouse.buttonDoubleClicked(Mouse.LEFT) || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
 		{
 			this.controls.setOrientation(code);
@@ -1077,9 +1127,9 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 	var intersects = this.raycaster.intersectObjects(this.scene.children, true);
 
 	if (intersects.length > 0)
-	{	
+	{
 		if (this.keyboard.keyPressed(Keyboard.CTRL))
-		{	
+		{
 			if (Editor.isSelected(intersects[0].object))
 			{
 				Editor.unselectObject(intersects[0].object);
@@ -1126,7 +1176,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	{
 		mode = this.cameraMode === SceneEditor.PERSPECTIVE ? SceneEditor.ORTHOGRAPHIC : SceneEditor.PERSPECTIVE;
 	}
-	
+
 	this.cameraMode = mode;
 
 	var aspect = this.canvas !== null ? this.canvas.size.x / this.canvas.size.y : 1.0;
@@ -1164,7 +1214,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
  * @param {number} tool Tool to select.
  */
 SceneEditor.prototype.selectTool = function(tool)
-{	
+{
 	if (tool !== undefined)
 	{
 		this.mode = tool;

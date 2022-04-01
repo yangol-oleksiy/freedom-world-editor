@@ -246,6 +246,14 @@ function Program()
 	 * @type {number}
 	 */
 	this.xrMode = Program.XR_NONE;
+
+  /**
+   * Indicates the XR mode currently active.
+   *
+   * @property xrMode
+   * @type {number}
+   */
+  this.coordsSystem = Program.CS_XZY;
 }
 
 /**
@@ -274,6 +282,24 @@ Program.XR_VR = 1;
  * @type {number}
  */
 Program.XR_AR = 2;
+
+/**
+ * Coordinate system XYZ.
+ *
+ * @static
+ * @attribute XR_XYZ
+ * @type {number}
+ */
+Program.CS_XYZ = 0;
+
+/**
+ * Coordinate system XZY
+ *
+ * @static
+ * @attribute XR_VR
+ * @type {number}
+ */
+Program.CS_XZY = 1;
 
 Program.prototype = Object.create(ResourceManager.prototype);
 
