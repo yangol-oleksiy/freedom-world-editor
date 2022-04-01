@@ -241,8 +241,8 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 	if (mouse.buttonPressed(Mouse.RIGHT))
 	{
 		var direction = this.getWorldDirection(this.tempVector);
-		var up = direction.y > 0;
-		direction.y = 0;
+		var up = this.coordsSystem == 'xyz' ? direction.y > 0 : direction.z > 0;
+		direction[this.coordsSystem == 'xyz' ? 'y' : 'z'] = 0;
 		direction.normalize();
 
 		if (this.smooth === true)
@@ -261,13 +261,24 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		{
 			var y = mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
 			this.center.x += up ? -direction.x * y : direction.x * y;
-			this.center.z += up ? -direction.z * y : direction.z * y;
+
+			if (this.coordsSystem == 'xyz') {
+				this.center.z += up ? -direction.z * y : direction.z * y;
+			} else {
+				this.center.z += up ? -direction.z * y : direction.z * y;
+			}
 
 			direction.applyAxisAngle(this.getUpDirectionVector(), Math.PI/2);
 
 			var x = mouse.delta.x * Editor.settings.editor.mouseLookSensitivity * this.distance;
 			this.center.x -= direction.x * x;
-			this.center.z -= direction.z * x;
+
+			if (this.coordsSystem == 'xyz') {
+				this.center.z -= direction.z * x;
+			} else {
+				this.center.y -= direction.y * x;
+			}
+
 		}
 
 		this.needsUpdate = true;
