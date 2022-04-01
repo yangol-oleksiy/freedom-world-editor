@@ -232,7 +232,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 		}
 		else
 		{
-			this.center.y += mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
+			this.center[this.coordsSystem == 'xyz' ? 'y' : 'z'] += mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
 		}
 
 		this.needsUpdate = true;
