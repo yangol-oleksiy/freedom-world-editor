@@ -287,7 +287,7 @@ Program.XR_AR = 2;
  * Coordinate system XYZ.
  *
  * @static
- * @attribute XR_XYZ
+ * @attribute CS_XYZ
  * @type {number}
  */
 Program.CS_XYZ = 0;
@@ -296,7 +296,7 @@ Program.CS_XYZ = 0;
  * Coordinate system XZY
  *
  * @static
- * @attribute XR_VR
+ * @attribute CS_XZY
  * @type {number}
  */
 Program.CS_XZY = 1;
