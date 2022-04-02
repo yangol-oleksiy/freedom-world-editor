@@ -526,6 +526,20 @@ Editor.getScene = function()
 };
 
 /**
+ * Get currently active scene coords system of the editor.
+ *
+ * @static
+ * @method getCoordsSystem
+ * @return {String} Coordinate system, 'xyz' or 'xzy'
+ */
+Editor.getCoordsSystem = function()
+{
+	var scene = Editor.getScene();
+
+	return scene.parent.coordsSystem == Program.CS_XYZ ? 'xyz' : 'xzy';
+};
+
+/**
  * Add objects to a parent, and creates an action in the editor history.
  *
  * If no parent is specified it adds to object to the current scene.

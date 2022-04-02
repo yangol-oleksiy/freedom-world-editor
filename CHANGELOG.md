@@ -3,7 +3,7 @@
 ### V0.101
 
 - Implemented "Invert Horizontal Navigation" setting
-- Bug fix for XZY coordinate system
+- Bug fixes for XZY coordinate system
 - Fixes towards project renaming (logo fix)
 
 ### V0.100

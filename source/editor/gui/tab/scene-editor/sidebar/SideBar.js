@@ -481,7 +481,12 @@ return target.set(x, y, z);`;
 	// Orthographic camera
 	cameras.addOption(Global.FILE_PATH + "icons/camera/orthographic.png", function()
 	{
-		Editor.addObject(new OrthographicCamera(3, 2, OrthographicCamera.RESIZE_HORIZONTAL), self.editor.scene);
+		var camera = new OrthographicCamera(3, 2, OrthographicCamera.RESIZE_HORIZONTAL);
+		if (Editor.getCoordsSystem() == 'xzy') {
+			camera.rotation.x = Math.PI / 2;
+			camera.rotation.y = Math.PI;
+		}
+		Editor.addObject(camera, self.editor.scene);
 	}, Locale.orthographicCamera);
 
 	cameras.updateOptions();
