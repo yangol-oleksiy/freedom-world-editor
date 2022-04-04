@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.102
+
+- Partial implementation of Lua programming language support (code editing and sample execution)
+
 ### V0.101
 
 - Implemented "Invert Horizontal Navigation" setting
