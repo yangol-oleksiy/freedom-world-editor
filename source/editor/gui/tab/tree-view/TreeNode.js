@@ -8,6 +8,7 @@ import {Model} from "../../../../core/resources/Model.js";
 import {Script} from "../../../../core/objects/script/Script.js";
 import {PythonScript} from "../../../../core/objects/script/PythonScript.js";
 import {LuaScript} from "../../../../core/objects/script/LuaScript.js";
+import {FennelScript} from "../../../../core/objects/script/FennelScript.js";
 import {Scene} from "../../../../core/objects/Scene.js";
 import {Program} from "../../../../core/objects/Program.js";
 import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
@@ -28,6 +29,7 @@ import {ParticleEditor} from "../particle-editor/ParticleEditor.js";
 import {ScriptEditor} from "../code/ScriptEditor.js";
 import {PythonScriptEditor} from "../code/PythonScriptEditor.js";
 import {LuaScriptEditor} from "../code/LuaScriptEditor.js";
+import {FennelScriptEditor} from "../code/FennelScriptEditor.js";
 import {CameraEditor} from "../camera/CameraEditor.js";
 import {DragBuffer} from "../../DragBuffer.js";
 import {Editor} from "../../../Editor.js";
@@ -213,6 +215,8 @@ function TreeNode(container)
 					context.addOption(Locale.scriptEditor, openScriptTab);
 				} else if (self.object instanceof LuaScript) {
 					context.addOption(Locale.scriptEditor, openLuaScriptTab);
+				} else if (self.object instanceof FennelScript) {
+					context.addOption(Locale.scriptEditor, openFennelScriptTab);
 				}
 				else if (self.object instanceof ParticleEmitter)
 				{
@@ -693,6 +697,9 @@ function TreeNode(container)
 			else if (self.object instanceof LuaScript)
 			{
 				openTab(LuaScriptEditor, self.object);
+			} else if (self.object instanceof FennelScript)
+			{
+					openTab(FennelScriptEditor, self.object);
 			}
 			else if (self.object instanceof Scene)
 			{
@@ -742,6 +749,11 @@ function TreeNode(container)
 	function openLuaScriptTab()
 	{
 		openTab(LuaScriptEditor, self.object);
+	}
+
+	function openFennelScriptTab()
+	{
+		openTab(FennelScriptEditor, self.object);
 	}
 
 	function openParticleTab()

@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.103
+
+- Partial implementation of Fennel programming language support (code editing and sample execution)
+
 ### V0.102
 
 - Partial implementation of Lua programming language support (code editing and sample execution)

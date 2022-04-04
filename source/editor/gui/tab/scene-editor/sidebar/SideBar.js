@@ -9,6 +9,7 @@ import {Sprite} from "../../../../../core/objects/sprite/Sprite.js";
 import {Script} from "../../../../../core/objects/script/Script.js";
 import {NodeScript} from "../../../../../core/objects/script/NodeScript.js";
 import {LuaScript} from "../../../../../core/objects/script/LuaScript.js";
+import {FennelScript} from "../../../../../core/objects/script/FennelScript.js";
 import {PhysicsObject} from "../../../../../core/objects/physics/PhysicsObject.js";
 import {ParticleEmitter} from "../../../../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../../../../core/objects/misc/Sky.js";
@@ -522,6 +523,12 @@ return target.set(x, y, z);`;
 		{
 			Editor.addObject(new LuaScript(), self.editor.scene);
 		}, Locale.lua);
+
+		// Fennel script
+		scripts.addOption(Global.FILE_PATH + "icons/script/fennel.png", function()
+		{
+			Editor.addObject(new FennelScript(), self.editor.scene);
+		}, Locale.fennel);
 	}
 
 	scripts.updateOptions();

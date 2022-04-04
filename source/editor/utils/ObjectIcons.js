@@ -52,6 +52,7 @@ ObjectIcons.icons = new Map([
 	["PythonScript", ObjectIcons.path + "script/python.png"],
 	["NodeScript", ObjectIcons.path + "script/workflow.png"],
 	["LuaScript", ObjectIcons.path + "script/lua.png"],
+	["FennelScript", ObjectIcons.path + "script/fennel.png"],
 
 	// Text
 	["TextMesh", ObjectIcons.path + "text/textmesh.png"],

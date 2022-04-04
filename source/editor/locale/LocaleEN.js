@@ -155,6 +155,7 @@ var LocaleEN = {
 	python: "Python",
 	nodeGraph: "Node Graph",
 	lua: "Lua",
+	fennel: "Fennel",
 	runScript: "Run script",
 	ignorePixelRatio: "Ignore Device Pixel Ratio",
 	units: "Units",

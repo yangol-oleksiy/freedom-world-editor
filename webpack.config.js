@@ -97,6 +97,7 @@ module.exports = [
 						"node_modules/codemirror/mode/python/python.js",
 						"node_modules/codemirror/mode/javascript/javascript.js",
 						"node_modules/codemirror/mode/lua/lua.js",
+						"node_modules/codemirror/mode/commonlisp/commonlisp.js",
 						"node_modules/codemirror/mode/css/css.js",
 						"node_modules/codemirror/mode/xml/xml.js",
 						"node_modules/codemirror/mode/htmlmixed/htmlmixed.js",
@@ -131,7 +132,10 @@ module.exports = [
 					],
 					"fengari-web.js": [
 						"node_modules/fengari-web/dist/fengari-web.js"
-					]
+					],
+					"antifennel.lua": [
+						"source/editor/fennel/antifennel.lua",
+					],
 				}
 			})
 		]
