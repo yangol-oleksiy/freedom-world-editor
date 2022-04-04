@@ -8,6 +8,7 @@ import {TextBitmap} from "../../../../../core/objects/text/TextBitmap.js";
 import {Sprite} from "../../../../../core/objects/sprite/Sprite.js";
 import {Script} from "../../../../../core/objects/script/Script.js";
 import {NodeScript} from "../../../../../core/objects/script/NodeScript.js";
+import {LuaScript} from "../../../../../core/objects/script/LuaScript.js";
 import {PhysicsObject} from "../../../../../core/objects/physics/PhysicsObject.js";
 import {ParticleEmitter} from "../../../../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../../../../core/objects/misc/Sky.js";
@@ -515,6 +516,12 @@ return target.set(x, y, z);`;
 		{
 			Editor.addObject(new NodeScript(), self.editor.scene);
 		}, Locale.nodeGraph);
+
+		// Lua script
+		scripts.addOption(Global.FILE_PATH + "icons/script/lua.png", function()
+		{
+			Editor.addObject(new LuaScript(), self.editor.scene);
+		}, Locale.lua);
 	}
 
 	scripts.updateOptions();

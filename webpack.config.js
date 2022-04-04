@@ -96,6 +96,7 @@ module.exports = [
 						"node_modules/codemirror/keymap/vim.js",
 						"node_modules/codemirror/mode/python/python.js",
 						"node_modules/codemirror/mode/javascript/javascript.js",
+						"node_modules/codemirror/mode/lua/lua.js",
 						"node_modules/codemirror/mode/css/css.js",
 						"node_modules/codemirror/mode/xml/xml.js",
 						"node_modules/codemirror/mode/htmlmixed/htmlmixed.js",
@@ -127,6 +128,9 @@ module.exports = [
 						"node_modules/codemirror/addon/dialog/dialog.css",
 						"node_modules/codemirror/addon/lint/lint.css",
 						"node_modules/codemirror/addon/hint/show-hint.css"
+					],
+					"fengari-web.js": [
+						"node_modules/fengari-web/dist/fengari-web.js"
 					]
 				}
 			})

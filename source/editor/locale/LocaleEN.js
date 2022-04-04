@@ -154,6 +154,8 @@ var LocaleEN = {
 	javascript: "JavaScript",
 	python: "Python",
 	nodeGraph: "Node Graph",
+	lua: "Lua",
+	runScript: "Run script",
 	ignorePixelRatio: "Ignore Device Pixel Ratio",
 	units: "Units",
 	libraryMode: "Library Mode",

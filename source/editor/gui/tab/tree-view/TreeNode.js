@@ -7,6 +7,7 @@ import {ObjectUtils} from "../../../../core/utils/ObjectUtils.js";
 import {Model} from "../../../../core/resources/Model.js";
 import {Script} from "../../../../core/objects/script/Script.js";
 import {PythonScript} from "../../../../core/objects/script/PythonScript.js";
+import {LuaScript} from "../../../../core/objects/script/LuaScript.js";
 import {Scene} from "../../../../core/objects/Scene.js";
 import {Program} from "../../../../core/objects/Program.js";
 import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
@@ -26,6 +27,7 @@ import {SceneEditor} from "../scene-editor/SceneEditor.js";
 import {ParticleEditor} from "../particle-editor/ParticleEditor.js";
 import {ScriptEditor} from "../code/ScriptEditor.js";
 import {PythonScriptEditor} from "../code/PythonScriptEditor.js";
+import {LuaScriptEditor} from "../code/LuaScriptEditor.js";
 import {CameraEditor} from "../camera/CameraEditor.js";
 import {DragBuffer} from "../../DragBuffer.js";
 import {Editor} from "../../../Editor.js";
@@ -209,6 +211,8 @@ function TreeNode(container)
 				if (self.object instanceof Script)
 				{
 					context.addOption(Locale.scriptEditor, openScriptTab);
+				} else if (self.object instanceof LuaScript) {
+					context.addOption(Locale.scriptEditor, openLuaScriptTab);
 				}
 				else if (self.object instanceof ParticleEmitter)
 				{
@@ -686,6 +690,10 @@ function TreeNode(container)
 			{
 				openTab(ScriptEditor, self.object);
 			}
+			else if (self.object instanceof LuaScript)
+			{
+				openTab(LuaScriptEditor, self.object);
+			}
 			else if (self.object instanceof Scene)
 			{
 				openTab(SceneEditor, self.object);
@@ -729,6 +737,11 @@ function TreeNode(container)
 	function openScriptTab()
 	{
 		openTab(ScriptEditor, self.object);
+	}
+
+	function openLuaScriptTab()
+	{
+		openTab(LuaScriptEditor, self.object);
 	}
 
 	function openParticleTab()
