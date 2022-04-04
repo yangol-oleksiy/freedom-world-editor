@@ -1,9 +1,7 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {LuaScript} from "../../../../../core/objects/script/LuaScript.js";
 import {Global} from "../../../../Global.js";
 import {Editor} from "../../../../Editor.js";
 import {Component} from "../../../../components/Component.js";
-import {ButtonIcon} from "../../../../components/buttons/ButtonIcon.js";
 import {ButtonText} from "../../../../components/buttons/ButtonText.js";
 
 /**
