@@ -1,6 +1,4 @@
 import {Locale} from "../../../../locale/LocaleManager.js";
-import {Global} from "../../../../Global.js";
-import {Editor} from "../../../../Editor.js";
 import {Component} from "../../../../components/Component.js";
 import {ButtonText} from "../../../../components/buttons/ButtonText.js";
 
