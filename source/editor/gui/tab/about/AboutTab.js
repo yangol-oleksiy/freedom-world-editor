@@ -38,7 +38,9 @@ function AboutTab(parent, closeable, container, index)
 	var libs = [];
 	libs.push("three.js R" + REVISION);
 	libs.push("CodeMirror V" + CodeMirror.version);
-	libs.push("CannonJS V" + CANNON.version);
+	libs.push(fengari.FENGARI_RELEASE.replace('Fengari ', 'Fengari V'));
+	libs.push('Fennel V1.0.0');
+	libs.push("CannonJS V0.6.2");
 	libs.push("TernJS V" + tern.version);
 	if (FWE.runningOnDesktop())
 	{

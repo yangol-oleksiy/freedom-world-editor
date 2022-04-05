@@ -3,6 +3,7 @@
 ### V0.103
 
 - Partial implementation of Fennel programming language support (code editing and sample execution)
+- Credits update for about window.
 
 ### V0.102
 
