@@ -3,6 +3,7 @@
 ### V0.104
 
 - Loading 3d objects libraries using YAML config
+- Navigation cube fix for XZY coordinates system
 
 ### V0.103
 

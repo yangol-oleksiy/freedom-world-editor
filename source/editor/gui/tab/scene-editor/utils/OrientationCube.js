@@ -3,18 +3,18 @@ import {Texture} from "../../../../../core/texture/Texture.js";
 import {Viewport} from "../../../../../core/objects/cameras/Viewport.js";
 import {Global} from "../../../../Global.js";
 
-/** 
+/**
  * Orietantion cube can be used to preview and change the rotation of an object.
- * 
+ *
  * Is used in the editor to preview and manipulate the camera prespective.
- * 
+ *
  * @class OrientationCube
  */
 function OrientationCube()
 {
 	/**
 	 * Orientation cube viewport.
-	 * 
+	 *
 	 * @attribute viewport
 	 * @type {Viewport}
 	 */
@@ -22,7 +22,7 @@ function OrientationCube()
 	this.viewport.size.set(150, 150);
 	this.viewport.offset.set(10, 10);
 	this.viewport.anchor = Viewport.TOP_RIGHT;
-	
+
 	/**
 	 * Cube visualization camera
 	 *
@@ -51,7 +51,7 @@ function OrientationCube()
 	this.xPos = new Mesh(plane, new MeshBasicMaterial({map: texture}));
 	this.xPos.code = OrientationCube.X_POS;
 	this.xPos.position.set(0.5, 0, 0);
-	this.xPos.rotation.set(0, Math.PI / 2, 0);
+	this.xPos.rotation.set(Editor.getCoordsSystem() == 'xzy' ? Math.PI / 2 : 0, Math.PI / 2, 0);
 	this.xPos.matrixAutoUpdate = false;
 	this.xPos.updateMatrix();
 	this.scene.add(this.xPos);
@@ -61,7 +61,7 @@ function OrientationCube()
 	this.xNeg = new Mesh(plane, new MeshBasicMaterial({map: texture}));
 	this.xNeg.code = OrientationCube.X_NEG;
 	this.xNeg.position.set(-0.5, 0, 0);
-	this.xNeg.rotation.set(0, -Math.PI / 2, 0);
+	this.xNeg.rotation.set(Editor.getCoordsSystem() == 'xzy' ? Math.PI / 2 : 0, -Math.PI / 2, 0);
 	this.xNeg.matrixAutoUpdate = false;
 	this.xNeg.updateMatrix();
 	this.scene.add(this.xNeg);
@@ -71,7 +71,7 @@ function OrientationCube()
 	this.yPos = new Mesh(plane, new MeshBasicMaterial({map: texture}));
 	this.yPos.code = OrientationCube.Y_POS;
 	this.yPos.position.set(0, 0.5, 0);
-	this.yPos.rotation.set(-Math.PI / 2, 0, 0);
+	this.yPos.rotation.set(-Math.PI / 2, 0, Editor.getCoordsSystem() == 'xzy' ? Math.PI : 0);
 	this.yPos.matrixAutoUpdate = false;
 	this.yPos.updateMatrix();
 	this.scene.add(this.yPos);
