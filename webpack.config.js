@@ -133,6 +133,9 @@ module.exports = [
 					"fengari-web.js": [
 						"node_modules/fengari-web/dist/fengari-web.js"
 					],
+					"js-yaml.min.js": [
+						"node_modules/js-yaml/dist/js-yaml.min.js"
+					],
 					"antifennel.lua": [
 						"source/editor/fennel/antifennel.lua",
 					],

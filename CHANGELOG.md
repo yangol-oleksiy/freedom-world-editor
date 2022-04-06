@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.104
+
+- Loading 3d objects libraries using YAML config
+
 ### V0.103
 
 - Partial implementation of Fennel programming language support (code editing and sample execution)

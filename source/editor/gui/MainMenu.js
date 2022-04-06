@@ -23,6 +23,7 @@ import {BSP} from "../../core/bsp/BSP.js";
 import {Exporters} from "../Exporters.js";
 import {AboutTab} from "./tab/about/AboutTab.js";
 import {SettingsTab} from "./tab/settings/SettingsTab.js";
+import {ObjectLibraryLoader} from "../utils/ObjectLibraryLoader";
 
 /**
  * Main menu of the application is displayed on top of the window, contains all global operations that can be applied to the project.
@@ -321,6 +322,14 @@ function MainMenu(parent)
 		}, ".isp, .nsp");
 
 	}, Global.FILE_PATH + "icons/misc/import.png");
+
+	if (DEVELOPMENT) {
+		// Load test library
+		fileMenu.addOption("Load test library", function()
+		{
+			ObjectLibraryLoader.loadTestLibs();
+		}, Global.FILE_PATH + "icons/misc/import.png");
+	}
 
 	// Export menu
 	var exportMenu = fileMenu.addMenu(Locale.export, Global.FILE_PATH + "icons/misc/export.png");
