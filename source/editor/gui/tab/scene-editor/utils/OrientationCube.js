@@ -2,6 +2,7 @@ import {PerspectiveCamera, Raycaster, Vector2, Scene, PlaneBufferGeometry, RGBFo
 import {Texture} from "../../../../../core/texture/Texture.js";
 import {Viewport} from "../../../../../core/objects/cameras/Viewport.js";
 import {Global} from "../../../../Global.js";
+import {Editor} from "../../../../Editor.js";
 
 /**
  * Orietantion cube can be used to preview and change the rotation of an object.
