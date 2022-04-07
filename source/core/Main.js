@@ -79,8 +79,6 @@ export {RoundedBoxBufferGeometry} from "./geometries/RoundedBoxBufferGeometry.js
 export {TerrainBufferGeometry} from "./geometries/TerrainBufferGeometry.js";
 export {ParametricBufferGeometry} from "./geometries/ParametricBufferGeometry.js";
 
-export {TwistModifier} from "./geometries/modifiers/TwistModifier.js";
-
 export {Mesh} from "./objects/mesh/Mesh.js";
 export {SkinnedMesh} from "./objects/mesh/SkinnedMesh.js";
 export {InstancedMesh} from "./objects/mesh/InstancedMesh.js";
@@ -150,4 +148,3 @@ export {EventManager} from "./utils/EventManager.js";
 export {MathUtils} from "./utils/MathUtils.js";
 export {ObjectUtils} from "./utils/ObjectUtils.js";
 export {PhysicsGenerator} from "./utils/PhysicsGenerator.js";
-export {UnitConverter} from "./utils/UnitConverter.js";

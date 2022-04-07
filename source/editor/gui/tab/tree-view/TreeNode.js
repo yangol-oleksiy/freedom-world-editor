@@ -312,28 +312,6 @@ function TreeNode(container)
 						var quickhull = new ConvexGeometry(vertices);
 						Editor.addAction(new ChangeAction(self.object, "geometry", quickhull));
 					});
-
-					// Generate normals for the attached geometry
-					context.addOption(Locale.computeNormals, function()
-					{
-						var geometry = self.object.geometry.clone();
-						geometry.computeVertexNormals();
-						Editor.addAction(new ChangeAction(self.object, "geometry", geometry));
-					});
-
-					// Apply transformation to geometry
-					context.addOption(Locale.applyTransformation, function()
-					{
-						var geometry = self.object.geometry.clone();
-						geometry.applyMatrix4(self.object.matrixWorld);
-
-						var actions = [];
-						actions.push(new ChangeAction(self.object, "geometry", geometry));
-						actions.push(new ChangeAction(self.object, "position", new Vector3(0, 0, 0)));
-						actions.push(new ChangeAction(self.object, "scale", new Vector3(1, 1, 1)));
-						actions.push(new ChangeAction(self.object, "quaternion", new Quaternion(0, 0, 0, 1)));
-						Editor.addAction(new ActionBundle(actions));
-					});
 				}
 			}
 

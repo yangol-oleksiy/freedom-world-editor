@@ -4,6 +4,7 @@
 
 - Loading 3d objects libraries using YAML config
 - Navigation cube fix for XZY coordinates system
+- Messy functionality removal (merge geometries, compute normals, apply transformation)
 
 ### V0.103
 

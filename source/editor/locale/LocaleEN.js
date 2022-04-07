@@ -10,7 +10,7 @@ var LocaleEN = {
 	{
 		language: "EN",
 		name: "English",
-		version: 1
+		version: 2
 	},
 
 	// Actions
@@ -33,12 +33,9 @@ var LocaleEN = {
 	undo: "Undo",
 	mix: "Mix",
 	setTransparent: "Set transparent",
-	mergeGeometries: "Merge Geometries",
 	executeScript: "Execute Script",
 
 	// Context menu
-	computeNormals: "Compute Normals",
-	applyTransformation: "Apply Transformation",
 	sceneEditor: "Scene Editor",
 	objectEditor: "Object Editor",
 	scriptEditor: "Script Editor",
