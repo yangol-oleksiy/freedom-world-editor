@@ -6,7 +6,6 @@ import {DirectionalLight} from "../objects/lights/DirectionalLight.js";
 import {EffectComposer} from "../postprocessing/EffectComposer.js";
 import {FirstPersonControls} from "../objects/controls/FirstPersonControls.js";
 import {Group} from "../objects/misc/Group.js";
-import {HTMLView} from "../objects/misc/HTMLView.js";
 import {HemisphereLight} from "../objects/lights/HemisphereLight.js";
 import {InstancedMesh} from "../objects/mesh/InstancedMesh.js";
 import {LensFlare} from "../objects/misc/LensFlare.js";
@@ -818,13 +817,6 @@ ObjectLoader.prototype.parseObject = function(data)
 
 		case "HemisphereLight":
 			object = new HemisphereLight(data.color, data.groundColor, data.intensity);
-			break;
-
-		case "HTMLView":
-			object = new HTMLView();
-			object.height = data.height;
-			object.width = data.width;
-			object.url = data.url;
 			break;
 
 		case "LightProbe":

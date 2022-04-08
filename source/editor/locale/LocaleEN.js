@@ -10,7 +10,7 @@ var LocaleEN = {
 	{
 		language: "EN",
 		name: "English",
-		version: 3
+		version: 4
 	},
 
 	// Actions
@@ -74,7 +74,6 @@ var LocaleEN = {
 	perspectiveCamera: "Perspective Camera",
 	orthographicCamera: "Orthographic Camera",
 	lensFlare: "Lens flare",
-	htmlView: "HTML View",
 	orbitControls: "Orbit Controls",
 	firstPersonControls: "First Person Controls",
 	particle: "Particle",

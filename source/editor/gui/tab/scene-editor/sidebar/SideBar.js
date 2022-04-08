@@ -14,7 +14,6 @@ import {PhysicsObject} from "../../../../../core/objects/physics/PhysicsObject.j
 import {ParticleEmitter} from "../../../../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../../../../core/objects/misc/Sky.js";
 import {LensFlare} from "../../../../../core/objects/misc/LensFlare.js";
-import {HTMLView} from "../../../../../core/objects/misc/HTMLView.js";
 import {Group} from "../../../../../core/objects/misc/Group.js";
 import {BillboardGroup} from "../../../../../core/objects/misc/BillboardGroup.js";
 import {Mesh} from "../../../../../core/objects/mesh/Mesh.js";
@@ -599,14 +598,6 @@ return target.set(x, y, z);`;
 
 		Editor.addObject(lensFlare, self.editor.scene);
 	}, Locale.lensFlare);
-
-	if (DEVELOPMENT)
-	{
-		effects.addOption(Global.FILE_PATH + "icons/platform/web.png", function()
-		{
-			Editor.addObject(new HTMLView("https://www.google.com/"), self.editor.scene);
-		}, Locale.htmlView);
-	}
 
 	effects.updateOptions();
 

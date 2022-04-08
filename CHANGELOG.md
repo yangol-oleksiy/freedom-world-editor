@@ -4,6 +4,7 @@
 
 - Implemented select area mode
 - Added insert mode tool button
+- Removed HTMLView project component
 
 ### V0.104
 
