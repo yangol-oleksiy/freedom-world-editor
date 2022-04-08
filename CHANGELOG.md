@@ -4,7 +4,8 @@
 
 - Implemented select area mode
 - Added insert mode tool button
-- Removed HTMLView project component
+- Removed HTMLView editor object
+- Removed "Orbit Controls" functionality from editor
 
 ### V0.104
 

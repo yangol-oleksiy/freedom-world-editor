@@ -660,11 +660,6 @@ return target.set(x, y, z);`;
 	controls.setImage(Global.FILE_PATH + "icons/misc/controller.png");
 	this.buttons.push(controls);
 
-	// Orbit controls
-	controls.addOption(Global.FILE_PATH + "icons/misc/orbit.png", function()
-	{
-		Editor.addObject(new OrbitControls(), self.editor.scene);
-	}, Locale.orbitControls);
 
 	// FPS controls
 	controls.addOption(Global.FILE_PATH + "icons/misc/crosshair.png", function()

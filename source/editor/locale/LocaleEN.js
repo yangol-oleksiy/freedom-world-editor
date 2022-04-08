@@ -74,7 +74,6 @@ var LocaleEN = {
 	perspectiveCamera: "Perspective Camera",
 	orthographicCamera: "Orthographic Camera",
 	lensFlare: "Lens flare",
-	orbitControls: "Orbit Controls",
 	firstPersonControls: "First Person Controls",
 	particle: "Particle",
 	ground: "Ground",
