@@ -1,5 +1,10 @@
 # Changelog
 
+### V0.105
+
+- Implemented select area mode
+- Added insert mode tool button
+
 ### V0.104
 
 - Loading 3d objects libraries using YAML config

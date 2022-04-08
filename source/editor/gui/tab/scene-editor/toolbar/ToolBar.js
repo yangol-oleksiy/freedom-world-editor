@@ -6,9 +6,9 @@ import {ToolBarGroup} from "./ToolBarGroup.js";
 
 /**
  * The tool bar is used to store tool groups.
- * 
+ *
  * Tools are organized by category, the toolbar size is automatically calculated from the amount of elements.
- * 
+ *
  * @class ToolBar
  * @extends {Component}
  * @param {Component} parent Parent element.
@@ -21,7 +21,7 @@ function ToolBar(parent)
 
 	/**
 	 * Spacing in px between the tool groups.
-	 * 
+	 *
 	 * @attribute spacing
 	 * @type {Number}
 	 */
@@ -29,12 +29,12 @@ function ToolBar(parent)
 
 	/**
 	 * Groups contained inside this tool bar.
-	 * 
+	 *
 	 * @attribute groups
 	 * @type {Array}
 	 */
 	this.groups = [];
-	
+
 	this.size.y = 45;
 
 	var self = this;
@@ -43,6 +43,14 @@ function ToolBar(parent)
 	this.select = tool.addToggleOption(Locale.select + " (CTRL+1)", Global.FILE_PATH + "icons/tools/select.png", function()
 	{
 		self.parent.selectTool(SceneEditor.SELECT);
+	});
+	this.multipleSelect = tool.addToggleOption(Locale.selectMultipleMode + " (no shortcut)", Global.FILE_PATH + "icons/tools/select_multiple	.png", function()
+	{
+		self.parent.selectTool(SceneEditor.SELECT_MULTIPLE);
+	});
+	this.insert = tool.addToggleOption(Locale.insertMode + " (no shortcut)", Global.FILE_PATH + "icons/tools/insert.png", function()
+	{
+		self.parent.selectTool(SceneEditor.INSERT);
 	});
 	this.move = tool.addToggleOption(Locale.move + " (CTRL+2)", Global.FILE_PATH + "icons/tools/move.png", function()
 	{
@@ -74,6 +82,8 @@ ToolBar.prototype.selectTool = function(tool)
 	this.move.setSelected(tool === SceneEditor.MOVE);
 	this.scale.setSelected(tool === SceneEditor.SCALE);
 	this.rotate.setSelected(tool === SceneEditor.ROTATE);
+	this.multipleSelect.setSelected(tool === SceneEditor.SELECT_MULTIPLE);
+	this.insert.setSelected(tool === SceneEditor.INSERT);
 };
 
 /**
@@ -94,7 +104,7 @@ ToolBar.prototype.addGroup = function()
  * Update the groups position and recalculate the bar size.
  *
  * Should be manually called after adding new elements to the toolbar.
- * 
+ *
  * @method updateGroups
  */
 ToolBar.prototype.updateGroups = function()
@@ -107,7 +117,7 @@ ToolBar.prototype.updateGroups = function()
 		this.groups[i].updateInterface();
 
 		this.size.x += this.groups[i].size.x;
-	
+
 		if (i + 1 < this.groups.length)
 		{
 			this.size.x += this.spacing;

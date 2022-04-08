@@ -10,7 +10,7 @@ var LocaleEN = {
 	{
 		language: "EN",
 		name: "English",
-		version: 2
+		version: 3
 	},
 
 	// Actions
@@ -29,6 +29,8 @@ var LocaleEN = {
 	deleteMaterial: "Delete material?",
 	deleteTexture: "Delete texture?",
 	select: "Select",
+	selectMultipleMode: "Select Multiple",
+	insertMode: "Insert Mode",
 	redo: "Redo",
 	undo: "Undo",
 	mix: "Mix",

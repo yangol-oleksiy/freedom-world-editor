@@ -208,7 +208,7 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 {
 	this.needsUpdate = false;
 
-	if (mouse.buttonPressed(Mouse.LEFT))
+	if (mouse.buttonPressed(Mouse.LEFT) && Editor.isSceneRotationAllowed())
 	{
 		if (this.smooth === true)
 		{

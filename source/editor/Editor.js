@@ -339,6 +339,7 @@ Editor.runProject = function()
  */
 Editor.selectObject = function(object)
 {
+	console.log('!!! selectObject');
 	for (var i = 0; i < Editor.selection.length; i++)
 	{
 		if (Editor.selection[i].gui !== undefined && Editor.selection[i].gui.node !== undefined)
@@ -1437,5 +1438,16 @@ Editor.exit = function()
 		gui.App.quit();
 	}
 };
+
+/**
+ * Predicate to determine if we should rotate scene upon mouse dragging
+ *
+ * @method isSceneRotationAllowed
+ */
+Editor.isSceneRotationAllowed = function()
+{
+	var tab = Editor.gui.tab.getTab(SceneEditor);
+	return tab.mode != SceneEditor.SELECT_MULTIPLE && tab.mode != SceneEditor.INSERT;
+}
 
 export {Editor};
