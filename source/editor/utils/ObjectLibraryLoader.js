@@ -15,6 +15,21 @@ import {Locale} from "../locale/LocaleManager.js";
  */
 function ObjectLibraryLoader() {}
 
+function maybeApplyCoordinatesTransformation(obj, objSystem, sceneSystem) {
+	if (objSystem == sceneSystem) {
+		return obj;
+	}
+
+	if (objSystem == 'xzy') { // XZY -> XYZ
+		obj.rotation.x = - Math.PI / 2;
+		obj.rotation.y = 0;
+		obj.rotation.z = 0;
+		return obj;
+	} else {
+		Editor.alert("Unimplemented, ObjectLibraryLoader");
+	}
+}
+
 ObjectLibraryLoader.loadTestLibs = function(variable)
 {
 	var loader = new FileLoader();
@@ -47,7 +62,9 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 				if (elem.pluginInsert) {
 					models.addOption(Global.FILE_PATH + "icons/models/figures.png", function()
 					{
-						Editor.getScene().add(group.children[0].clone(true));
+						var obj = maybeApplyCoordinatesTransformation(group.children[0], elem.coordinatesSystem, Editor.getCoordsSystem()).clone(true);
+						obj.userData.selectable = true;
+						Editor.getScene().add(obj);
 					}, elem.name);
 
 					models.updateOptions();
@@ -60,7 +77,7 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 						: Global.FILE_PATH + "icons/tools/select.png";
 
 					var id = importId + elem.name;
-					var object = group.children[0].clone(true);
+					var object = maybeApplyCoordinatesTransformation(group.children[0], elem.coordinatesSystem, Editor.getCoordsSystem()).clone(true);
 					var option = tool.addToggleOption(elem.name, iconPath, function()
 					{
 						insertModeToolBar.selectTool(id);

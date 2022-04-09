@@ -2,6 +2,7 @@
 defaultOptions:
   pluginInsertMode: true
   pluginInsert: true
+  coordinatesSystem: xzy
 iconsBase: http://localhost:8080/files/3dlib/icons/
 items:
   - name: Palm

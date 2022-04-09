@@ -700,6 +700,7 @@ function SceneEditor(parent, closeable, container, index)
 	});
 
 	this.selectedAreas = [];
+	this.selectedWithAreaObjects = [];
 	this.canvas.resetCanvas();
 }
 
@@ -1153,12 +1154,105 @@ SceneEditor.prototype.updateRaycasterFromMouse = function()
 	this.raycaster.setFromCamera(this.normalized, this.camera);
 };
 
+function cleanAreaSelectionBoundingBoxes(th) {
+	th.selectedWithAreaObjects.forEach(function(child) {
+		if (child.userData.selectionHelper) {
+			th.scene.remove(child);
+		}
+	});
+}
+
 SceneEditor.prototype.clearMultipleSelections = function() {
 	var th = this;
+
+	cleanAreaSelectionBoundingBoxes(this);
+
 	this.selectedAreas.forEach(function(area){
 		th.scene.remove(area);
 	});
 	this.selectedAreas = [];
+}
+
+function onAreaSelectionStart(th, elem) {
+	th.areaSelectStartPoint = {
+		x: Math.round(elem.point.x),
+		y: Math.round(elem.point.y),
+		z: Math.round(elem.point.z)
+	};
+
+	if (!th.keyboard.keyPressed(Keyboard.CTRL)) {
+		th.clearMultipleSelections();
+	}
+}
+
+
+function onAreaSelectionEnd(th, elem, helperCube) {
+	var selectedArea = helperCube.clone();
+	selectedArea.name = 'selectedArea';
+
+	th.scene.add(selectedArea);
+	th.selectedAreas.push(selectedArea);
+	var selectedChildren = th.scene.children.filter(function(child) {
+		if (!child.userData.selectable) {
+			return false;
+		}
+
+		var lessX, lessY, biggerX, biggerY;
+
+		if (th.areaSelectStartPoint.x > Math.round(elem.point.x)) {
+			lessX = Math.round(elem.point.x);
+			biggerX = th.areaSelectStartPoint.x;
+		} else {
+			lessX = th.areaSelectStartPoint.x;
+			biggerX = Math.round(elem.point.x)
+		}
+
+		if (Editor.getCoordsSystem() == 'xzy') {
+			if (th.areaSelectStartPoint.y > Math.round(elem.point.y)) {
+				lessY = Math.round(elem.point.y);
+				biggerY = th.areaSelectStartPoint.y;
+			} else {
+				lessY = th.areaSelectStartPoint.y;
+				biggerY = Math.round(elem.point.y);
+			}
+
+			return child.position.x >= lessX && child.position.y >= lessY && child.position.x <= biggerX && child.position.y <= biggerY;
+		} else {
+			if (th.areaSelectStartPoint.z > Math.round(elem.point.z)) {
+				lessY = Math.round(elem.point.z);
+				biggerY = th.areaSelectStartPoint.z;
+			} else {
+				lessY = th.areaSelectStartPoint.z;
+				biggerY = Math.round(elem.point.z);
+			}
+
+			return child.position.x >= lessX && child.position.z >= lessY && child.position.x <= biggerX && child.position.z <= biggerY;
+		}
+
+	});
+
+	selectedChildren.forEach(function(child) {
+		var boundingBox = new THREE.Box3();
+		boundingBox.setFromObject(child, true);
+		const helper = new THREE.Box3Helper( boundingBox, 0xff0000 );
+		helper.userData.selectionHelper = true;
+		th.selectedWithAreaObjects.push(helper);
+
+		th.scene.add(helper);
+	})
+}
+
+function onClickInInsertMode(th, elem) {
+	if (th.insertModeToolBar.lastSelectedObject) {
+		var newObj = th.insertModeToolBar.lastSelectedObject.clone(true)
+		newObj.position.x = Math.round(elem.point.x);
+		newObj.position.y = Math.round(elem.point.y);
+		newObj.position.z = Math.round(elem.point.z);
+		newObj.userData.selectable = true;
+		th.scene.add(newObj);
+	} else {
+		Editor.alert(Locale.insertModeNoObjectToInsert);
+	}
 }
 
 /**
@@ -1182,7 +1276,7 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 			this.helperCube.visible = false;
 		}
 
-		intersects.forEach(function(elem){
+		intersects.forEach(function(elem) {
 
 			if (elem.object.name == 'helperPlane') {
 				if (th.mode == SceneEditor.SELECT_MULTIPLE || th.mode == SceneEditor.INSERT) {
@@ -1190,11 +1284,7 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 						if (!th.mouse.buttonPressed(Mouse.LEFT)) {
 							if (th.areaSelectStartPoint) {
 								// Mouse up here
-								var selectedArea = helperCube.clone();
-								selectedArea.name = 'selectedArea';
-
-								th.scene.add(selectedArea);
-								th.selectedAreas.push(selectedArea);
+								onAreaSelectionEnd(th, elem, helperCube);
 							}
 
 							th.areaSelectStartPoint = null;
@@ -1247,29 +1337,13 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 								}
 							} else {
 								// Mouse down here
-								th.areaSelectStartPoint = {
-									x: Math.round(elem.point.x),
-									y: Math.round(elem.point.y),
-									z: Math.round(elem.point.z)
-								};
-
-								if (!th.keyboard.keyPressed(Keyboard.CTRL)) {
-									th.clearMultipleSelections();
-								}
+								onAreaSelectionStart(th, elem);
 							}
 						}
 					} else {
 						// Button click in insert mode
 						if (th.mouse.buttonJustPressed(Mouse.LEFT) && th.mode == SceneEditor.INSERT) {
-							if (th.insertModeToolBar.lastSelectedObject) {
-								var newObj = th.insertModeToolBar.lastSelectedObject.clone(true)
-								newObj.position.x = Math.round(elem.point.x);
-								newObj.position.y = Math.round(elem.point.y);
-								newObj.position.z = Math.round(elem.point.z);
-								th.scene.add(newObj);
-							} else {
-								Editor.alert(Locale.insertModeNoObjectToInsert);
-							}
+							onClickInInsertMode(th, elem);
 						}
 
 						if (Editor.getCoordsSystem() == 'xzy') {

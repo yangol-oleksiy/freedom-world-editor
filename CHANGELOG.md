@@ -4,6 +4,7 @@
 
 - Implemented insert mode inserting
 - Updated library file format for inserting support
+- Implemented selection mode objects visual selection
 
 ### V0.105
 
