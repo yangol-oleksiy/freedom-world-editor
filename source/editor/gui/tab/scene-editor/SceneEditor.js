@@ -38,6 +38,7 @@ import {VideoTexture} from "../../../../core/texture/VideoTexture.js";
 import {Viewport} from "../../../../core/objects/cameras/Viewport.js";
 import {TransformControls} from "./transform/TransformControls.js";
 import {ToolBar} from "./toolbar/ToolBar.js";
+import {InsertModeToolBar} from "./toolbar/InsertModeToolBar.js";
 import {SkeletonHelper} from "./helpers/SkeletonHelper.js";
 import {SideBar} from "./sidebar/SideBar.js";
 import {RectAreaLightHelper} from "./helpers/RectAreaLightHelper.js";
@@ -431,6 +432,12 @@ function SceneEditor(parent, closeable, container, index)
 
 	this.helperCube = new Mesh(new BoxGeometry(1, 1, 1), new MeshPhongMaterial( { visible: true, color:0xff0000, transparent: true, opacity:0.3 } ))	;
 	this.helperCube.name = 'helperCube';
+
+	/**
+	 * Wireframe model used instead of standard cube when insert mode is activate
+	 * Should be not null only in insert mode
+	 */
+	this.helperInsertModeObject = null;
 	/**
 	 * Axes helper configured to match editor settings.
 	 *
@@ -631,6 +638,15 @@ function SceneEditor(parent, closeable, container, index)
 	 */
 	this.toolBar = new ToolBar(this);
 	this.toolBar.setMode(Component.BOTTOM_LEFT);
+
+	/**
+	 * The editor insert mode tool bar is used to select objects for insert operation.
+	 *
+	 * @attribute toolBar
+	 * @type {ToolBar}
+	 */
+	this.insertModeToolBar = new InsertModeToolBar(this);
+	this.insertModeToolBar.setMode(Component.BOTTOM_LEFT);
 
 	/**
 	 * Event manager to handley keyboard shortcuts.
@@ -1159,8 +1175,12 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 	if (intersects.length > 0)
 	{
 		var selectedObj = null;
-		var helperCube = this.helperCube;
+		var helperCube = this.helperInsertModeObject ? this.helperInsertModeObject : this.helperCube;
 		var th = this;
+
+		if (this.helperInsertModeObject) {
+			this.helperCube.visible = false;
+		}
 
 		intersects.forEach(function(elem){
 
@@ -1239,6 +1259,19 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 							}
 						}
 					} else {
+						// Button click in insert mode
+						if (th.mouse.buttonJustPressed(Mouse.LEFT) && th.mode == SceneEditor.INSERT) {
+							if (th.insertModeToolBar.lastSelectedObject) {
+								var newObj = th.insertModeToolBar.lastSelectedObject.clone(true)
+								newObj.position.x = Math.round(elem.point.x);
+								newObj.position.y = Math.round(elem.point.y);
+								newObj.position.z = Math.round(elem.point.z);
+								th.scene.add(newObj);
+							} else {
+								Editor.alert(Locale.insertModeNoObjectToInsert);
+							}
+						}
+
 						if (Editor.getCoordsSystem() == 'xzy') {
 							helperCube.position.x = Math.round(elem.point.x);
 							helperCube.position.y = Math.round(elem.point.y);
@@ -1384,9 +1417,35 @@ SceneEditor.prototype.selectTool = function(tool)
 		this.clearMultipleSelections();
 	}
 
+	this.sideBar.setVisibility(this.mode !== SceneEditor.INSERT);
+
 	this.helperCube.visible = false;
 
 	this.toolBar.selectTool(tool);
+
+	if (this.mode == SceneEditor.INSERT) {
+		if (this.insertModeToolBar.lastSelectedObject) {
+			this.helperInsertModeObject = this.insertModeToolBar.lastSelectedObject.clone(true);
+			this.helperInsertModeObject.material = this.helperInsertModeObject.material.map(function(material) {
+				var newMaterial = material.clone();
+				newMaterial.wireframe = true;
+				return newMaterial;
+			});
+
+			this.scene.add(this.helperInsertModeObject);
+		}
+
+		this.insertModeToolBar.setVisibility(true);
+		this.insertModeToolBar.updateInterface();
+	} else {
+		if (this.helperInsertModeObject) {
+			this.scene.remove(this.helperInsertModeObject);
+			this.helperInsertModeObject = null;
+		}
+
+		this.insertModeToolBar.setVisibility(false);
+		this.insertModeToolBar.updateInterface();
+	}
 };
 
 /**
@@ -1531,6 +1590,9 @@ SceneEditor.prototype.updateSize = function()
 
 	this.toolBar.position.set(this.size.x / 2 - this.toolBar.size.x / 2, 5);
 	this.toolBar.updateInterface();
+
+	this.insertModeToolBar.position.set(this.size.x / 2 - this.insertModeToolBar.size.x / 2, this.size.y - this.insertModeToolBar.size.y - 5);
+	this.insertModeToolBar.updateInterface();
 
 	var width = this.size.x - this.sideBar.size.x;
 	var height = this.size.y;

@@ -10,7 +10,7 @@ var LocaleEN = {
 	{
 		language: "EN",
 		name: "English",
-		version: 5
+		version: 6
 	},
 
 	// Actions
@@ -31,6 +31,7 @@ var LocaleEN = {
 	select: "Select",
 	selectMultipleMode: "Select Multiple",
 	insertMode: "Insert Mode",
+	insertModeNoObjectToInsert: "No object selected to insert, please add more object libraries",
 	redo: "Redo",
 	undo: "Undo",
 	mix: "Mix",

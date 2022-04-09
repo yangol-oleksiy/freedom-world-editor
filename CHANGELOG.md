@@ -1,5 +1,10 @@
 # Changelog
 
+### V0.106
+
+- Implemented insert mode inserting
+- Updated library file format for inserting support
+
 ### V0.105
 
 - Implemented select area mode

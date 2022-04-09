@@ -1,3 +1,9 @@
 # Palm model from here https://www.turbosquid.com/3d-models/blender-carrot-crystal-oak-tree-3d-model-1189852
-- name: Palm
-  model: palm.fbx
+defaultOptions:
+  pluginInsertMode: true
+  pluginInsert: true
+iconsBase: http://localhost:8080/files/3dlib/icons/
+items:
+  - name: Palm
+    model: palm.fbx
+    iconPath: palm.png

@@ -29,25 +29,56 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 	models.setImage(Global.FILE_PATH + "icons/misc/3d.png");
 	sidebar.buttons = [models].concat(sidebar.buttons);
 
+	var sceneEditor = Editor.gui.tab.getTab(SceneEditor);
+	var insertModeToolBar = Editor.gui.tab.getTab(SceneEditor).insertModeToolBar;
+
+	var tool = insertModeToolBar.addGroup();
+	var importId = 'import' + Date.now() + Math.floor(Math.random() * 1000);
+
 	loader.load(libraryPath + 'lib.yaml', function(data) {
 		var library = YAML.load(data);
 
-		library.forEach(function(elem){
+		library.items.forEach(function(origElem){
+			var elem = Object.assign(library.defaultOptions, origElem);
 			var objectPath = libraryPath + elem.model;
 
+
 			fbxLoader.load(objectPath, function(group){
-				models.addOption(Global.FILE_PATH + "icons/models/figures.png", function()
-				{
-					Editor.getScene().add(group.children[0].clone(true));
-				}, elem.name);
+				if (elem.pluginInsert) {
+					models.addOption(Global.FILE_PATH + "icons/models/figures.png", function()
+					{
+						Editor.getScene().add(group.children[0].clone(true));
+					}, elem.name);
 
-				models.updateOptions();
+					models.updateOptions();
+					sidebar.updateInterface();
+				}
+
+				if (elem.pluginInsertMode) {
+					var iconPath = elem.iconPath
+						? library.iconsBase.replace(/[/]$/, '') + '/' + elem.iconPath.replace(/^[/]/, '')
+						: Global.FILE_PATH + "icons/tools/select.png";
+
+					var id = importId + elem.name;
+					var object = group.children[0].clone(true);
+					var option = tool.addToggleOption(elem.name, iconPath, function()
+					{
+						insertModeToolBar.selectTool(id);
+					});
+					option.id = id;
+					option.object = object;
+
+					insertModeToolBar.allButtons.push(option);
+				}
+
+				insertModeToolBar.maybeSelectFirstOption();
 				sidebar.updateInterface();
-			})
-
-			sidebar.updateInterface();
+			});
 		});
 	});
+
+	insertModeToolBar.updateGroups();
+	sceneEditor.updateInterface();
 };
 
 export {ObjectLibraryLoader};
