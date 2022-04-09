@@ -5,8 +5,9 @@
 - Implemented select area mode
 - Added insert mode tool button
 - Removed HTMLView editor object
-- Removed "Orbit Controls" functionality from editor
-- Removed "First Person Controls" functionality from editor
+- Removed "Orbit Controls" from editor insert toolbar
+- Removed "First Person Controls" from editor insert toolbar
+- Removed "Player Controller" from editor insert toolbar
 
 ### V0.104
 

@@ -653,13 +653,6 @@ return target.set(x, y, z);`;
 	}, Locale.particle);
 
 	physics.updateOptions();
-
-	// Add device
-	var controls = new ButtonDrawer(this);
-	controls.setImage(Global.FILE_PATH + "icons/misc/controller.png");
-	this.buttons.push(controls);
-
-	controls.updateOptions();
 };
 
 export {SideBar};
