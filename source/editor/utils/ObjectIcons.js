@@ -76,8 +76,7 @@ ObjectIcons.icons = new Map([
 	["Bone", ObjectIcons.path + "misc/bone.png"],
 	["Group", ObjectIcons.path + "misc/container.png"],
 	["BillboardGroup", ObjectIcons.path + "misc/rotate.png"],
-	["LensFlare", ObjectIcons.path + "misc/flare.png"],
-	["FirstPersonControls", ObjectIcons.path + "misc/crosshair.png"]
+	["LensFlare", ObjectIcons.path + "misc/flare.png"]
 ]);
 
 /**

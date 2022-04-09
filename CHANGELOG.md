@@ -6,6 +6,7 @@
 - Added insert mode tool button
 - Removed HTMLView editor object
 - Removed "Orbit Controls" functionality from editor
+- Removed "First Person Controls" functionality from editor
 
 ### V0.104
 

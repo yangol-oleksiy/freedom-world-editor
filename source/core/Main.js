@@ -126,9 +126,6 @@ export {Sky} from "./objects/misc/Sky.js";
 export {Group} from "./objects/misc/Group.js";
 export {LensFlare} from "./objects/misc/LensFlare.js";
 
-export {OrbitControls} from "./objects/controls/OrbitControls.js";
-export {FirstPersonControls} from "./objects/controls/FirstPersonControls.js";
-
 export {Program} from "./objects/Program.js";
 export {Scene} from "./objects/Scene.js";
 

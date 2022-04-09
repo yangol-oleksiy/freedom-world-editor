@@ -25,7 +25,6 @@ import {HemisphereLight} from "../../../../../core/objects/lights/HemisphereLigh
 import {DirectionalLight} from "../../../../../core/objects/lights/DirectionalLight.js";
 import {AmbientLight} from "../../../../../core/objects/lights/AmbientLight.js";
 import {OrbitControls} from "../../../../../core/objects/controls/OrbitControls.js";
-import {FirstPersonControls} from "../../../../../core/objects/controls/FirstPersonControls.js";
 import {PerspectiveCamera} from "../../../../../core/objects/cameras/PerspectiveCamera.js";
 import {OrthographicCamera} from "../../../../../core/objects/cameras/OrthographicCamera.js";
 import {CubeCamera} from "../../../../../core/objects/cameras/CubeCamera.js";
@@ -659,13 +658,6 @@ return target.set(x, y, z);`;
 	var controls = new ButtonDrawer(this);
 	controls.setImage(Global.FILE_PATH + "icons/misc/controller.png");
 	this.buttons.push(controls);
-
-
-	// FPS controls
-	controls.addOption(Global.FILE_PATH + "icons/misc/crosshair.png", function()
-	{
-		Editor.addObject(new FirstPersonControls(), self.editor.scene);
-	}, Locale.firstPersonControls);
 
 	controls.updateOptions();
 };

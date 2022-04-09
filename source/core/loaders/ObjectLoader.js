@@ -4,7 +4,6 @@ import {AudioEmitter} from "../objects/audio/AudioEmitter.js";
 import {CubeCamera} from "../objects/cameras/CubeCamera.js";
 import {DirectionalLight} from "../objects/lights/DirectionalLight.js";
 import {EffectComposer} from "../postprocessing/EffectComposer.js";
-import {FirstPersonControls} from "../objects/controls/FirstPersonControls.js";
 import {Group} from "../objects/misc/Group.js";
 import {HemisphereLight} from "../objects/lights/HemisphereLight.js";
 import {InstancedMesh} from "../objects/mesh/InstancedMesh.js";
@@ -578,16 +577,6 @@ ObjectLoader.prototype.parseObject = function(data)
 
 		case "CubeCamera":
 			object = new CubeCamera(data.near, data.far, data.resolution, data.autoUpdate);
-			break;
-
-		case "FirstPersonControls":
-			object = new FirstPersonControls();
-			object.sensitivity = data.sensitivity;
-			object.needsButtonPressed = data.needsButtonPressed;
-			object.movementEnabled = data.movementEnabled;
-			object.moveSpeed = data.moveSpeed;
-			object.moveOnPlane = data.moveOnPlane;
-			object.moveKeys = data.moveKeys;
 			break;
 
 		case "OrbitControls":

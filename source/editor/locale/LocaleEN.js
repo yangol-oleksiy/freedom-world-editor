@@ -10,7 +10,7 @@ var LocaleEN = {
 	{
 		language: "EN",
 		name: "English",
-		version: 4
+		version: 5
 	},
 
 	// Actions
@@ -74,7 +74,6 @@ var LocaleEN = {
 	perspectiveCamera: "Perspective Camera",
 	orthographicCamera: "Orthographic Camera",
 	lensFlare: "Lens flare",
-	firstPersonControls: "First Person Controls",
 	particle: "Particle",
 	ground: "Ground",
 	spineAnimation: "Spine Animation",

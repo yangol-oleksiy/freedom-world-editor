@@ -339,7 +339,6 @@ Editor.runProject = function()
  */
 Editor.selectObject = function(object)
 {
-	console.log('!!! selectObject');
 	for (var i = 0; i < Editor.selection.length; i++)
 	{
 		if (Editor.selection[i].gui !== undefined && Editor.selection[i].gui.node !== undefined)
