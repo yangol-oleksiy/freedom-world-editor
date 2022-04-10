@@ -7,7 +7,6 @@ import {TabGroupSplit} from "../components/tabs/splittable/TabGroupSplit.js";
 import {TabContainer} from "../components/tabs/splittable/TabContainer.js";
 import {DocumentBody} from "../components/DocumentBody.js";
 import {TreeView} from "./tab/tree-view/TreeView.js";
-import {ProfilingTab} from "./tab/profiling/ProfilingTab.js";
 import {InspectorContainer} from "./tab/inspector/InspectorContainer.js";
 import {ConsoleTab} from "./tab/console/ConsoleTab.js";
 import {AssetExplorer} from "./tab/asset/AssetExplorer.js";
@@ -48,11 +47,6 @@ function Interface()
 	this.console = leftBottom.addTab(ConsoleTab, false);
 
 	this.animation = leftBottom.addTab(AnimationTab, false);
-
-	if (DEVELOPMENT)
-	{
-		leftBottom.addTab(ProfilingTab, false);
-	}
 
 	this.tree = rightTop.addTab(TreeView, false);
 

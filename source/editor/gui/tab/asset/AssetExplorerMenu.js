@@ -22,7 +22,7 @@ function AssetExplorerMenu(parent)
 
 	this.element.style.backgroundColor = "var(--bar-color)";
 	this.element.style.overflow = "visible";
-	
+
 	// Import
 	var menu = new DropdownMenu(this);
 	menu.setText(Locale.import);
@@ -33,7 +33,7 @@ function AssetExplorerMenu(parent)
 	menu.addOption(Locale.models3D, function()
 	{
 		FileSystem.chooseFile(function(files)
-		{	
+		{
 			for (var i = 0; i < files.length; i++)
 			{
 				Loaders.loadModel(files[i]);
@@ -76,21 +76,6 @@ function AssetExplorerMenu(parent)
 			}
 		}, "audio/*");
 	}, Global.FILE_PATH + "icons/misc/audio.png");
-	
-	// Spine Animation
-	if (FWE.runningOnDesktop())
-	{
-		menu.addOption(Locale.spineAnimation, function()
-		{
-			FileSystem.chooseFile(function(files)
-			{
-				for (var i = 0; i < files.length; i++)
-				{
-					Loaders.loadSpineAnimation(files[i]);
-				}
-			}, ".json, .spine");
-		}, Global.FILE_PATH + "icons/misc/spine.png");
-	}
 
 	menu.updateInterface();
 
@@ -181,7 +166,7 @@ function AssetExplorerMenu(parent)
 	material.setText(Locale.material);
 	material.size.set(100, 25);
 	material.position.set(200, 0);
-	
+
 	material.addOption(Locale.standardMaterial, function()
 	{
 		var material = new MeshStandardMaterial();
@@ -202,7 +187,7 @@ function AssetExplorerMenu(parent)
 		material.name = "phong";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
-	
+
 	material.addOption(Locale.basicMaterial, function()
 	{
 		var material = new MeshBasicMaterial();
@@ -286,7 +271,7 @@ function AssetExplorerMenu(parent)
 		material.name = "normal";
 		Editor.addAction(new AddResourceAction(material, Editor.program, "materials"));
 	}, Global.FILE_PATH + "icons/misc/material.png");
-	
+
 	others.addOption(Locale.depthMaterial, function()
 	{
 		var material = new MeshDepthMaterial();
@@ -309,28 +294,6 @@ function AssetExplorerMenu(parent)
 	}, Global.FILE_PATH + "icons/misc/material.png");
 
 	material.updateInterface();
-
-	// Create menu
-	var create = new DropdownMenu(this);
-	create.setText(Locale.code);
-	create.size.set(100, 25);
-	create.position.set(300, 0);
-	
-	create.addOption(Locale.html, function()
-	{
-		var resource = new TextFile("<!DOCTYPE html>\n<html>\n<head>\n\t<title></title>\n</head>\n<body>\n\n</body>\n</html>", "html");
-		resource.name = "html";
-		Editor.addAction(new AddResourceAction(resource, Editor.program, "resources"));
-	}, Global.FILE_PATH + "icons/script/script.png");
-
-	create.addOption(Locale.javascript, function()
-	{
-		var resource = new TextFile("", "js");
-		resource.name = "js";
-		Editor.addAction(new AddResourceAction(resource, Editor.program, "resources"));
-	}, Global.FILE_PATH + "icons/script/script.png");
-
-	create.updateInterface();
 }
 
 AssetExplorerMenu.prototype = Object.create(Component.prototype);

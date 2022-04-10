@@ -10,7 +10,7 @@ var LocaleEN = {
 	{
 		language: "EN",
 		name: "English",
-		version: 6
+		version: 7
 	},
 
 	// Actions
@@ -464,7 +464,6 @@ var LocaleEN = {
 	modifiers: "Modifiers",
 	useTexture: "Use Texture",
 	configuration: "Configuration",
-	profiling: "Profiling",
 	groupObjects: "Group Objects",
 	create: "Create",
 	code: "Code",
