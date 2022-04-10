@@ -1,11 +1,10 @@
 import {Group, Object3D} from "three";
 // eslint-disable-next-line no-duplicate-imports
 import * as THREE from "three";
-import * as CANNON from "cannon-es";
 import {Scene} from "../Scene.js";
 import {Program} from "../Program.js";
 import {FileSystem} from "../../FileSystem.js";
-import * as NUNU from "../../Main.js";
+import * as FWE from "../../Main.js";
 
 /**
  * LuaScript objects are used to run Lua scripts inside editor.
@@ -329,7 +328,7 @@ LuaScript.prototype.createContextObject = function()
 
 	Object.assign(context, CANNON);
 	Object.assign(context, THREE);
-	Object.assign(context, NUNU);
+	Object.assign(context, FWE);
 
 	var mathProps = ["E", "LN2", "LN10", "LOG2E", "LOG10E", "PI", "SQRT1_2", "SQRT2", "abs", "acos", "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil", "clz32", "cos", "cosh", "exp", "expm1", "floor", "fround", "hypot", "imul", "log", "log1p", "log2", "log10", "max", "min", "pow", "random", "round", "sign", "sin", "sinh", "sqrt", "tan", "tanh", "trunc"];
 	var math = {};

@@ -1,4 +1,3 @@
-import {World, NaiveBroadphase, SplitSolver, GSSolver} from "cannon-es";
 import {Color, Texture, Camera, Raycaster, Vector2, Scene as TScene, Object3D, Fog, FogExp2, Vector3, Quaternion} from "three";
 import {PointOctree} from "sparse-octree";
 import {Program} from "./Program.js";
@@ -24,27 +23,6 @@ function Scene()
 	this.matrixAutoUpdate = false;
 
 	this.usePhysics = true;
-
-	/**
-	 * Cannon.js world used for physics simulation.
-	 *
-	 * The world is configured by default with a NaiveBroadphase and a SplitSolver.
-	 *
-	 * Documentation for cannon.js physics World object can be found at http://schteppe.github.io/cannon.js/docs/classes/World.html.
-	 *
-	 * @property world
-	 * @type {World}
-	 */
-	this.world = new World();
-	this.world.defaultContactMaterial.contactEquationStiffness = 1e9;
-	this.world.defaultContactMaterial.contactEquationRelaxation = 4;
-	this.world.quatNormalizeSkip = 0;
-	this.world.quatNormalizeFast = false;
-	this.world.gravity.set(0, -9.8, 0);
-	this.world.broadphase = new NaiveBroadphase();
-	this.world.solver = new SplitSolver(new GSSolver());
-	this.world.solver.tolerance = 0.05;
-	this.world.solver.iterations = 7;
 
 	/**
 	 * Background of the scene.
@@ -204,11 +182,6 @@ Scene.prototype.update = function(delta)
 	else if (this.defaultCamera !== null)
 	{
 		this.raycaster.setFromCamera(this.mouse, this.defaultCamera);
-	}
-
-	if (this.usePhysics)
-	{
-		this.world.step(delta < 0.05 ? delta : 0.05);
 	}
 
 	for (var i = 0; i < this.children.length; i++)
@@ -478,21 +451,11 @@ Scene.prototype.toJSON = function(meta)
 		data.object.fog = this.fog.toJSON();
 	}
 
-	data.object.usePhysics = this.usePhysics;
-
 	data.object.cameras = [];
 	for (var i = 0; i < this.cameras.length; i++)
 	{
 		data.object.cameras.push(this.cameras[i].uuid);
 	}
-
-	data.object.world = {};
-	data.object.world.gravity = this.world.gravity;
-	data.object.world.quatNormalizeSkip = this.world.quatNormalizeSkip;
-	data.object.world.quatNormalizeFast = this.world.quatNormalizeFast;
-	data.object.world.solver = {};
-	data.object.world.solver.tolerance = this.world.solver.tolerance;
-	data.object.world.solver.iterations = this.world.solver.iterations;
 
 	return data;
 };

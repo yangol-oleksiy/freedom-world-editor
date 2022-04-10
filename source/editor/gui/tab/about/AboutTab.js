@@ -1,5 +1,4 @@
 import {REVISION} from "three";
-import * as CANNON from "cannon-es";
 import {Locale} from "../../../locale/LocaleManager.js";
 import {FWE} from "../../../../core/FWE.js";
 import {Global} from "../../../Global.js";
@@ -40,7 +39,6 @@ function AboutTab(parent, closeable, container, index)
 	libs.push("CodeMirror V" + CodeMirror.version);
 	libs.push(fengari.FENGARI_RELEASE.replace('Fengari ', 'Fengari V'));
 	libs.push('Fennel V1.0.0');
-	libs.push("CannonJS V0.6.2");
 	libs.push("TernJS V" + tern.version);
 	if (FWE.runningOnDesktop())
 	{
