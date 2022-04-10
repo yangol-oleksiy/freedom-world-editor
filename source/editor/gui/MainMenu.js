@@ -8,7 +8,6 @@ import {AddAction} from "../history/action/objects/AddAction.js";
 import {ChangeAction} from "../history/action/ChangeAction.js";
 import {ActionBundle} from "../history/action/ActionBundle.js";
 import {Global} from "../Global.js";
-import {ProjectExporters} from "../ProjectExporters.js";
 import {Editor} from "../Editor.js";
 import {DropdownMenu} from "../components/dropdown/DropdownMenu.js";
 import {Component} from "../components/Component.js";
@@ -74,50 +73,19 @@ function MainMenu(parent)
 	// Save project
 	fileMenu.addOption(Locale.save, function()
 	{
-		if (Editor.openFile !== null)
-		{
-			Editor.saveProgram(undefined, true);
-		}
-		else
-		{
-			Editor.gui.saveProgram();
-		}
+		Editor.alert('Unimplemented');
 	}, Global.FILE_PATH + "icons/misc/save.png");
 
 	// Save project
 	fileMenu.addOption(Locale.saveAs, function()
 	{
-		Editor.gui.saveProgram();
+		Editor.alert('Unimplemented');
 	}, Global.FILE_PATH + "icons/misc/save.png").setAltText("CTRL+S");
-
-	// Save project to folder
-	if (DEVELOPMENT)
-	{
-		fileMenu.addOption(Locale.saveTo, function()
-		{
-			FileSystem.chooseDirectory().then(function(path)
-			{
-				Editor.saveProgramPath(path);
-			});
-		}, Global.FILE_PATH + "icons/misc/save.png");
-	}
-
-	// Save readable legacy format
-	if (DEVELOPMENT)
-	{
-		fileMenu.addOption("Save ISP", function()
-		{
-			FileSystem.chooseFile(function(files)
-			{
-				Editor.saveProgram(files[0].path, false, true);
-			}, ".isp", true);
-		}, Global.FILE_PATH + "icons/misc/save.png");
-	}
 
 	// Load Project
 	fileMenu.addOption(Locale.load, function()
 	{
-		Editor.gui.loadProgram();
+		Editor.alert('Unimplemented');
 	}, Global.FILE_PATH + "icons/misc/load.png").setAltText("CTRL+L");
 
 	// Settings
@@ -130,107 +98,6 @@ function MainMenu(parent)
 		}
 		tab.select();
 	}, Global.FILE_PATH + "icons/misc/settings.png");
-
-	// Publish
-	var publish = fileMenu.addMenu(Locale.publish, Global.FILE_PATH + "icons/misc/publish.png");
-
-	if (FWE.runningOnDesktop())
-	{
-		// Publish web
-		publish.addOption("Web", function()
-		{
-			FileSystem.chooseFile(function(files)
-			{
-				try
-				{
-					ProjectExporters.exportWebProject(files[0].path);
-					Editor.alert(Locale.projectExported);
-				}
-				catch (e)
-				{
-					Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
-				}
-			}, "", Editor.program.name);
-		}, Global.FILE_PATH + "icons/platform/web.png");
-
-		if (FWE.runningOnDesktop())
-		{
-			// Publish windows
-			publish.addOption("Windows", function()
-			{
-				FileSystem.chooseFile(function(files)
-				{
-					try
-					{
-						ProjectExporters.exportWindows(files[0].path);
-						Editor.alert(Locale.projectExported);
-					}
-					catch (e)
-					{
-						console.error("Freedom World Editor: Error exporting windows project.", e);
-						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
-					}
-				}, "", Editor.program.name);
-			}, Global.FILE_PATH + "icons/platform/windows.png");
-
-			// Publish linux
-			publish.addOption("Linux", function()
-			{
-				FileSystem.chooseFile(function(files)
-				{
-					try
-					{
-						ProjectExporters.exportLinux(files[0].path);
-						Editor.alert(Locale.projectExported);
-					}
-					catch (e)
-					{
-						console.error("Freedom World Editor: Error exporting linux project.", e);
-						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
-					}
-				}, "", Editor.program.name);
-			}, Global.FILE_PATH + "icons/platform/linux.png");
-
-
-			// Publish macos
-			publish.addOption("macOS", function()
-			{
-				FileSystem.chooseFile(function(files)
-				{
-					try
-					{
-						ProjectExporters.exportMacOS(files[0].path);
-						Editor.alert(Locale.projectExported);
-					}
-					catch (e)
-					{
-						console.error("Freedom World Editor: Error exporting macOS project.", e);
-						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
-					}
-				}, "", Editor.program.name);
-			}, Global.FILE_PATH + "icons/platform/osx.png");
-		}
-	}
-	// Running on web browser
-	else
-	{
-		publish.addOption("Web", function()
-		{
-			FileSystem.chooseFileName(function(fname)
-			{
-				try
-				{
-					ProjectExporters.exportWebProjectZip(fname);
-					Editor.alert(Locale.projectExported);
-				}
-				catch (e)
-				{
-					console.error("Freedom World Editor: Error exporting web project.", e);
-					Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
-				}
-			}, ".zip");
-		}, Global.FILE_PATH + "icons/platform/web.png");
-	}
 
 	// Import
 	fileMenu.addOption(Locale.import, function()

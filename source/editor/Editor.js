@@ -1,5 +1,4 @@
 import {Object3D, Material, Texture, Geometry, BufferGeometry, Shape, Math, BoxBufferGeometry, MeshStandardMaterial, SpriteMaterial} from "three";
-import {StaticPair} from "@as-com/pson";
 import {EventManager} from "../core/utils/EventManager.js";
 import {Video} from "../core/resources/Video.js";
 import {TextFile} from "../core/resources/TextFile.js";
@@ -15,7 +14,6 @@ import {FWE} from "../core/FWE.js";
 import {ObjectLoader} from "../core/loaders/ObjectLoader.js";
 import {Keyboard} from "../core/input/Keyboard.js";
 import {FileSystem} from "../core/FileSystem.js";
-import {ResourceContainer} from "../core/resources/ResourceContainer.js";
 import {Locale} from "./locale/LocaleManager.js";
 import {VirtualClipboard} from "./utils/VirtualClipboard.js";
 import {Settings} from "./Settings.js";
@@ -30,7 +28,6 @@ import {ChangeAction} from "./history/action/ChangeAction.js";
 import {ActionBundle} from "./history/action/ActionBundle.js";
 import {Action} from "./history/action/Action.js";
 import {SceneEditor} from "./gui/tab/scene-editor/SceneEditor.js";
-import {RunProject} from "./gui/tab/run/RunProject.js";
 import {CodeEditor} from "./gui/tab/code/CodeEditor.js";
 import {Interface} from "./gui/Interface.js";
 import {Global} from "./Global.js";
@@ -156,19 +153,7 @@ Editor.initialize = function()
 		{
 			var file = event.dataTransfer.files[i];
 			var extension = FileSystem.getFileExtension(file.name);
-
-			// Project file
-			if (extension === "isp" || extension === "nsp")
-			{
-				if (Editor.confirm(Locale.changesWillBeLost + " " + Locale.loadProject))
-				{
-					Editor.loadProgram(file, extension === "nsp");
-					Editor.resetEditor();
-				}
-				break;
-			}
-			// Text file
-			else if (TextFile.fileIsText(file))
+			if (TextFile.fileIsText(file))
 			{
 				Loaders.loadText(file);
 			}
@@ -191,21 +176,6 @@ Editor.initialize = function()
 	Editor.gui = new Interface();
 	Editor.gui.updateInterface();
 
-	// Check is some project file passed as argument
-	for (var i = 0; i < Editor.args.length; i++)
-	{
-		if (Editor.args[i].endsWith(".isp"))
-		{
-			Editor.loadProgram(Editor.args[i], false);
-			break;
-		}
-		else if (Editor.args[i].endsWith(".nsp"))
-		{
-			Editor.loadProgram(Editor.args[i], true);
-			break;
-		}
-	}
-
 	// Create new program
 	if (Editor.program === null)
 	{
@@ -220,22 +190,7 @@ Editor.initialize = function()
 
 		if (event.ctrlKey)
 		{
-			if (key === Keyboard.S)
-			{
-				if (Editor.openFile === null)
-				{
-					Editor.gui.saveProgram();
-				}
-				else
-				{
-					Editor.saveProgram(undefined, true);
-				}
-			}
-			else if (key === Keyboard.L)
-			{
-				Editor.gui.loadProgram();
-			}
-			else if (key === Keyboard.W || key === Keyboard.F4)
+			if (key === Keyboard.W || key === Keyboard.F4)
 			{
 				Editor.gui.tab.closeActual();
 			}
@@ -298,37 +253,8 @@ Editor.initialize = function()
 		{
 			Editor.renameObject();
 		}
-		else if (key === Keyboard.F5)
-		{
-			Editor.runProject();
-		}
 	});
 	Editor.manager.create();
-};
-
-/**
- * Run the project that is currently open in the editor.
- *
- * Opens a new tab, and sets the run button text.
- *
- * @static
- * @method runProject
- */
-Editor.runProject = function()
-{
-	var tab = Editor.gui.tab.getTab(RunProject, Editor.program);
-
-	if (tab === null)
-	{
-		tab = Editor.gui.tab.addTab(RunProject, true);
-		tab.select();
-		Editor.gui.menuBar.run.setText(Locale.stop);
-	}
-	else
-	{
-		tab.close();
-		Editor.gui.menuBar.run.setText(Locale.run);
-	}
 };
 
 /**
@@ -1069,98 +995,6 @@ Editor.addXZYScene = function(material)
 };
 
 /**
- * Save the program into a project directory, with all resources split across multiple files.
- *
- * @static
- * @method saveProgramPath
- * @param {string} path Target directory to export the files into.
- */
-Editor.saveProgramPath = function(path)
-{
-	var pson = new StaticPair();
-	var data = Editor.program.toJSON();
-
-	for (var i = 0; i < ResourceContainer.libraries.length; i++)
-	{
-		var lib = ResourceContainer.libraries[i];
-		var resources = data[lib];
-		data[lib] = [];
-
-		if (resources.length > 0)
-		{
-			FileSystem.makeDirectory(path + "\\" + lib);
-
-			for (var j = 0; j < resources.length; j++)
-			{
-				var fname = path + "\\" + lib + "\\" + resources[j].uuid;
-
-				data[lib].push({
-					uuid: resources[j].uuid,
-					format: "chunk",
-					path: fname
-				});
-
-				FileSystem.writeFileArrayBuffer(fname, pson.toArrayBuffer(resources[j]));
-			}
-		}
-	}
-
-	FileSystem.writeFileArrayBuffer(path + "\\app.nsp", pson.toArrayBuffer(data));
-};
-
-/**
- * Save program to file (.nsp or .isp).
- *
- * @static
- * @method saveProgram
- * @param {string} fname
- * @param {boolean} binary If true the file is saved as nsp.
- * @param {boolean} keepDirectory
- * @param {boolean} supressMessage
- */
-Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
-{
-	try
-	{
-		if (fname === undefined && Editor.openFile !== null)
-		{
-			fname = Editor.openFile;
-		}
-
-		if (binary === true)
-		{
-			fname = fname.replace(".isp", ".nsp");
-
-			var pson = new StaticPair();
-			var data = pson.toArrayBuffer(Editor.program.toJSON());
-			FileSystem.writeFileArrayBuffer(fname, data);
-		}
-		else
-		{
-			fname = fname.replace(".nsp", ".isp");
-
-			var json = JSON.stringify(Editor.program.toJSON(), null, "\t");
-			FileSystem.writeFile(fname, json);
-		}
-
-		if (keepDirectory !== true && Editor.openFile !== fname)
-		{
-			Editor.setOpenFile(fname);
-		}
-
-		if (suppressMessage !== true)
-		{
-			Editor.alert(Locale.projectSaved);
-		}
-	}
-	catch (e)
-	{
-		Editor.alert(Locale.errorSavingFile + "\n(" + e + ")");
-		console.error("Freedom World Editor: Error saving file", e);
-	}
-};
-
-/**
  * Set a program to be edited, create new history object and clear editor windows.
  *
  * @static
@@ -1197,82 +1031,6 @@ Editor.setProgram = function(program)
 			var scene = Editor.gui.tab.addTab(SceneEditor, true);
 			scene.attach(program.children[0]);
 		}
-	}
-};
-
-/**
- * Load program from file.
- *
- * Programs can be stored as textual json files, or PSON files (binary).
- *
- * @static
- * @method loadProgram
- * @param {File} file
- * @param {boolean} binary Indicates if the file is binary.
- */
-Editor.loadProgram = function(file, binary)
-{
-	var modal = new LoadingModal(DocumentBody);
-	modal.show();
-
-	function onload()
-	{
-		try
-		{
-			var loader = new ObjectLoader();
-
-			var program;
-
-			if (binary === true)
-			{
-				var pson = new StaticPair();
-				var data = pson.decode(reader.result);
-				program = loader.parse(data);
-			}
-			else
-			{
-				program = loader.parse(JSON.parse(reader.result));
-			}
-
-			Editor.setOpenFile(file);
-			Editor.setProgram(program);
-
-			Editor.alert(Locale.projectLoaded);
-		}
-		catch (e)
-		{
-			Editor.alert(Locale.errorLoadingFile + "\n(" + e + ")");
-			console.error("Freedom World Editor: Error loading file", e);
-		}
-
-		modal.destroy();
-	};
-
-	if (file instanceof File)
-	{
-		var reader = new FileReader();
-		reader.onload = onload;
-		if (binary === true)
-		{
-			reader.readAsArrayBuffer(file);
-		}
-		else
-		{
-			reader.readAsText(file);
-		}
-	}
-	else if (typeof file === "string")
-	{
-		var reader = {};
-		if (binary === true)
-		{
-			reader.result = FileSystem.readFileArrayBuffer(file);
-		}
-		else
-		{
-			reader.result = FileSystem.readFile(file);
-		}
-		onload();
 	}
 };
 

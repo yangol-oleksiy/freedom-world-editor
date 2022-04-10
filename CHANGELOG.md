@@ -6,6 +6,7 @@
 - Removed Gamepad and TizenKeyboard functionality from editor
 - Removed cordova related code from editor
 - Removed jszip related code from editor
+- Removed game project load/save related code from editor
 
 ### V0.108
 

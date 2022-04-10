@@ -528,14 +528,9 @@ var LocaleEN = {
 	toggleAR: "Toggle Augmented Reality",
 	toggleFullscreen: "Toggle Fullscreen",
 
-	// Messages
-	projectSaved: "Project saved.",
-	projectLoaded: "Project loaded",
-	projectExported: "Project exported",
 
 	// Confirm
 	changesWillBeLost: "All unsaved changes to the project will be lost!",
-	loadProject: "Load project from file?",
 	createProject: "Create new project?",
 	exportOnlyVisibleObjects: "Export only the visible objects from the project?",
 
@@ -556,7 +551,6 @@ var LocaleEN = {
 	selectObjectFirst: "Need to select an object first before performing this operation.",
 
 	// Errors
-	errorExportingProject: "Error exporting project",
 	errorLoadingFile: "Error loading file",
 	errorSavingFile: "Error saving file",
 	errorPaste: "Error pasting object",

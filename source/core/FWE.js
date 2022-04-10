@@ -74,15 +74,6 @@ FWE.NAME = "Freedom World Editor";
  */
 
 /**
- * NWJS platform, used for desktop version.
- *
- * @static
- * @attribute NWJS
- * @type {number}
- */
-FWE.NWJS = 200;
-
-/**
  * Running inside of a regular web browser.
  *
  * @static
@@ -199,7 +190,6 @@ FWE.webGLAvailable = function()
  * Check in wich platform the enviroment is running.
  *
  * Possible return values are:
- * - FWE.NWJS
  * - FWE.BROWSER
  *
  * @method getPlatform
@@ -207,44 +197,18 @@ FWE.webGLAvailable = function()
  */
 FWE.getPlatform = function()
 {
-	if (window.nw !== undefined)
-	{
-		return FWE.NWJS;
-	}
-
 	return FWE.BROWSER;
 };
 
 /**
- * Check if app is running inside NWJS.
+ * Old unused function
  *
  * @method runningOnDesktop
- * @return {boolean} True if running inside NWJS
+ * @return {boolean} always false
  */
 FWE.runningOnDesktop = function()
 {
-	return window.nw !== undefined;
-};
-
-/**
- * Open a webpage on a new window.
- *
- * On desktop and mobile it will open the default browser.
- *
- * On the web it will open as a popup.
- *
- * @method openWebpage
- */
-FWE.openWebpage = function(url)
-{
-	if (FWE.runningOnDesktop())
-	{
-		window.require("nw.gui").Shell.openExternal(url);
-	}
-	else
-	{
-		window.open(url);
-	}
+	return false;
 };
 
 /**

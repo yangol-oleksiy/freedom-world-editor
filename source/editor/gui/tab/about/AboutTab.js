@@ -40,10 +40,6 @@ function AboutTab(parent, closeable, container, index)
 	libs.push(fengari.FENGARI_RELEASE.replace('Fengari ', 'Fengari V'));
 	libs.push('Fennel V1.0.0');
 	libs.push("TernJS V" + tern.version);
-	if (FWE.runningOnDesktop())
-	{
-		libs.push("NWJS V" + process.versions['node-webkit']);
-	}
 
 	var top = 50;
 

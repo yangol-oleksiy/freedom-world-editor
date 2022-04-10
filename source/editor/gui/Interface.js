@@ -53,52 +53,6 @@ function Interface()
 }
 
 /**
- * Save program into file.
- *
- * Dpending on the plaftorm created the required GUI elements to select save file.
- *
- * @method saveProgram
- */
-Interface.prototype.saveProgram = function()
-{
-	if (FWE.runningOnDesktop())
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			Editor.saveProgram(files[0].path, true);
-		}, ".nsp", true);
-	}
-	else
-	{
-		FileSystem.chooseFileName(function(fname)
-		{
-			Editor.saveProgram(fname, true);
-		}, ".nsp", Editor.openFile !== null ? Editor.openFile : "file");
-	}
-};
-
-/**
- * Load new project from file.
- *
- * Creates the necessary GUI elements to select the file.
- *
- * @method loadProgram
- */
-Interface.prototype.loadProgram = function()
-{
-	if (Editor.confirm(Locale.changesWillBeLost + " " + Locale.loadProject))
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if (files.length > 0)
-			{
-				Editor.loadProgram(files[0], files[0].name.endsWith(".nsp"));
-			}
-		}, ".isp, .nsp");
-	}
-};
-
-/**
  * Create new program.
  *
  * @method newProgram
