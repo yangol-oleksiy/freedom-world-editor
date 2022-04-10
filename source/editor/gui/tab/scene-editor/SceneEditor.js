@@ -29,7 +29,6 @@ import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicC
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
 import {RendererCanvas} from "../../../components/RendererCanvas.js";
 import {Settings} from "../../../Settings.js";
-import {SpineAnimation} from "../../../../core/objects/spine/SpineAnimation.js";
 import {SwapAction} from "../../../history/action/objects/SwapAction.js";
 import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {Video} from "../../../../core/resources/Video.js";
@@ -1622,11 +1621,6 @@ SceneEditor.prototype.updateSelection = function()
 		else if (object instanceof Points)
 		{
 			this.objectHelper.add(new PointsHelper(object, 0xFFFF00));
-		}
-		// Spine animation
-		else if (object instanceof SpineAnimation)
-		{
-			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
 		// Group
 		else if (object instanceof Group)

@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.108
+
+- Removed animation related functionality from editor
+
 ### V0.107
 
 - Removed physics functionality from editor

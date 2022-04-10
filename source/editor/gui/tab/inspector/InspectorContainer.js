@@ -6,7 +6,6 @@ import {Image} from "../../../../core/resources/Image.js";
 import {TextSprite} from "../../../../core/objects/text/TextSprite.js";
 import {TextMesh} from "../../../../core/objects/text/TextMesh.js";
 import {TextBitmap} from "../../../../core/objects/text/TextBitmap.js";
-import {SpineAnimation} from "../../../../core/objects/spine/SpineAnimation.js";
 import {Script} from "../../../../core/objects/script/Script.js";
 import {Scene} from "../../../../core/objects/Scene.js";
 import {Program} from "../../../../core/objects/Program.js";
@@ -31,7 +30,6 @@ import {AudioInspector} from "./resources/AudioInspector.js";
 import {TextSpriteInspector} from "./objects/text/TextSpriteInspector.js";
 import {TextMeshInspector} from "./objects/text/TextMeshInspector.js";
 import {TextBitmapInspector} from "./objects/text/TextBitmapInspector.js";
-import {SpineInspector} from "./objects/spine/SpineInspector.js";
 import {ScriptInspector} from "./objects/ScriptInspector.js";
 import {SceneInspector} from "./objects/SceneInspector.js";
 import {ProgramInspector} from "./objects/ProgramInspector.js";
@@ -154,10 +152,6 @@ InspectorContainer.prototype.updateSelection = function()
 		else if (object instanceof ParticleEmitter)
 		{
 			this.panel = new ParticleEmitterInspector(this, object);
-		}
-		else if (object instanceof SpineAnimation)
-		{
-			this.panel = new SpineInspector(this, object);
 		}
 		else if (object instanceof InstancedMesh)
 		{

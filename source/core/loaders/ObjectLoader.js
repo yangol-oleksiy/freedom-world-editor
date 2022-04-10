@@ -23,7 +23,6 @@ import {Scene} from "../objects/Scene.js";
 import {Script} from "../objects/script/Script.js";
 import {SkinnedMesh} from "../objects/mesh/SkinnedMesh.js";
 import {Sky} from "../objects/misc/Sky.js";
-import {SpineAnimation} from "../objects/spine/SpineAnimation.js";
 import {SpotLight} from "../objects/lights/SpotLight.js";
 import {Sprite} from "../objects/sprite/Sprite.js";
 import {PythonScript} from "../objects/script/PythonScript.js";
@@ -414,25 +413,6 @@ ObjectLoader.prototype.parseObject = function(data)
 	{
 		switch (data.type)
 		{
-		case "SpineAnimation":
-			for (var i = 0; i < data.textures.length; i++)
-			{
-				data.textures[i].texture = this.getTexture(data.textures[i].texture);
-			}
-
-			object = new SpineAnimation(data.json, data.atlas, "", data.textures);
-
-			if (data.animation !== undefined)
-			{
-				object.animation = data.animation;
-				object.track = data.track;
-				object.loop = data.loop;
-			}
-			if (data.skin !== undefined)
-			{
-				object.skin = data.skin;
-			}
-			break;
 
 		case "Audio":
 			object = new AudioEmitter(this.getAudio(data.audio));

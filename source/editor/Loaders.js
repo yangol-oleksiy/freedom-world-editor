@@ -28,7 +28,6 @@ import {InstancedMesh} from "../core/objects/mesh/InstancedMesh.js";
 import {FileSystem} from "../core/FileSystem.js";
 import {FWE} from "../core/FWE.js";
 import {Group} from "../core/objects/misc/Group.js";
-import {SpineAnimation} from "../core/objects/spine/SpineAnimation.js";
 import {Audio} from "../core/resources/Audio.js";
 import {Font} from "../core/resources/Font.js";
 import {Image} from "../core/resources/Image.js";
@@ -65,7 +64,7 @@ Loaders.loadTexture = function(file, onLoad)
 	function loadCompressedTexture(data)
 	{
 		var texture = new CompressedTexture();
-		
+
 		if (data.isCubemap === true)
 		{
 			var faces = data.mipmaps.length / data.mipmapCount;
@@ -142,7 +141,7 @@ Loaders.loadTexture = function(file, onLoad)
 
 			var image = new Image(jpeg, "jpeg");
 			Editor.addAction(new AddResourceAction(image, Editor.program, "images"));
-			
+
 			var texture = new Texture(image);
 			texture.name = name;
 			Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
@@ -228,7 +227,7 @@ Loaders.loadAudio = function(file, onLoad)
 	{
 		var audio = new Audio(reader.result);
 		audio.name = name;
-		
+
 		if (onLoad !== undefined)
 		{
 			onLoad(audio);
@@ -246,7 +245,7 @@ Loaders.loadFont = function(file, onLoad)
 	var name = FileSystem.getFileName(file.name);
 	var extension = FileSystem.getFileExtension(file.name);
 	var reader = new FileReader();
-	
+
 	reader.onload = function()
 	{
 		if (extension === "json")
@@ -279,52 +278,6 @@ Loaders.loadFont = function(file, onLoad)
 };
 
 /**
- * Load spine animation file from file.
- *
- * Also searches for the .atlas file on the file path.
- *
- * @static
- * @method loadSpineAnimation
- * @param {File} file File to load.
- */
-Loaders.loadSpineAnimation = function(file)
-{
-	try
-	{
-		var path = FileSystem.getFilePath(file.path);
-
-		var atlasFile = null;
-		var files = FileSystem.getFilesDirectory(path);
-		for (var i = 0; i < files.length; i++)
-		{
-			if (files[i].endsWith("atlas"))
-			{
-				atlasFile = path + files[i];
-				break;
-			}
-		}
-
-		if (atlasFile === null)
-		{
-			Editor.alert(Locale.failedLoadSpine);
-			console.warn("Freedom World Editor: No atlas file found in the directory.");
-			return;
-		}
-
-		var data = FileSystem.readFile(file.path);
-		var atlas = FileSystem.readFile(atlasFile);
-
-		var animation = new SpineAnimation(data, atlas, path);
-		animation.name = FileSystem.getFileName(file.path);
-		Editor.addObject(animation);
-	}
-	catch (e)
-	{
-		Editor.alert(Locale.failedLoadSpine + "(" + e + ")");
-	}
-};
-
-/**
  * Load text from file and add it as a resource to the program.
  *
  * @static
@@ -351,7 +304,7 @@ Loaders.loadText = function(file)
  * Load a 3D file containing objects to be added to the scene.
  *
  * If no parent is specified it adds the objects to currently open scene.
- * 
+ *
  * @method loadModel
  * @param {File} file File to be read and parsed.
  * @param {Object3D} parent Object to add the objects.
@@ -384,7 +337,7 @@ Loaders.loadModel = function(file, parent)
 		else if (extension === "obj")
 		{
 			var materials = null;
-			
+
 			// Look for MTL file
 			if (FWE.runningOnDesktop())
 			{
@@ -466,12 +419,12 @@ Loaders.loadModel = function(file, parent)
 				{
 					var loader = new VOXLoader();
 					var chunks = loader.parse(reader.result);
-					
+
 					var name = FileSystem.getFileName(file) || "vox";
 
 					var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 					geometry.name = name;
-				
+
 					var material = new MeshPhongMaterial();
 					material.name = name;
 
@@ -497,7 +450,7 @@ Loaders.loadModel = function(file, parent)
 						group.add(mesh);
 
 					}
-					
+
 					Editor.addObject(group, parent);
 					modal.destroy();
 				}
@@ -605,7 +558,7 @@ Loaders.loadModel = function(file, parent)
 		}
 		// Blender
 		else if (extension === "blend")
-		{	
+		{
 			var reader = new FileReader();
 			reader.onload = function()
 			{
@@ -660,7 +613,7 @@ Loaders.loadModel = function(file, parent)
 				{
 					var loader = new ColladaLoader();
 					var collada = loader.parse(reader.result, path);
-					
+
 					var scene = collada.scene;
 					var animations = collada.animations;
 
@@ -674,7 +627,7 @@ Loaders.loadModel = function(file, parent)
 							}
 						});
 					}
-					
+
 					Editor.addObject(scene, parent);
 					modal.destroy();
 				}
@@ -849,7 +802,7 @@ Loaders.loadModel = function(file, parent)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		
+
 		// VRML
 		else if (extension === "wrl" || extension === "vrml")
 		{
@@ -886,9 +839,9 @@ Loaders.loadModel = function(file, parent)
 				{
 					var loader = new FBXLoader();
 					var object = loader.parse(reader.result, path);
-					
+
 					if (object.animations !== undefined && object.animations.length > 0)
-					{					
+					{
 						object.traverse(function(child)
 						{
 							if (child instanceof SkinnedMesh)

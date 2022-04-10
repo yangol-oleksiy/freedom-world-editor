@@ -10,7 +10,6 @@ import {TreeView} from "./tab/tree-view/TreeView.js";
 import {InspectorContainer} from "./tab/inspector/InspectorContainer.js";
 import {ConsoleTab} from "./tab/console/ConsoleTab.js";
 import {AssetExplorer} from "./tab/asset/AssetExplorer.js";
-import {AnimationTab} from "./tab/animation/AnimationTab.js";
 import {MainMenu} from "./MainMenu.js";
 
 /**
@@ -45,8 +44,6 @@ function Interface()
 	this.assetExplorer = leftBottom.addTab(AssetExplorer, false);
 
 	this.console = leftBottom.addTab(ConsoleTab, false);
-
-	this.animation = leftBottom.addTab(AnimationTab, false);
 
 	this.tree = rightTop.addTab(TreeView, false);
 

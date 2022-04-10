@@ -2,7 +2,6 @@ import {Material, AnimationClip} from "three";
 import {ResourceContainer} from "../../resources/ResourceContainer.js";
 import {Scene} from "../../objects/Scene.js";
 import {FWE} from "../../FWE.js";
-import {AnimationMixer} from "../../animation/AnimationMixer.js";
 
 /**
  * Folded attribute is used only for editing, if true the object shows as folded in the object explorer.
@@ -77,12 +76,6 @@ THREE.Object3D.prototype.stopAnimation = function()
  */
 THREE.Object3D.prototype.initialize = function()
 {
-	if (this.animations !== undefined)
-	{
-		this.mixer = new AnimationMixer(this);
-		this.mixer.createActions(this.animations);
-		this.mixer.play();
-	}
 };
 
 /**

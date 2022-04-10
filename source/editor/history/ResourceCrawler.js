@@ -8,7 +8,6 @@ import {Font} from "../../core/resources/Font.js";
 import {Audio} from "../../core/resources/Audio.js";
 import {TextSprite} from "../../core/objects/text/TextSprite.js";
 import {TextBitmap} from "../../core/objects/text/TextBitmap.js";
-import {SpineAnimation} from "../../core/objects/spine/SpineAnimation.js";
 import {ParticleEmitter} from "../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../core/objects/misc/Sky.js";
 import {LensFlare} from "../../core/objects/misc/LensFlare.js";
@@ -28,7 +27,7 @@ function ResourceCrawler() {}
  * Is called recursively for every Array or Object found, the callback receives the (value, parent, attribute) as parameters.
  *
  * If the callback method returns false it does not traverse the object.
- * 
+ *
  * @static
  * @method traverseDeep
  * @param {Object} object Object to be traversed.
@@ -72,12 +71,12 @@ ResourceCrawler.traverseDeep = function(object, callback)
  * @param {Resource} newResource New resource used to replace the old one.
  */
 ResourceCrawler.swapResource = function(manager, category, oldResource, newResource)
-{	
+{
 	if (manager[category][oldResource.uuid] === undefined)
 	{
 		throw new Error("Old resource not found in the resource manager.");
 	}
-	
+
 	// Swap resource in the manager
 	delete manager[category][oldResource.uuid];
 
@@ -146,7 +145,7 @@ ResourceCrawler.addResource = function(manager, resource, category)
  * @param {ResourceManager} manager
  * @param {Resource} resource
  * @param {string} category
- */ 
+ */
 ResourceCrawler.removeResource = function(manager, resource, category)
 {
 	if (category === "materials")
@@ -225,7 +224,7 @@ ResourceCrawler.searchObject = function(object, manager, target)
 	{
 		resources = new ResourceContainer();
 	}
-	
+
 	object.traverse(function(child)
 	{
 		if (child.locked)
@@ -252,7 +251,7 @@ ResourceCrawler.searchObject = function(object, manager, target)
 		}
 
 		// Material/textures
-		if (child.material !== undefined && !(child instanceof TextBitmap || child instanceof TextSprite ||child instanceof LensFlare || child instanceof ParticleEmitter || child instanceof Sky || child instanceof SpineAnimation))
+		if (child.material !== undefined && !(child instanceof TextBitmap || child instanceof TextSprite ||child instanceof LensFlare || child instanceof ParticleEmitter || child instanceof Sky))
 		{
 			if (child.material instanceof Material)
 			{
@@ -290,7 +289,7 @@ ResourceCrawler.searchObject = function(object, manager, target)
 				if (manager.geometries[child.geometry.uuid] === undefined)
 				{
 					resources.geometries[child.geometry.uuid] = child.geometry;
-				}			
+				}
 			}
 		}
 
@@ -340,7 +339,7 @@ ResourceCrawler.searchObject = function(object, manager, target)
 
 			if (manager.textures[texture.uuid] === undefined)
 			{
-				resources.textures[texture.uuid] = texture;	
+				resources.textures[texture.uuid] = texture;
 			}
 		}
 	}

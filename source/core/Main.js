@@ -6,8 +6,6 @@ export {VRHandler} from "./xr/VRHandler.js";
 
 export {TargetConfig} from "./platform/TargetConfig.js";
 
-export {AnimationMixer} from "./animation/AnimationMixer.js";
-
 export {Key} from "./input/Key.js";
 export {Keyboard} from "./input/Keyboard.js";
 export {TizenKeyboard} from "./input/TizenKeyboard.js";
@@ -108,9 +106,6 @@ export {PositionalAudio} from "./objects/audio/PositionalAudio.js";
 
 export {Script} from "./objects/script/Script.js";
 export {NodeScript} from "./objects/script/NodeScript.js";
-
-export {SpineAnimation} from "./objects/spine/SpineAnimation.js";
-export {SpineTexture} from "./objects/spine/SpineTexture.js";
 
 export {ParticleEmitterControl} from "./objects/particle/core/ParticleEmitterControl.js";
 export {ParticleGroup} from "./objects/particle/core/ParticleGroup.js";

@@ -1,10 +1,10 @@
-import {FileLoader, Vector3, Face3, Vector2, AnimationClip, Geometry, DefaultLoadingManager} from "three";
+import {FileLoader, Vector3, Face3, Vector2, Geometry, DefaultLoadingManager} from "three";
 
 /**
  * Legacy geometry loader is used to load the old geometry file format.
- * 
+ *
  * May be necessary to load old project files.
- * 
+ *
  * @class LegacyGeometryLoader
  * @author alteredq / http:// alteredqualia.com/
  */
@@ -412,51 +412,6 @@ LegacyGeometryLoader.prototype.parse = (function()
 		}
 	}
 
-	function parseAnimations(json, geometry)
-	{
-		var outputAnimations = [];
-
-		// parse old style Bone/Hierarchy animations
-		var animations = [];
-		if (json.animation !== undefined)
-		{
-			animations.push(json.animation);
-		}
-
-		if (json.animations !== undefined)
-		{
-			if (json.animations.length)
-			{
-				animations = animations.concat(json.animations);
-			}
-			else
-			{
-				animations.push(json.animations);
-			}
-		}
-
-		for (var i = 0; i < animations.length; i++)
-		{
-			var clip = AnimationClip.parseAnimation(animations[i], geometry.bones);
-			if (clip)
-			{
-				outputAnimations.push(clip);
-			}
-		}
-
-		// parse implicit morph animations
-		if (geometry.morphTargets)
-		{
-			var morphAnimationClips = AnimationClip.CreateClipsFromMorphTargetSequences(geometry.morphTargets, 10);
-			outputAnimations = outputAnimations.concat(morphAnimationClips);
-		}
-
-		if (outputAnimations.length > 0)
-		{
-			geometry.animations = outputAnimations;
-		}
-	}
-
 	return function parse(json, path)
 	{
 		if (json.data !== undefined)
@@ -477,7 +432,6 @@ LegacyGeometryLoader.prototype.parse = (function()
 		parseModel(json, geometry);
 		parseSkin(json, geometry);
 		parseMorphing(json, geometry);
-		parseAnimations(json, geometry);
 
 		geometry.computeFaceNormals();
 		geometry.computeBoundingSphere();
