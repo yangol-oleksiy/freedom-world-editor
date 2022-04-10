@@ -7,6 +7,7 @@
 - Removed cordova related code from editor
 - Removed jszip related code from editor
 - Removed game project load/save related code from editor
+- Removed messy file exporters from editor
 
 ### V0.108
 

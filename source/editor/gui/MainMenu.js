@@ -1,4 +1,3 @@
-import {StaticPair} from "@as-com/pson";
 import {Locale} from "../locale/LocaleManager.js";
 import {FWE} from "../../core/FWE.js";
 import {ObjectLoader} from "../../core/loaders/ObjectLoader.js";
@@ -12,7 +11,6 @@ import {Editor} from "../Editor.js";
 import {DropdownMenu} from "../components/dropdown/DropdownMenu.js";
 import {Component} from "../components/Component.js";
 import {ButtonText} from "../components/buttons/ButtonText.js";
-import {Exporters} from "../Exporters.js";
 import {AboutTab} from "./tab/about/AboutTab.js";
 import {SettingsTab} from "./tab/settings/SettingsTab.js";
 import {ObjectLibraryLoader} from "../utils/ObjectLibraryLoader";
@@ -99,142 +97,12 @@ function MainMenu(parent)
 		tab.select();
 	}, Global.FILE_PATH + "icons/misc/settings.png");
 
-	// Import
-	fileMenu.addOption(Locale.import, function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if (files.length > 0)
-			{
-				var file = files[0];
-				var binary = FileSystem.getFileExtension(file.name) !== "isp";
-
-				var loader = new ObjectLoader();
-				var reader = new FileReader();
-
-				reader.onload = function()
-				{
-					if (binary)
-					{
-						var pson = new StaticPair();
-						var data = pson.decode(reader.result);
-						var program = loader.parse(data);
-					}
-					else
-					{
-						var program = loader.parse(JSON.parse(reader.result));
-					}
-
-					var actions = [];
-
-					for (var i = 0; i < program.children.length; i++)
-					{
-						actions.push(new AddAction(program.children[i], Editor.program));
-					}
-
-					Editor.addAction(new ActionBundle(actions));
-				};
-
-				if (binary)
-				{
-					reader.readAsArrayBuffer(file);
-				}
-				else
-				{
-					reader.readAsText(file);
-				}
-			}
-		}, ".isp, .nsp");
-
-	}, Global.FILE_PATH + "icons/misc/import.png");
-
 	if (DEVELOPMENT) {
 		// Load test library
 		fileMenu.addOption("Load test library", function()
 		{
 			ObjectLibraryLoader.loadTestLibs();
 		}, Global.FILE_PATH + "icons/misc/import.png");
-	}
-
-	// Export menu
-	var exportMenu = fileMenu.addMenu(Locale.export, Global.FILE_PATH + "icons/misc/export.png");
-
-	// Export OBJ
-	exportMenu.addOption("OBJ", function()
-	{
-		Exporters.exportOBJ(Editor.getScene());
-	}, Global.FILE_PATH + "icons/misc/scene.png");
-
-	// Export GLTF
-	exportMenu.addOption("GLTF", function()
-	{
-		Exporters.exportGLTF(Editor.getScene(), false);
-	}, Global.FILE_PATH + "icons/gltf.png");
-
-	// Export GLB
-	exportMenu.addOption("GLB", function()
-	{
-		Exporters.exportGLTF(Editor.getScene(), true);
-	}, Global.FILE_PATH + "icons/gltf.png");
-
-	// Export Google Draco
-	exportMenu.addOption("Draco", function()
-	{
-		if (Editor.selection.length === 0 || Editor.selection[0].geometry === undefined)
-		{
-			Editor.alert(Locale.needsObjectGeometry);
-			return;
-		}
-
-		Exporters.exportDraco(Editor.selection[0]);
-
-	}, Global.FILE_PATH + "icons/misc/scene.png");
-
-	// Export Collada
-	exportMenu.addOption("Collada V1.4.1", function()
-	{
-		Exporters.exportCollada(Editor.program, "1.4.1");
-	}, Global.FILE_PATH + "icons/misc/scene.png");
-
-	exportMenu.addOption("Collada V1.5", function()
-	{
-		Exporters.exportCollada(Editor.program, "1.5.0");
-
-	}, Global.FILE_PATH + "icons/misc/scene.png");
-
-	// Export PLY
-	exportMenu.addOption("PLY", function()
-	{
-		Exporters.exportPLY(Editor.getScene(), false);
-	}, Global.FILE_PATH + "icons/misc/scene.png");
-
-	exportMenu.addOption("PLY (" + Locale.binary + ")", function()
-	{
-		Exporters.exportPLY(Editor.getScene(), true);
-	}, Global.FILE_PATH + "icons/misc/scene.png");
-
-	// Export STL
-	exportMenu.addOption("STL", function()
-	{
-		Exporters.exportSTL(Editor.program, false);
-	}, Global.FILE_PATH + "icons/misc/scene.png");
-
-	// Export Binary STL
-	exportMenu.addOption("STL (" + Locale.binary + ")", function()
-	{
-		Exporters.exportSTL(Editor.program, true);
-	}, Global.FILE_PATH + "icons/misc/scene.png");
-
-	// Exit
-	if (FWE.runningOnDesktop())
-	{
-		fileMenu.addOption(Locale.exit, function()
-		{
-			if (Editor.confirm(Locale.unsavedChangesExit))
-			{
-				Editor.exit();
-			}
-		}, Global.FILE_PATH + "icons/misc/exit.png");
 	}
 
 	fileMenu.updateInterface();
@@ -288,11 +156,6 @@ function MainMenu(parent)
 	projectMenu.setText(Locale.project);
 	projectMenu.size.set(100, this.size.y);
 	projectMenu.position.set(220, 0);
-
-	projectMenu.addOption(Locale.createScene, function()
-	{
-		Editor.addDefaultScene();
-	}, Global.FILE_PATH + "icons/misc/add.png");
 
 	projectMenu.addOption(Locale.executeScript, function()
 	{
