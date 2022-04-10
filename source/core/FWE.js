@@ -92,15 +92,6 @@ FWE.NWJS = 200;
 FWE.BROWSER = 201;
 
 /**
- * Cordova platform, used for mobile versions.
- *
- * @static
- * @attribute CORDOVA
- * @type {number}
- */
-FWE.CORDOVA = 202;
-
-/**
  * Import stuff from a namespace to another target namespace.
  *
  * If not target is specified window is used.
@@ -210,7 +201,6 @@ FWE.webGLAvailable = function()
  * Possible return values are:
  * - FWE.NWJS
  * - FWE.BROWSER
- * - FWE.CORDOVA
  *
  * @method getPlatform
  * @return {number} Indicates the platform type.
@@ -220,10 +210,6 @@ FWE.getPlatform = function()
 	if (window.nw !== undefined)
 	{
 		return FWE.NWJS;
-	}
-	else if (window.cordova !== undefined)
-	{
-		return FWE.CORDOVA;
 	}
 
 	return FWE.BROWSER;

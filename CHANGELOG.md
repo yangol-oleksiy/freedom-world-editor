@@ -3,7 +3,8 @@
 ### V0.109
 
 - Removed cannon-es library support completely from editor
-- Removed Gamepad and TizenKeyboard functionality frin editor
+- Removed Gamepad and TizenKeyboard functionality from editor
+- Removed cordova related code from editor
 
 ### V0.108
 

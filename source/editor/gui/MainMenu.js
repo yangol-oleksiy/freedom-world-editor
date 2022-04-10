@@ -153,41 +153,6 @@ function MainMenu(parent)
 			}, "", Editor.program.name);
 		}, Global.FILE_PATH + "icons/platform/web.png");
 
-		// Android
-		if (DEVELOPMENT)
-		{
-			var android = publish.addMenu("Android", Global.FILE_PATH + "icons/platform/android.png");
-
-			android.addOption(Locale.run, function()
-			{
-				try
-				{
-					ProjectExporters.exportAndroid(ProjectExporters.ANDROID_RUN);
-				}
-				catch (e)
-				{
-					console.error("Freedom World Editor: Error exporting android project.", e);
-					Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
-				}
-			});
-
-			android.addOption("Unsigned APK", function()
-			{
-				FileSystem.chooseFile(function(files)
-				{
-					try
-					{
-						ProjectExporters.exportAndroid(ProjectExporters.ANDROID_EXPORT_UNSIGNED, files[0].path);
-					}
-					catch (e)
-					{
-						console.error("Freedom World Editor: Error exporting android project.", e);
-						Editor.alert(Locale.errorExportingProject + "\n(" + e + ")");
-					}
-				}, ".apk", Editor.program.name);
-			});
-		}
-
 		if (FWE.runningOnDesktop())
 		{
 			// Publish windows

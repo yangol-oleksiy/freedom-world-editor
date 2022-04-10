@@ -5,8 +5,8 @@ import {FWE} from "./FWE.js";
 
 /**
  * FileSystem is used to read and write files using Freedom World Editor.
- * 
- * Its implements multiple solutions for each method depending on the platform (NodeJS, brower or cordova).
+ *
+ * Its implements multiple solutions for each method depending on the platform (NodeJS, brower).
  *
  * Some operations are platform specific and might not work everywhere.
  *
@@ -37,7 +37,7 @@ FileSystem.isLocalFile = function(url)
  * Read a local or remote file as text data.
  *
  * When running on desktop uses nodejs to access files, on the web performs a http GET request.
- * 
+ *
  * @method readFile
  * @param {string} fname Path or URL of the file being read.
  * @param {boolean} sync If true the file will be read in sync.
@@ -64,7 +64,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 			{
 				onLoad(data);
 			}
-			
+
 			return data;
 		}
 		else
@@ -93,7 +93,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
 		var file = new XMLHttpRequest();
 		file.overrideMimeType("text/plain");
 		file.open("GET", fname, !sync);
-		
+
 		if (onLoad !== undefined)
 		{
 			file.onload = function()
@@ -121,7 +121,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress, onError)
  * Read a local or remote file as arraybuffer data.
  *
  * When running on desktop uses nodejs to access files, on the web performs a http GET request.
- * 
+ *
  * @method readFileArrayBuffer
  * @param {string} fname Path or URL of the file being read.
  * @param {boolean} sync If true the file will be read in sync.
@@ -199,7 +199,7 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress, onErr
  * Read a local or remote file as base64 data.
  *
  * When running on desktop uses nodejs to access files, on the web performs a http GET request.
- * 
+ *
  * @method readFileBase64
  * @param {string} fname Path or URL of the file being read.
  * @param {boolean} sync If true the file will be read in sync.
@@ -214,7 +214,7 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 	{
 		sync = true;
 	}
-	
+
 	// NodeJS
 	if (FileSystem.fs !== undefined && FileSystem.isLocalFile(fname))
 	{
@@ -249,9 +249,9 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 		var file = new XMLHttpRequest();
 		file.open("GET", fname, !sync);
 		file.overrideMimeType("text/plain; charset=x-user-defined");
-		
+
 		if (onLoad !== undefined)
-		{		
+		{
 			file.onload = function()
 			{
 				onLoad(Base64Utils.fromBinaryString(file.response));
@@ -274,7 +274,7 @@ FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress, onError)
 
 /**
  * Write text to a file.
- * 
+ *
  * When running on the web it writes file to a blob and auto downloads it.
  *
  * @method writeFile
@@ -395,7 +395,7 @@ FileSystem.writeFileBase64 = function(fname, data, sync, onFinish)
 };
 
 /**
- * Write binary file using arraybuffer data. 
+ * Write binary file using arraybuffer data.
  *
  * If running on the web writes the file into a blob and auto downloads it.
  *
@@ -406,7 +406,7 @@ FileSystem.writeFileBase64 = function(fname, data, sync, onFinish)
  * @param {Function} onFinish Callback function called when the file is written.
  */
 FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
-{	
+{
 	if (FileSystem.fs !== undefined)
 	{
 		var buffer = BufferUtils.fromArrayBuffer(data);
@@ -448,7 +448,7 @@ FileSystem.writeFileArrayBuffer = function(fname, data, sync, onFinish)
 		download.style.display = "none";
 		document.body.appendChild(download);
 		download.click();
-		
+
 		if (onFinish !== undefined)
 		{
 			onFinish();
@@ -488,7 +488,7 @@ FileSystem.chooseFileWrite = function(onLoad, filter)
 
 /**
  * Open file chooser dialog window for the user to select a directory.
- * 
+ *
  * Only works while using NWJS.
  *
  * @method chooseDirectory
@@ -501,15 +501,15 @@ FileSystem.chooseDirectory = function()
 		var chooser = document.createElement("input");
 		chooser.type = "file";
 		chooser.style.display = "none";
-		chooser.nwdirectory = true; 
+		chooser.nwdirectory = true;
 		document.body.appendChild(chooser);
-	
+
 		chooser.onchange = function()
 		{
 			resolve(chooser.value);
 			document.body.removeChild(chooser);
 		};
-		
+
 		chooser.onerror = reject;
 		chooser.onabort = reject;
 
@@ -547,7 +547,7 @@ FileSystem.chooseFile = function(onLoad, filter, saveas, multiFile)
 	}
 
 	chooser.onchange = function()
-	{	
+	{
 		if (onLoad !== undefined)
 		{
 			onLoad(chooser.files);
@@ -560,7 +560,7 @@ FileSystem.chooseFile = function(onLoad, filter, saveas, multiFile)
 	{
 		chooser.nwsaveas = saveas !== true ? saveas : "file";
 	}
-	
+
 	chooser.click();
 };
 
@@ -568,7 +568,7 @@ FileSystem.chooseFile = function(onLoad, filter, saveas, multiFile)
  * Used as an alternative to chooseFile for saving files in the browser.
  *
  * Uses a prompt to question the user the file name.
- * 
+ *
  * @method chooseFileName
  * @param {Function} onLoad onLoad callback
  * @param {string} saveas File extension
@@ -576,14 +576,14 @@ FileSystem.chooseFile = function(onLoad, filter, saveas, multiFile)
 FileSystem.chooseFileName = function(onLoad, saveas, name)
 {
 	var fname = prompt("Save As", name !== undefined ? name : "file");
-	
+
 	if (fname !== null)
 	{
 		if (saveas !== undefined && !fname.endsWith(saveas))
 		{
 			fname += saveas;
 		}
-		
+
 		if (onLoad !== undefined)
 		{
 			onLoad(fname);
@@ -593,7 +593,7 @@ FileSystem.chooseFileName = function(onLoad, saveas, name)
 
 /**
  * Copy file (cannot be used to copy folders).
- * 
+ *
  * Only works when running inside NWJS.
  *
  * @method copyFile
@@ -620,7 +620,7 @@ FileSystem.copyFile = function(src, dst)
 
 /**
  * Make a directory (dont throw exeption if directory already exists).
- * 
+ *
  * Only works when running inside NWJS.
  *
  * @method makeDirectory
@@ -637,7 +637,7 @@ FileSystem.makeDirectory = function(dir)
 
 /**
  * Returns files in directory (returns empty array in case of error).
- * 
+ *
  * Only works when running inside NWJS.
  *
  * @method getFilesDirectory
@@ -663,7 +663,7 @@ FileSystem.getFilesDirectory = function(dir)
 
 /**
  * Delete folders and all subfolders.
- * 
+ *
  * Only works when running inside NWJS.
  *
  * @method deleteFolder
@@ -696,7 +696,7 @@ FileSystem.deleteFolder = function(path)
 
 /**
  * Copy folder and all its files (includes symbolic links).
- * 
+ *
  * Only works when running inside NWJS.
  *
  * @method copyFolder
@@ -718,7 +718,7 @@ FileSystem.copyFolder = function(src, dst)
 			var source = src + "\\" + files[i];
 			var destiny = dst + "\\" + files[i];
 			var current = FileSystem.fs.statSync(source);
-			
+
 			// Directory
 			if (current.isDirectory())
 			{
@@ -740,7 +740,7 @@ FileSystem.copyFolder = function(src, dst)
 
 /**
  * Check if a file exists.
- * 
+ *
  * Only works inside of NWJS. When running inside the browser always returns false.
  *
  * @method fileExists
@@ -761,9 +761,9 @@ FileSystem.fileExists = function(file)
 
 /**
  * Get file name without extension from file path string.
- * 
+ *
  * If input is a/b/c/abc.d output is abc.
- * 
+ *
  * @method getFileName
  * @param {string} file File path
  * @return {string} File name without path and extension
@@ -782,15 +782,15 @@ FileSystem.getFileName = function(file)
 
 		return file.substring(a > b ? a + 1 : b + 1, file.lastIndexOf("."));
 	}
-	
+
 	return "";
 };
 
 /**
  * Get file name with extension from file path string.
- * 
+ *
  * If input is a/b/c/abc.d output is abc.d.
- * 
+ *
  * @method getFileNameWithExtension
  * @param {string} file File path
  * @return {string} File name without path with extension
@@ -809,13 +809,13 @@ FileSystem.getFileNameWithExtension = function(file)
 
 		return file.substring(a > b ? a + 1 : b + 1, file.length);
 	}
-	
+
 	return "";
 };
 
 /**
  * Get file name without extension.
- * 
+ *
  * If input is a/b/c/abc.d output is a/b/c/abc.
  *
  * @method getNameWithoutExtension
@@ -839,7 +839,7 @@ FileSystem.getNameWithoutExtension = function(file)
 
 /**
  * Get directory where the file is placed.
- * 
+ *
  * If input is a/b/c/abc.d output is a/b/c/
  *
  * @method getFilePath
@@ -854,7 +854,7 @@ FileSystem.getFilePath = function(file)
 		{
 			file = file.name;
 		}
-		
+
 		var a = file.lastIndexOf("\\");
 		var b = file.lastIndexOf("/");
 
@@ -866,7 +866,7 @@ FileSystem.getFilePath = function(file)
 
 /**
  * Get file extension from file path string (always in lowercase).
- * 
+ *
  * If input is a/b/c/abc.d output is d.
  *
  * @method getFileExtension
@@ -874,7 +874,7 @@ FileSystem.getFilePath = function(file)
  * @return {string}
  */
 FileSystem.getFileExtension = function(file)
-{	
+{
 	if (file !== undefined)
 	{
 		if (file instanceof File)
@@ -884,7 +884,7 @@ FileSystem.getFileExtension = function(file)
 
 		return file.substring(file.lastIndexOf(".") + 1, file.length).toLowerCase();
 	}
-	
+
 	return "";
 };
 
