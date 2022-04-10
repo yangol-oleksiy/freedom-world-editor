@@ -31,7 +31,7 @@
   - Drag and drop files directly into the project (images, video, models, ...)
   - Manage project resources.
   - Edit material, textures, shaders, code, ...
-- Built on [three.js](https://threejs.org/) library w/ physics by [cannon.js](https://schteppe.github.io/cannon.js/)
+- Built on [three.js](https://threejs.org/) library
   - Real time lighting and shadow map support
   - three.js libraries can be imported into the editor
   - Wide range of file formats supported (gltf, dae, obj, fbx, 3ds, ...)
