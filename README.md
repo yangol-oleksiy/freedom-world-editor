@@ -2,7 +2,7 @@
 
 - Freedom World Editor is an open source scene editor for Freedom World online role playing game.
 - Freedom World Editor is forked from nunuStudio project https://github.com/tentone/nunuStudio
-- Powered by [three.js](https://github.com/mrdoob/three.js) can run directly in the web or be exported as desktop application trough [nwjs.io](https://nwjs.io).
+- Powered by [three.js](https://github.com/mrdoob/three.js).
 - Fully featured visual editor, supports a wide range of file formats, the tools are open source and completely free to use for both personal and commercial usage.
 - Visual scene editor, code editor, visual tools to edit textures, materials, particle emitters and a powerful scripting API that allows the creation of complex applications using [JavaScript](https://www.javascript.com/) or [Python](https://www.python.org/).
 - Fully featured [web version](https://www.nunustudio.org/build/editor/index.html) of the original nunuStudio editor is available on the nunuStudio project page.
@@ -24,7 +24,6 @@
 <img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/5.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/6.png">
 
 
-
 ### Features
 
 - Visual application editor
@@ -35,7 +34,6 @@
   - Real time lighting and shadow map support
   - three.js libraries can be imported into the editor
   - Wide range of file formats supported (gltf, dae, obj, fbx, 3ds, ...)
-- [NW.js](https://nwjs.io/) and [Cordova](https://cordova.apache.org/) exports for desktop and mobile deployment
 - Compatible with [WebXR](https://www.w3.org/TR/webxr/) for Virtual Reality and Augmented Reality
 
 
@@ -47,24 +45,6 @@
 - Install dependencies from npm by running `npm install` some dependencies are not available on npm and have to be installed by running `npm install napa`
 - Install the dependencies for the project webpage running `cd source/page && npm install`
 - Build  editor, runtime and documentation, run `npm run build`
-
-
-
-### Embedding Application
-
-- Application developed with can be embedded into already existing web pages, and are compatible with frameworks like [Angular](https://angular.io/) or [React](https://reactjs.org/).
-- To embed applications in HTML pages the following code can be used, the application is bootstrapped using the `loadApp(file, id)` method.
-
-```html
-<html>
-    <head>
-        <script src="nunu.min.js"></script>
-    </head>
-    <body onload="Nunu.App.loadApp('pong.nsp', 'canvas')">
-        <canvas width="800" height="480" id="canvas"></canvas>
-    </body>
-</html>
-```
 
 ### License
 
