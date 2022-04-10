@@ -8,9 +8,7 @@ export {TargetConfig} from "./platform/TargetConfig.js";
 
 export {Key} from "./input/Key.js";
 export {Keyboard} from "./input/Keyboard.js";
-export {TizenKeyboard} from "./input/TizenKeyboard.js";
 export {Mouse} from "./input/Mouse.js";
-export {Gamepad} from "./input/Gamepad.js";
 export {Gyroscope} from "./input/Gyroscope.js";
 
 export {RendererState} from "./renderer/RendererState.js";

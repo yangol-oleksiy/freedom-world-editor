@@ -1,9 +1,13 @@
 # Changelog
 
+### V0.109
+
+- Removed cannon-es library support completely from editor
+- Removed Gamepad and TizenKeyboard functionality frin editor
+
 ### V0.108
 
 - Removed animation related functionality from editor
-- Removed cannon-es library support completely from editor
 
 ### V0.107
 
