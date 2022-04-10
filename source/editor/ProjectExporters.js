@@ -1,5 +1,4 @@
 import {StaticPair} from "@as-com/pson";
-import JSZip from "jszip";
 import {Base64Utils} from "../core/utils/binary/Base64Utils.js";
 import {FileSystem} from "../core/FileSystem.js";
 import {Global} from "./Global.js";
@@ -46,44 +45,6 @@ ProjectExporters.exportWebProject = function(dir)
 	FileSystem.copyFile(Global.RUNTIME_PATH + "index.html", dir + "/index.html");
 	FileSystem.copyFile(Global.RUNTIME_PATH + "nunu.min.js", dir + "/nunu.min.js");
 	Editor.saveProgram(dir + "/app.nsp", true, true, true);
-};
-
-/**
- * Export web project as a zip package using JSZip.
- *
- * Used in the web version to export projects.
- *
- * @static
- * @method exportWebProjectZip
- * @param {string} fname Name of the file.
- */
-ProjectExporters.exportWebProjectZip = function(fname)
-{
-	var zip = new JSZip();
-	zip.file("index.html", FileSystem.readFile(Global.RUNTIME_PATH + "index.html"));
-	zip.file("nunu.min.js", FileSystem.readFile(Global.RUNTIME_PATH + "nunu.min.js"));
-
-	var pson = new StaticPair();
-	var data = pson.toArrayBuffer(Editor.program.toJSON());
-
-	zip.file("app.nsp", Base64Utils.fromArraybuffer(data), {base64: true});
-	zip.file("logo.png", FileSystem.readFileBase64(Global.RUNTIME_PATH + "logo.png"), {base64: true});
-	zip.file("fullscreen.png", FileSystem.readFileBase64(Global.RUNTIME_PATH + "fullscreen.png"), {base64: true});
-	zip.file("vr.png", FileSystem.readFileBase64(Global.RUNTIME_PATH + "vr.png"), {base64: true});
-
-	zip.generateAsync({type: "blob"}).then(function(content)
-	{
-		var download = document.createElement("a");
-		download.download = fname;
-		download.href = window.URL.createObjectURL(content);
-		download.style.display = "none";
-		download.onclick = function()
-		{
-			document.body.removeChild(this);
-		};
-		document.body.appendChild(download);
-		download.click();
-	});
 };
 
 /**
