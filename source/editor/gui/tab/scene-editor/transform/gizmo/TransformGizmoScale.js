@@ -1,6 +1,5 @@
 import {Shape} from "cannon-es";
 import {Geometry, Mesh, BoxGeometry, BufferGeometry, Float32BufferAttribute, Line, BoxBufferGeometry, CylinderBufferGeometry, Matrix4} from "three";
-import {PhysicsObject} from "../../../../../../core/objects/physics/PhysicsObject.js";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../../../../history/action/ActionBundle.js";
 import {GizmoMaterial} from "../GizmoMaterial.js";
@@ -145,29 +144,6 @@ TransformGizmoScale.prototype.transformObject = function(controls)
 			else if (controls.axis === "Z")
 			{
 				controls.objects[i].scale.z = controls.attributes[i].oldScale.z * (1 + controls.point.z);
-			}
-		}
-
-		// Update physics objects
-		if (controls.objects[i] instanceof PhysicsObject)
-		{
-			var shapes = controls.objects[i].body.shapes;
-			var scale = controls.objects[i].scale;
-
-			for (var i = 0; i < shapes.length; i++)
-			{
-				var shape = shapes[i];
-
-				if (shape.type === Shape.types.BOX)
-				{
-					shape.halfExtents.x = scale.x / 2.0;
-					shape.halfExtents.y = scale.y / 2.0;
-					shape.halfExtents.z = scale.z / 2.0;
-				}
-				else if (shape.type === Shape.types.SPHERE)
-				{
-					shape.radius = scale.x;
-				}
 			}
 		}
 	}

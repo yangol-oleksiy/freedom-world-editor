@@ -14,7 +14,6 @@ import {OrbitControls} from "../objects/controls/OrbitControls.js";
 import {OrthographicCamera} from "../objects/cameras/OrthographicCamera.js";
 import {ParticleEmitter} from "../objects/particle/ParticleEmitter.js";
 import {PerspectiveCamera} from "../objects/cameras/PerspectiveCamera.js";
-import {PhysicsObject} from "../objects/physics/PhysicsObject.js";
 import {PointLight} from "../objects/lights/PointLight.js";
 import {PositionalAudio} from "../objects/audio/PositionalAudio.js";
 import {Program} from "../objects/Program.js";
@@ -459,10 +458,6 @@ ObjectLoader.prototype.parseObject = function(data)
 			}
 			object.distanceModel = data.distanceModel;
 			object.panningModel = data.panningModel;
-			break;
-
-		case "Physics":
-			object = PhysicsObject.fromJSON(data);
 			break;
 
 		case "ParticleEmiter":

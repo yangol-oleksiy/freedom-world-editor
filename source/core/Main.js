@@ -109,8 +109,6 @@ export {PositionalAudio} from "./objects/audio/PositionalAudio.js";
 export {Script} from "./objects/script/Script.js";
 export {NodeScript} from "./objects/script/NodeScript.js";
 
-export {PhysicsObject} from "./objects/physics/PhysicsObject.js";
-
 export {SpineAnimation} from "./objects/spine/SpineAnimation.js";
 export {SpineTexture} from "./objects/spine/SpineTexture.js";
 
@@ -143,4 +141,3 @@ export {LocalStorage} from "./utils/LocalStorage.js";
 export {EventManager} from "./utils/EventManager.js";
 export {MathUtils} from "./utils/MathUtils.js";
 export {ObjectUtils} from "./utils/ObjectUtils.js";
-export {PhysicsGenerator} from "./utils/PhysicsGenerator.js";

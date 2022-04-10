@@ -27,7 +27,6 @@ import {FWE} from "../../../../core/FWE.js";
 import {ObjectIcons} from "../../../utils/ObjectIcons.js";
 import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
-import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
 import {RendererCanvas} from "../../../components/RendererCanvas.js";
 import {Settings} from "../../../Settings.js";
 import {SpineAnimation} from "../../../../core/objects/spine/SpineAnimation.js";
@@ -43,7 +42,6 @@ import {SkeletonHelper} from "./helpers/SkeletonHelper.js";
 import {SideBar} from "./sidebar/SideBar.js";
 import {RectAreaLightHelper} from "./helpers/RectAreaLightHelper.js";
 import {PointsHelper} from "./helpers/PointsHelper.js";
-import {PhysicsObjectHelper} from "./helpers/PhysicsObjectHelper.js";
 import {OrientationCube} from "./utils/OrientationCube.js";
 import {ObjectIconHelper} from "./helpers/ObjectIconHelper.js";
 import {LineHelper} from "./helpers/LineHelper.js";
@@ -1592,11 +1590,6 @@ SceneEditor.prototype.updateSelection = function()
 			{
 				this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 			}
-		}
-		// Physics
-		else if (object instanceof PhysicsObject)
-		{
-			this.objectHelper.add(new PhysicsObjectHelper(object));
 		}
 		// LensFlare
 		else if (object instanceof LensFlare)

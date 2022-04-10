@@ -2,7 +2,6 @@ import {Vector2, Object3D, Mesh, SkinnedMesh, InstancedMesh, Vector3, Quaternion
 import {ConvexGeometry} from "three/examples/jsm/geometries/ConvexGeometry";
 import {BufferGeometryUtils} from "three/examples/jsm/utils/BufferGeometryUtils";
 import {Locale} from "../../../locale/LocaleManager.js";
-import {PhysicsGenerator} from "../../../../core/utils/PhysicsGenerator.js";
 import {ObjectUtils} from "../../../../core/utils/ObjectUtils.js";
 import {Model} from "../../../../core/resources/Model.js";
 import {Script} from "../../../../core/objects/script/Script.js";
@@ -11,7 +10,6 @@ import {LuaScript} from "../../../../core/objects/script/LuaScript.js";
 import {FennelScript} from "../../../../core/objects/script/FennelScript.js";
 import {Scene} from "../../../../core/objects/Scene.js";
 import {Program} from "../../../../core/objects/Program.js";
-import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
 import {ParticleEmitter} from "../../../../core/objects/particle/ParticleEmitter.js";
 import {Group} from "../../../../core/objects/misc/Group.js";
 import {LightProbe} from "../../../../core/objects/lights/LightProbe.js";
@@ -326,50 +324,6 @@ function TreeNode(container)
 					instanced.quaternion.copy(self.object.quaternion);
 
 					Editor.addAction(new SwapAction(self.object, instanced));
-				});
-			}
-
-			// Add physics to object
-			if (self.object instanceof Mesh || self.object instanceof SkinnedMesh)
-			{
-				// Add physics object
-				function createPhysics(object, mode)
-				{
-					var physics = new PhysicsObject();
-					physics.addShape(PhysicsGenerator.createShape(object, mode));
-					physics.name = object.name;
-					physics.position.copy(object.position);
-					physics.quaternion.copy(object.quaternion);
-
-					object.position.set(0, 0, 0);
-					object.quaternion.set(0, 0, 0, 1);
-
-					var actions = [];
-					actions.push(new SwapAction(object, physics, true));
-					actions.push(new AddAction(object, physics));
-					Editor.addAction(new ActionBundle(actions));
-				}
-
-				var physics = context.addMenu("Add physics");
-
-				physics.addOption(Locale.box, function()
-				{
-					createPhysics(self.object, PhysicsGenerator.Type.BOX);
-				});
-
-				physics.addOption(Locale.sphere, function()
-				{
-					createPhysics(self.object, PhysicsGenerator.Type.SPHERE);
-				});
-
-				physics.addOption(Locale.cylinder, function()
-				{
-					createPhysics(self.object, PhysicsGenerator.Type.CYLINDER);
-				});
-
-				physics.addOption(Locale.convexHull, function()
-				{
-					createPhysics(self.object, PhysicsGenerator.Type.HULL);
 				});
 			}
 

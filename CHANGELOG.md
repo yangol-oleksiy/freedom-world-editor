@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.107
+
+- Removed physics functionality from editor
+
 ### V0.106
 
 - Implemented insert mode inserting

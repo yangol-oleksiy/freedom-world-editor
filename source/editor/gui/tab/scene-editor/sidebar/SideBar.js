@@ -1,4 +1,3 @@
-import {Box, Vec3, Sphere, Cylinder, Plane, Body, Particle} from "cannon-es";
 import {BoxBufferGeometry, CylinderBufferGeometry, SphereBufferGeometry, TorusKnotBufferGeometry, TorusBufferGeometry, ConeBufferGeometry, PlaneBufferGeometry, CircleBufferGeometry, RingBufferGeometry, IcosahedronBufferGeometry, TetrahedronBufferGeometry, OctahedronBufferGeometry, DodecahedronBufferGeometry} from "three";
 import {Locale} from "../../../../locale/LocaleManager.js";
 import {Texture} from "../../../../../core/texture/Texture.js";
@@ -10,7 +9,6 @@ import {Script} from "../../../../../core/objects/script/Script.js";
 import {NodeScript} from "../../../../../core/objects/script/NodeScript.js";
 import {LuaScript} from "../../../../../core/objects/script/LuaScript.js";
 import {FennelScript} from "../../../../../core/objects/script/FennelScript.js";
-import {PhysicsObject} from "../../../../../core/objects/physics/PhysicsObject.js";
 import {ParticleEmitter} from "../../../../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../../../../core/objects/misc/Sky.js";
 import {LensFlare} from "../../../../../core/objects/misc/LensFlare.js";
@@ -599,60 +597,6 @@ return target.set(x, y, z);`;
 	}, Locale.lensFlare);
 
 	effects.updateOptions();
-
-	// Physics
-	var physics = new ButtonDrawer(this);
-	physics.setImage(Global.FILE_PATH + "icons/misc/physics.png");
-	this.buttons.push(physics);
-
-	// Physics box
-	physics.addOption(Global.FILE_PATH + "icons/models/cube.png", function()
-	{
-		var object = new PhysicsObject();
-		object.body.addShape(new Box(new Vec3(0.5, 0.5, 0.5)));
-		object.name = "box";
-		Editor.addObject(object, self.editor.scene);
-	}, Locale.box);
-
-	// Physics sphere
-	physics.addOption(Global.FILE_PATH + "icons/models/sphere.png", function()
-	{
-		var object = new PhysicsObject();
-		object.body.addShape(new Sphere(1.0));
-		object.name = "sphere";
-		Editor.addObject(object, self.editor.scene);
-	}, Locale.sphere);
-
-	// Physics Cylinder
-	physics.addOption(Global.FILE_PATH + "icons/models/cylinder.png", function()
-	{
-		var object = new PhysicsObject();
-		object.body.addShape(new Cylinder(1.0, 1.0, 2.0, 8));
-		object.name = "cylinder";
-		Editor.addObject(object, self.editor.scene);
-	}, Locale.cylinder);
-
-	// Physics Plane
-	physics.addOption(Global.FILE_PATH + "icons/models/plane.png", function()
-	{
-		var object = new PhysicsObject();
-		object.rotation.x = -Math.PI / 2;
-		object.body.addShape(new Plane());
-		object.body.type = Body.KINEMATIC;
-		object.name = "ground";
-		Editor.addObject(object, self.editor.scene);
-	}, Locale.ground);
-
-	// Physics Particle
-	physics.addOption(Global.FILE_PATH + "icons/models/point.png", function()
-	{
-		var object = new PhysicsObject();
-		object.body.addShape(new Particle());
-		object.name = "particle";
-		Editor.addObject(object, self.editor.scene);
-	}, Locale.particle);
-
-	physics.updateOptions();
 };
 
 export {SideBar};

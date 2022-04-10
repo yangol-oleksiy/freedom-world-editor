@@ -67,9 +67,6 @@ ObjectIcons.icons = new Map([
 	["Audio", ObjectIcons.path + "misc/audio.png"],
 	["PositionalAudio", ObjectIcons.path + "misc/audio_positional.png"],
 
-	// Physics
-	["Physics", ObjectIcons.path + "misc/physics.png"],
-
 	// Others
 	["Object3D", ObjectIcons.path + "misc/scene.png"],
 	["CubeCamera", ObjectIcons.path + "misc/probe.png"],

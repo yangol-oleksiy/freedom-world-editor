@@ -10,7 +10,6 @@ import {SpineAnimation} from "../../../../core/objects/spine/SpineAnimation.js";
 import {Script} from "../../../../core/objects/script/Script.js";
 import {Scene} from "../../../../core/objects/Scene.js";
 import {Program} from "../../../../core/objects/Program.js";
-import {PhysicsObject} from "../../../../core/objects/physics/PhysicsObject.js";
 import {ParticleEmitter} from "../../../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../../../core/objects/misc/Sky.js";
 import {InstancedMesh} from "../../../../core/objects/mesh/InstancedMesh.js";
@@ -36,7 +35,6 @@ import {SpineInspector} from "./objects/spine/SpineInspector.js";
 import {ScriptInspector} from "./objects/ScriptInspector.js";
 import {SceneInspector} from "./objects/SceneInspector.js";
 import {ProgramInspector} from "./objects/ProgramInspector.js";
-import {PhysicsInspector} from "./objects/physics/PhysicsInspector.js";
 import {ObjectInspector} from "./objects/ObjectInspector.js";
 import {SkyInspector} from "./objects/misc/SkyInspector.js";
 import {ParticleEmitterInspector} from "./objects/misc/ParticleEmitterInspector.js";
@@ -123,7 +121,7 @@ InspectorContainer.prototype.isAttached = function(object)
 InspectorContainer.prototype.updateObjectsView = function()
 {
 	if (this.panel !== null)
-	{	
+	{
 		var object = this.panel.object;
 
 		if (object.isObject3D === true && object.parent === null)
@@ -137,9 +135,9 @@ InspectorContainer.prototype.updateObjectsView = function()
 };
 
 InspectorContainer.prototype.updateSelection = function()
-{	
+{
 	var object = Editor.hasObjectSelected() ? Editor.selection[0] : null;
-	
+
 	if (this.panel !== null && this.panel.object === object)
 	{
 		return;
@@ -248,10 +246,6 @@ InspectorContainer.prototype.updateSelection = function()
 		{
 			this.panel = new ProgramInspector(this, object);
 		}
-		else if (object instanceof PhysicsObject)
-		{
-			this.panel = new PhysicsInspector(this, object);
-		}
 		else if (object instanceof OrbitControls)
 		{
 			this.panel = new OrbitControlsInspector(this, object);
@@ -300,7 +294,7 @@ InspectorContainer.prototype.updateSelection = function()
 	if (this.panel !== null)
 	{
 		this.emptyText.setVisibility(false);
-		
+
 		this.panel.updateInspector();
 		this.panel.size.copy(this.size);
 		this.panel.updateInterface();
@@ -308,7 +302,7 @@ InspectorContainer.prototype.updateSelection = function()
 };
 
 InspectorContainer.prototype.updateValues = function()
-{	
+{
 	if (this.panel !== null)
 	{
 		this.panel.updateInspector();
@@ -316,7 +310,7 @@ InspectorContainer.prototype.updateValues = function()
 };
 
 InspectorContainer.prototype.updateSize = function()
-{	
+{
 	TabComponent.prototype.updateSize.call(this);
 
 	this.emptyText.position.x = this.size.x * 0.1;
