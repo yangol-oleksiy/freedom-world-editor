@@ -10,7 +10,7 @@ var LocaleEN = {
 	{
 		language: "EN",
 		name: "English",
-		version: 8
+		version: 9
 	},
 
 	// Actions
@@ -109,7 +109,6 @@ var LocaleEN = {
 	cubeTexture: "Cube Texture",
 	canvasTexture: "Canvas Texture",
 	videoTexture: "Video Texture",
-	webcamTexture: "Webcam Texture",
 
 	// Properties
 	sizeAttenuation: "Size Attenuation",

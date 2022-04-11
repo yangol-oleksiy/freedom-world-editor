@@ -1014,7 +1014,6 @@ Editor.setProgram = function(program)
 
 		// Tree view
 		Editor.gui.tree.attach(Editor.program);
-		Editor.gui.assetExplorer.attach(Editor.program);
 
 		// History
 		Editor.history = new History(Editor.settings.general.historySize);

@@ -4,7 +4,6 @@ import {ChangeAction} from "../../../../history/action/ChangeAction.js";
 import {Editor} from "../../../../Editor.js";
 import {TableForm} from "../../../../components/TableForm.js";
 import {VectorBox} from "../../../../components/input/VectorBox.js";
-import {TextureChooser} from "../../../../components/input/TextureChooser.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {Slider} from "../../../../components/input/Slider.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
@@ -57,14 +56,6 @@ function SceneInspector(parent, object)
 
 	// Background texture
 	this.form.addText("");
-	this.backgroundTexture = new TextureChooser(this.form);
-	this.backgroundTexture.acceptAll = true;
-	this.backgroundTexture.size.set(0, 100);
-	this.backgroundTexture.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.object, "background", self.backgroundTexture.getValue()));
-	});
-	this.form.add(this.backgroundTexture);
 	this.form.nextRow();
 
 	// Background alpha
@@ -278,15 +269,10 @@ SceneInspector.prototype.updateInspector = function()
 		{
 			this.background.setValue(this.object.background.r, this.object.background.g, this.object.background.b);
 		}
-		else if (this.object.background instanceof Texture)
-		{
-			this.backgroundTexture.setValue(this.object.background);
-		}
 	}
 	else
 	{
 		this.background.setValue(0, 0, 0);
-		this.backgroundTexture.setValue(null);
 	}
 	this.alpha.setValue(this.object.alpha);
 

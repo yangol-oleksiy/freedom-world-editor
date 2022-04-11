@@ -12,7 +12,6 @@ import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {TableForm} from "../../../components/TableForm.js";
 import {RendererCanvas} from "../../../components/RendererCanvas.js";
 import {VectorBox} from "../../../components/input/VectorBox.js";
-import {TextureChooser} from "../../../components/input/TextureChooser.js";
 import {TextBox} from "../../../components/input/TextBox.js";
 import {NumberRow} from "../../../components/input/NumberRow.js";
 import {NumberBox} from "../../../components/input/NumberBox.js";
@@ -81,18 +80,6 @@ function ParticleEditor(parent, closeable, container, index)
 		Editor.updateObjectsViewsGUI();
 	});
 	this.form.add(this.name);
-	this.form.nextRow();
-
-	// Texture map
-	this.form.addText(Locale.texture);
-	this.texture = new TextureChooser(this.form);
-	this.texture.size.set(100, 100);
-	this.texture.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.particle.group, "texture", self.texture.getValue()));
-		self.particle.reload();
-	});
-	this.form.add(this.texture);
 	this.form.nextRow();
 
 	// Max particle count
@@ -313,7 +300,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	this.form.add(this.wiggleRow);
 	this.form.nextRow();
-	
+
 	// Opacity graph
 	this.form.addText(Locale.opacity);
 	this.opacity = new Graph(this.form);
@@ -428,7 +415,7 @@ function ParticleEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.colorValue);
 	this.form.nextRow();
-	
+
 	this.form.addText(Locale.spread);
 	this.colorSpread = new ColorGradientChooser(this.form);
 	this.colorSpread.size.set(190, 18);
@@ -452,7 +439,7 @@ ParticleEditor.prototype.updateMetadata = function()
 	{
 		this.setName(this.particle.name);
 		this.name.setText(this.particle.name);
-		
+
 		// Check if object has a parent
 		if (this.particle.parent === null)
 		{
@@ -484,10 +471,9 @@ ParticleEditor.prototype.attach = function(particle)
 	// Attach particle
 	this.particle = particle;
 	this.updateMetadata();
-	
+
 	// Group attributes
 	this.name.setText(particle.name);
-	this.texture.setValue(particle.group.texture);
 	this.maxParticleCount.setValue(particle.group.maxParticleCount);
 	this.blending.setValue(particle.group.blending);
 	this.direction.setValue(particle.emitter.direction);
@@ -573,7 +559,7 @@ ParticleEditor.prototype.deactivate = function()
 ParticleEditor.prototype.destroy = function()
 {
 	TabComponent.prototype.destroy.call(this);
-	
+
 	this.mouse.dispose();
 	this.canvas.destroy();
 };
@@ -611,7 +597,7 @@ ParticleEditor.prototype.update = function()
 
 		this.updateCamera();
 	}
-	
+
 	this.particle.matrixWorld.getInverse(this.scene.matrixWorld);
 
 	// Render grid and axis

@@ -1,5 +1,4 @@
 import {DefaultLoadingManager, FileLoader} from "three";
-import {WebcamTexture} from "../texture/WebcamTexture.js";
 import {VideoTexture} from "../texture/VideoTexture.js";
 import {Texture} from "../texture/Texture.js";
 import {SpriteSheetTexture} from "../texture/SpriteSheetTexture.js";
@@ -18,7 +17,7 @@ import {CanvasTexture} from "../texture/CanvasTexture.js";
 function TextureLoader(manager)
 {
 	this.manager = manager !== undefined ? manager : DefaultLoadingManager;
-	
+
 	this.path = "";
 	this.crossOrigin = "anonymous";
 
@@ -29,7 +28,7 @@ function TextureLoader(manager)
 
 /**
  * Set cross origin path for the loader.
- * 
+ *
  * @method setCrossOrigin
  * @param {string} url URL.
  * @return {TextureLoader} Self for chaining.
@@ -42,7 +41,7 @@ TextureLoader.prototype.setCrossOrigin = function(url)
 
 /**
  * Set base path for texture loading.
- * 
+ *
  * @method setPath
  * @param {string} path Path
  * @return {TextureLoader} Self for chaining.
@@ -93,7 +92,7 @@ TextureLoader.prototype.setFonts = function(fonts)
  * Load texture from URL.
  *
  * Does the same as creating a new Texture object.
- * 
+ *
  * @method load
  * @param {string} url
  * @param {Function} onLoad
@@ -137,7 +136,7 @@ TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
 TextureLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
 {
 	var self = this;
-	
+
 	var loader = new FileLoader(this.manager);
 	loader.load(url, function(text)
 	{
@@ -175,16 +174,6 @@ TextureLoader.prototype.parse = function(json, onLoad)
 		texture.setAutoPlay(json.autoplay);
 		texture.setPlaybackRate(json.playbackRate);
 		texture.setVolume(json.volume);
-	}
-	// Webcam texture
-	else if (category === "Webcam")
-	{
-		texture = new WebcamTexture();
-
-		if (json.mode !== undefined)
-		{
-			texture.mode = json.mode;
-		}
 	}
 	// Compressed texture
 	else if (category === "Compressed")
@@ -285,7 +274,7 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	}
 
 	texture.needsUpdate = true;
-	
+
 	texture.uuid = json.uuid;
 	texture.name = json.name;
 

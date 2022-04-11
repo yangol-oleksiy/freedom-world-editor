@@ -54,7 +54,6 @@ export {VideoStream} from "./resources/VideoStream.js";
 export {Texture} from "./texture/Texture.js";
 export {CanvasTexture} from "./texture/CanvasTexture.js";
 export {VideoTexture} from "./texture/VideoTexture.js";
-export {WebcamTexture} from "./texture/WebcamTexture.js";
 export {CubeTexture} from "./texture/CubeTexture.js";
 export {DataTexture} from "./texture/DataTexture.js";
 export {CompressedTexture} from "./texture/CompressedTexture.js";

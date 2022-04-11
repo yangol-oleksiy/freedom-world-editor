@@ -9,7 +9,6 @@ import {DocumentBody} from "../components/DocumentBody.js";
 import {TreeView} from "./tab/tree-view/TreeView.js";
 import {InspectorContainer} from "./tab/inspector/InspectorContainer.js";
 import {ConsoleTab} from "./tab/console/ConsoleTab.js";
-import {AssetExplorer} from "./tab/asset/AssetExplorer.js";
 import {MainMenu} from "./MainMenu.js";
 
 /**
@@ -40,8 +39,6 @@ function Interface()
 	var right = main.elementB.split(TabGroup.BOTTOM).parent;
 	var rightTop = right.elementA;
 	var rightBottom = right.elementB;
-
-	this.assetExplorer = leftBottom.addTab(AssetExplorer, false);
 
 	this.console = leftBottom.addTab(ConsoleTab, false);
 

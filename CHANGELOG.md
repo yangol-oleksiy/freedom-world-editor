@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.111
+
+- Removed materials editors from editor
+
 ### V0.110
 
 - Removed messy file exporters from editor
