@@ -1,9 +1,9 @@
 import YAML from 'js-yaml';
 import {FileLoader} from 'three';
-import {SideBar} from '../gui/tab/scene-editor/sidebar/SideBar'
-import {Editor} from '../Editor'
-import {SceneEditor} from "../gui/tab/scene-editor/SceneEditor.js";
 import {FBXLoader} from "three/examples/jsm/loaders/FBXLoader";
+import {SideBar} from '../gui/tab/scene-editor/sidebar/SideBar';
+import {Editor} from '../Editor';
+import {SceneEditor} from "../gui/tab/scene-editor/SceneEditor.js";
 import {ButtonDrawer} from "../components/buttons/ButtonDrawer.js";
 import {Global} from "../Global.js";
 import {Locale} from "../locale/LocaleManager.js";
@@ -15,17 +15,22 @@ import {Locale} from "../locale/LocaleManager.js";
  */
 function ObjectLibraryLoader() {}
 
-function maybeApplyCoordinatesTransformation(obj, objSystem, sceneSystem) {
-	if (objSystem == sceneSystem) {
+function maybeApplyCoordinatesTransformation(obj, objSystem, sceneSystem) 
+{
+	if (objSystem == sceneSystem) 
+	{
 		return obj;
 	}
 
-	if (objSystem == 'xzy') { // XZY -> XYZ
+	if (objSystem == 'xzy') 
+	{ // XZY -> XYZ
 		obj.rotation.x = - Math.PI / 2;
 		obj.rotation.y = 0;
 		obj.rotation.z = 0;
 		return obj;
-	} else {
+	}
+	else 
+	{
 		Editor.alert("Unimplemented, ObjectLibraryLoader");
 	}
 }
@@ -50,16 +55,20 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 	var tool = insertModeToolBar.addGroup();
 	var importId = 'import' + Date.now() + Math.floor(Math.random() * 1000);
 
-	loader.load(libraryPath + 'lib.yaml', function(data) {
+	loader.load(libraryPath + 'lib.yaml', function(data) 
+	{
 		var library = YAML.load(data);
 
-		library.items.forEach(function(origElem){
+		library.items.forEach(function(origElem)
+		{
 			var elem = Object.assign(library.defaultOptions, origElem);
 			var objectPath = libraryPath + elem.model;
 
 
-			fbxLoader.load(objectPath, function(group){
-				if (elem.pluginInsert) {
+			fbxLoader.load(objectPath, function(group)
+			{
+				if (elem.pluginInsert) 
+				{
 					models.addOption(Global.FILE_PATH + "icons/models/figures.png", function()
 					{
 						var obj = maybeApplyCoordinatesTransformation(group.children[0], elem.coordinatesSystem, Editor.getCoordsSystem()).clone(true);
@@ -71,7 +80,8 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 					sidebar.updateInterface();
 				}
 
-				if (elem.pluginInsertMode) {
+				if (elem.pluginInsertMode) 
+				{
 					var iconPath = elem.iconPath
 						? library.iconsBase.replace(/[/]$/, '') + '/' + elem.iconPath.replace(/^[/]/, '')
 						: Global.FILE_PATH + "icons/tools/select.png";

@@ -196,13 +196,15 @@ EditorOrbitControls.prototype.setOrientation = function(code)
 	this.updateControls();
 };
 
-EditorOrbitControls.prototype.getUpDirectionVector = function() {
-  if (!this.coordsSystem) {
-    throw 'No coords system where it should be (case 2)';
-  }
+EditorOrbitControls.prototype.getUpDirectionVector = function() 
+{
+	if (!this.coordsSystem) 
+	{
+		throw 'No coords system where it should be (case 2)';
+	}
 
-  return this.coordsSystem == 'xyz' ? EditorOrbitControls.UP_XYZ : EditorOrbitControls.UP_XZY;
-}
+	return this.coordsSystem == 'xyz' ? EditorOrbitControls.UP_XYZ : EditorOrbitControls.UP_XZY;
+};
 
 EditorOrbitControls.prototype.update = function(mouse, keyboard)
 {
@@ -262,9 +264,12 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 			var y = mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
 			this.center.x += up ? -direction.x * y : direction.x * y;
 
-			if (this.coordsSystem == 'xyz') {
+			if (this.coordsSystem == 'xyz') 
+			{
 				this.center.z += up ? -direction.z * y : direction.z * y;
-			} else {
+			}
+			else 
+			{
 				this.center.z += up ? -direction.z * y : direction.z * y;
 			}
 
@@ -273,9 +278,12 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 			var x = mouse.delta.x * Editor.settings.editor.mouseLookSensitivity * this.distance;
 			this.center.x -= direction.x * x;
 
-			if (this.coordsSystem == 'xyz') {
+			if (this.coordsSystem == 'xyz') 
+			{
 				this.center.z -= direction.z * x;
-			} else {
+			}
+			else 
+			{
 				this.center.y -= direction.y * x;
 			}
 
@@ -409,19 +417,23 @@ EditorOrbitControls.prototype.updateControls = function()
 
 	var cos = this.distance * Math.cos(this.orientation.y);
 
-  if (!this.coordsSystem) {
-    throw 'No coords system where it should be';
-  }
+	if (!this.coordsSystem) 
+	{
+		throw 'No coords system where it should be';
+	}
 
-  if (this.coordsSystem == 'xyz') {
+	if (this.coordsSystem == 'xyz') 
+	{
 	   this.position.set(Math.cos(this.orientation.x) * cos, this.distance * Math.sin(this.orientation.y), Math.sin(this.orientation.x) * cos);
-  } else {
-    this.position.set(-Math.cos(this.orientation.x) * cos, Math.sin(this.orientation.x) * cos, this.distance * Math.sin(this.orientation.y));
-  }
+	}
+	else 
+	{
+		this.position.set(-Math.cos(this.orientation.x) * cos, Math.sin(this.orientation.x) * cos, this.distance * Math.sin(this.orientation.y));
+	}
 
 	this.position.add(this.center);
 
-  this.tempMatrix.lookAt(this.position, this.center, this.getUpDirectionVector());
+	this.tempMatrix.lookAt(this.position, this.center, this.getUpDirectionVector());
 	this.quaternion.setFromRotationMatrix(this.tempMatrix);
 
 	this.updateMatrixWorld(true);
@@ -435,7 +447,7 @@ EditorOrbitControls.prototype.updateControls = function()
 
 EditorOrbitControls.prototype.attach = function(camera)
 {
-  while (this.children.length > 0)
+	while (this.children.length > 0)
 	{
 		this.remove(this.children[0]);
 	}
@@ -443,8 +455,8 @@ EditorOrbitControls.prototype.attach = function(camera)
 
 	this.camera = camera;
 
-  this.reset();
-  this.updateControls();
+	this.reset();
+	this.updateControls();
 };
 
 export {EditorOrbitControls};

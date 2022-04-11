@@ -393,7 +393,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.gridHelperXYZ = new GridHelper(Editor.settings.editor.gridSize, Editor.settings.editor.gridSpacing, 0x888888);
 	this.gridHelperXYZ.visible = Editor.settings.editor.gridEnabled;
 
-  /**
+	/**
 	 * Grid helper configured to match editor settings.
 	 *
 	 * @attribute gridHelperXZY
@@ -401,22 +401,22 @@ function SceneEditor(parent, closeable, container, index)
 	 */
 	this.gridHelperXZY = new GridHelper(Editor.settings.editor.gridSize, Editor.settings.editor.gridSpacing, 0x888888);
 	this.gridHelperXZY.visible = Editor.settings.editor.gridEnabled;
-  this.gridHelperXZY.rotateX(90 * THREE.Math.DEG2RAD);
+	this.gridHelperXZY.rotateX(90 * THREE.Math.DEG2RAD);
 
 	this.helperScene.add(this.gridHelperXZY);
-  this.helperScene.add(this.gridHelperXYZ);
+	this.helperScene.add(this.gridHelperXYZ);
 
 	const geometry = new PlaneGeometry( 1000, 1000 );
 
-	this.helperPlaneXZY = new Mesh(geometry, new MeshBasicMaterial( { visible: true } ))
+	this.helperPlaneXZY = new Mesh(geometry, new MeshBasicMaterial( {visible: true} ));
 	this.helperPlaneXZY.name = 'helperPlane';
 	this.helperPlaneXZY.visible = false;
-	this.helperPlaneXYZ = new Mesh(geometry, new MeshBasicMaterial( { visible: true } ))
+	this.helperPlaneXYZ = new Mesh(geometry, new MeshBasicMaterial( {visible: true} ));
 	this.helperPlaneXYZ.rotation.x = THREE.Math.DEG2RAD * -90;
 	this.helperPlaneXYZ.name = 'helperPlane';
 	this.helperPlaneXYZ.visible = false;
 
-	this.helperCube = new Mesh(new BoxGeometry(1, 1, 1), new MeshPhongMaterial( { visible: true, color:0xff0000, transparent: true, opacity:0.3 } ))	;
+	this.helperCube = new Mesh(new BoxGeometry(1, 1, 1), new MeshPhongMaterial( {visible: true, color: 0xff0000, transparent: true, opacity: 0.3} ))	;
 	this.helperCube.name = 'helperCube';
 
 	/**
@@ -775,9 +775,10 @@ SceneEditor.prototype.updateCameraControls = function(mode, coordsSystem)
 		return;
 	}
 
-  if (!coordsSystem) {
-    throw 'No coords system where it should be (case 3)';
-  }
+	if (!coordsSystem) 
+	{
+		throw 'No coords system where it should be (case 3)';
+	}
 
 	this.controlsMode = mode;
 
@@ -794,8 +795,8 @@ SceneEditor.prototype.updateCameraControls = function(mode, coordsSystem)
 		this.controls = new EditorPlanarControls(mode);
 	}
 
-  this.controls.coordsSystem = coordsSystem;
-  this.controls.attach(this.camera);
+	this.controls.coordsSystem = coordsSystem;
+	this.controls.attach(this.camera);
 };
 
 SceneEditor.prototype.updateSettings = function()
@@ -806,7 +807,7 @@ SceneEditor.prototype.updateSettings = function()
 	this.gridHelperXYZ.setSpacing(Editor.settings.editor.gridSpacing);
 	this.gridHelperXYZ.update();
 
-  // Grid XZY
+	// Grid XZY
 	this.gridHelperXZY.visible = Editor.settings.editor.gridEnabled;
 	this.gridHelperXZY.setSize(Editor.settings.editor.gridSize);
 	this.gridHelperXZY.setSpacing(Editor.settings.editor.gridSpacing);
@@ -853,35 +854,47 @@ SceneEditor.prototype.attach = function(scene)
 		this.scene.defaultCamera = this.camera;
 	}
 
-	if (scene.parent.coordsSystem == Program.CS_XYZ) {
+	if (scene.parent.coordsSystem == Program.CS_XYZ) 
+	{
 		this.camera.rotation.reorder('XYZ');
-	} else {
+	}
+	else 
+	{
 		this.camera.rotation.reorder('XZY');
 	}
 
 	var coordsSystem = scene.parent.coordsSystem == Program.CS_XYZ ? 'xyz' : 'xzy';
 
-	if (Editor.settings.editor.gridEnabled) {
-		if (coordsSystem == 'xyz') {
+	if (Editor.settings.editor.gridEnabled) 
+	{
+		if (coordsSystem == 'xyz') 
+		{
 			this.gridHelperXZY.visible = false;
 			this.gridHelperXYZ.visible = true;
-		} else {
+		}
+		else 
+		{
 			this.gridHelperXZY.visible = true;
 			this.gridHelperXYZ.visible = false;
 		}
-	} else {
+	}
+	else 
+	{
 		this.gridHelperXZY.visible = false;
 		this.gridHelperXYZ.visible = false;
 	}
 
-	if (coordsSystem == 'xyz') {
+	if (coordsSystem == 'xyz') 
+	{
 		this.scene.add(this.helperPlaneXYZ);
-	} else {
+	}
+	else 
+	{
 		this.scene.add(this.helperPlaneXZY);
 	}
 	this.scene.add(this.helperCube);
 
-  this.updateCameraControls(Editor.settings.editor.navigation, coordsSystem);
+	this.updateCameraControls(Editor.settings.editor.navigation, coordsSystem);
 };
 
 /**
@@ -970,9 +983,9 @@ SceneEditor.prototype.update = function()
 			this.gridHelperXYZ.position.x = this.controls.position.x - this.controls.position.x % Editor.settings.editor.gridSpacing;
 			this.gridHelperXYZ.position.z = this.controls.position.z - this.controls.position.z % Editor.settings.editor.gridSpacing;
 
-      // Update grid helper position
-      this.gridHelperXZY.position.x = this.controls.position.x - this.controls.position.x % Editor.settings.editor.gridSpacing;
-      this.gridHelperXZY.position.y = this.controls.position.y - this.controls.position.y % Editor.settings.editor.gridSpacing;
+			// Update grid helper position
+			this.gridHelperXZY.position.x = this.controls.position.x - this.controls.position.x % Editor.settings.editor.gridSpacing;
+			this.gridHelperXZY.position.y = this.controls.position.y - this.controls.position.y % Editor.settings.editor.gridSpacing;
 		}
 	}
 
@@ -1109,74 +1122,96 @@ SceneEditor.prototype.updateRaycasterFromMouse = function()
 	this.raycaster.setFromCamera(this.normalized, this.camera);
 };
 
-function cleanAreaSelectionBoundingBoxes(th) {
-	th.selectedWithAreaObjects.forEach(function(child) {
-		if (child.userData.selectionHelper) {
+function cleanAreaSelectionBoundingBoxes(th) 
+{
+	th.selectedWithAreaObjects.forEach(function(child) 
+	{
+		if (child.userData.selectionHelper) 
+		{
 			th.scene.remove(child);
 		}
 	});
 }
 
-SceneEditor.prototype.clearMultipleSelections = function() {
+SceneEditor.prototype.clearMultipleSelections = function() 
+{
 	var th = this;
 
 	cleanAreaSelectionBoundingBoxes(this);
 
-	this.selectedAreas.forEach(function(area){
+	this.selectedAreas.forEach(function(area)
+	{
 		th.scene.remove(area);
 	});
 	this.selectedAreas = [];
-}
+};
 
-function onAreaSelectionStart(th, elem) {
+function onAreaSelectionStart(th, elem) 
+{
 	th.areaSelectStartPoint = {
 		x: Math.round(elem.point.x),
 		y: Math.round(elem.point.y),
 		z: Math.round(elem.point.z)
 	};
 
-	if (!th.keyboard.keyPressed(Keyboard.CTRL)) {
+	if (!th.keyboard.keyPressed(Keyboard.CTRL)) 
+	{
 		th.clearMultipleSelections();
 	}
 }
 
 
-function onAreaSelectionEnd(th, elem, helperCube) {
+function onAreaSelectionEnd(th, elem, helperCube) 
+{
 	var selectedArea = helperCube.clone();
 	selectedArea.name = 'selectedArea';
 
 	th.scene.add(selectedArea);
 	th.selectedAreas.push(selectedArea);
-	var selectedChildren = th.scene.children.filter(function(child) {
-		if (!child.userData.selectable) {
+	var selectedChildren = th.scene.children.filter(function(child) 
+	{
+		if (!child.userData.selectable) 
+		{
 			return false;
 		}
 
 		var lessX, lessY, biggerX, biggerY;
 
-		if (th.areaSelectStartPoint.x > Math.round(elem.point.x)) {
+		if (th.areaSelectStartPoint.x > Math.round(elem.point.x)) 
+		{
 			lessX = Math.round(elem.point.x);
 			biggerX = th.areaSelectStartPoint.x;
-		} else {
+		}
+		else 
+		{
 			lessX = th.areaSelectStartPoint.x;
-			biggerX = Math.round(elem.point.x)
+			biggerX = Math.round(elem.point.x);
 		}
 
-		if (Editor.getCoordsSystem() == 'xzy') {
-			if (th.areaSelectStartPoint.y > Math.round(elem.point.y)) {
+		if (Editor.getCoordsSystem() == 'xzy') 
+		{
+			if (th.areaSelectStartPoint.y > Math.round(elem.point.y)) 
+			{
 				lessY = Math.round(elem.point.y);
 				biggerY = th.areaSelectStartPoint.y;
-			} else {
+			}
+			else 
+			{
 				lessY = th.areaSelectStartPoint.y;
 				biggerY = Math.round(elem.point.y);
 			}
 
 			return child.position.x >= lessX && child.position.y >= lessY && child.position.x <= biggerX && child.position.y <= biggerY;
-		} else {
-			if (th.areaSelectStartPoint.z > Math.round(elem.point.z)) {
+		}
+		else 
+		{
+			if (th.areaSelectStartPoint.z > Math.round(elem.point.z)) 
+			{
 				lessY = Math.round(elem.point.z);
 				biggerY = th.areaSelectStartPoint.z;
-			} else {
+			}
+			else 
+			{
 				lessY = th.areaSelectStartPoint.z;
 				biggerY = Math.round(elem.point.z);
 			}
@@ -1186,7 +1221,8 @@ function onAreaSelectionEnd(th, elem, helperCube) {
 
 	});
 
-	selectedChildren.forEach(function(child) {
+	selectedChildren.forEach(function(child) 
+	{
 		var boundingBox = new THREE.Box3();
 		boundingBox.setFromObject(child, true);
 		const helper = new THREE.Box3Helper( boundingBox, 0xff0000 );
@@ -1194,18 +1230,22 @@ function onAreaSelectionEnd(th, elem, helperCube) {
 		th.selectedWithAreaObjects.push(helper);
 
 		th.scene.add(helper);
-	})
+	});
 }
 
-function onClickInInsertMode(th, elem) {
-	if (th.insertModeToolBar.lastSelectedObject) {
-		var newObj = th.insertModeToolBar.lastSelectedObject.clone(true)
+function onClickInInsertMode(th, elem) 
+{
+	if (th.insertModeToolBar.lastSelectedObject) 
+	{
+		var newObj = th.insertModeToolBar.lastSelectedObject.clone(true);
 		newObj.position.x = Math.round(elem.point.x);
 		newObj.position.y = Math.round(elem.point.y);
 		newObj.position.z = Math.round(elem.point.z);
 		newObj.userData.selectable = true;
 		th.scene.add(newObj);
-	} else {
+	}
+	else 
+	{
 		Editor.alert(Locale.insertModeNoObjectToInsert);
 	}
 }
@@ -1227,28 +1267,38 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 		var helperCube = this.helperInsertModeObject ? this.helperInsertModeObject : this.helperCube;
 		var th = this;
 
-		if (this.helperInsertModeObject) {
+		if (this.helperInsertModeObject) 
+		{
 			this.helperCube.visible = false;
 		}
 
-		intersects.forEach(function(elem) {
+		intersects.forEach(function(elem) 
+		{
 
-			if (elem.object.name == 'helperPlane') {
-				if (th.mode == SceneEditor.SELECT_MULTIPLE || th.mode == SceneEditor.INSERT) {
-					if (th.mode == SceneEditor.SELECT_MULTIPLE) {
-						if (!th.mouse.buttonPressed(Mouse.LEFT)) {
-							if (th.areaSelectStartPoint) {
+			if (elem.object.name == 'helperPlane') 
+			{
+				if (th.mode == SceneEditor.SELECT_MULTIPLE || th.mode == SceneEditor.INSERT) 
+				{
+					if (th.mode == SceneEditor.SELECT_MULTIPLE) 
+					{
+						if (!th.mouse.buttonPressed(Mouse.LEFT)) 
+						{
+							if (th.areaSelectStartPoint) 
+							{
 								// Mouse up here
 								onAreaSelectionEnd(th, elem, helperCube);
 							}
 
 							th.areaSelectStartPoint = null;
 
-							if (Editor.getCoordsSystem() == 'xzy') {
+							if (Editor.getCoordsSystem() == 'xzy') 
+							{
 								helperCube.position.x = Math.round(elem.point.x);
 								helperCube.position.y = Math.round(elem.point.y);
 								helperCube.position.z = 0;
-							} else {
+							}
+							else 
+							{
 								helperCube.position.x = Math.round(elem.point.x);
 								helperCube.position.y = 0;
 								helperCube.position.z = Math.round(elem.point.z);
@@ -1257,9 +1307,13 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 							helperCube.scale.x = 1;
 							helperCube.scale.y = 1;
 							helperCube.scale.z = 1;
-						} else {
-							if (th.areaSelectStartPoint) {
-								if (Editor.getCoordsSystem() == 'xzy') {
+						}
+						else 
+						{
+							if (th.areaSelectStartPoint) 
+							{
+								if (Editor.getCoordsSystem() == 'xzy') 
+								{
 									helperCube.position.x = (th.areaSelectStartPoint.x + Math.round(elem.point.x)) / 2;
 									helperCube.position.y = (th.areaSelectStartPoint.y + Math.round(elem.point.y)) / 2;
 									helperCube.position.z = 0;
@@ -1267,14 +1321,18 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 									helperCube.scale.x = Math.abs(Math.round(elem.point.x) - th.areaSelectStartPoint.x) + 1;
 									helperCube.scale.y = Math.abs(Math.round(elem.point.y) - th.areaSelectStartPoint.y) + 1;
 
-									if (helperCube.scale.x == 0) {
+									if (helperCube.scale.x == 0) 
+									{
 										helperCube.scale.x = 1;
 									}
 
-									if (helperCube.scale.y == 0) {
+									if (helperCube.scale.y == 0) 
+									{
 										helperCube.scale.y = 1;
 									}
-								} else {
+								}
+								else 
+								{
 									helperCube.position.x = (th.areaSelectStartPoint.x + Math.round(elem.point.x)) / 2;
 									helperCube.position.y = 0;
 									helperCube.position.z = (th.areaSelectStartPoint.z + Math.round(elem.point.z)) / 2;
@@ -1282,30 +1340,40 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 									helperCube.scale.x = Math.abs(Math.round(elem.point.x) - th.areaSelectStartPoint.x) + 1;
 									helperCube.scale.z = Math.abs(Math.round(elem.point.z) - th.areaSelectStartPoint.z) + 1;
 
-									if (helperCube.scale.x == 0) {
+									if (helperCube.scale.x == 0) 
+									{
 										helperCube.scale.x = 1;
 									}
 
-									if (helperCube.scale.z == 0) {
+									if (helperCube.scale.z == 0) 
+									{
 										helperCube.scale.z = 1;
 									}
 								}
-							} else {
+							}
+							else 
+							{
 								// Mouse down here
 								onAreaSelectionStart(th, elem);
 							}
 						}
-					} else {
+					}
+					else 
+					{
 						// Button click in insert mode
-						if (th.mouse.buttonJustPressed(Mouse.LEFT) && th.mode == SceneEditor.INSERT) {
+						if (th.mouse.buttonJustPressed(Mouse.LEFT) && th.mode == SceneEditor.INSERT) 
+						{
 							onClickInInsertMode(th, elem);
 						}
 
-						if (Editor.getCoordsSystem() == 'xzy') {
+						if (Editor.getCoordsSystem() == 'xzy') 
+						{
 							helperCube.position.x = Math.round(elem.point.x);
 							helperCube.position.y = Math.round(elem.point.y);
 							helperCube.position.z = 0;
-						} else {
+						}
+						else 
+						{
 							helperCube.position.x = Math.round(elem.point.x);
 							helperCube.position.y = 0;
 							helperCube.position.z = Math.round(elem.point.z);
@@ -1313,17 +1381,24 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 					}
 
 					helperCube.visible = true;
-				} else {
+				}
+				else 
+				{
 					helperCube.visible = false;
 				}
-			} else if (elem.object.name == 'helperCube') {
+			}
+			else if (elem.object.name == 'helperCube') 
+			{
 				// Just pass
-			} else if (!selectedObj) {
+			}
+			else if (!selectedObj) 
+			{
 				selectedObj = elem;
 			}
 		});
 
-		if (this.mode == SceneEditor.SELECT && selectedObj) {
+		if (this.mode == SceneEditor.SELECT && selectedObj) 
+		{
 			if (this.keyboard.keyPressed(Keyboard.CTRL))
 			{
 				if (Editor.isSelected(selectedObj.object))
@@ -1435,14 +1510,17 @@ SceneEditor.prototype.selectTool = function(tool)
 	{
 		this.transform.setMode(TransformControls.NONE);
 
-		if (this.mode !== SceneEditor.SELECT) {
-			while (Editor.selection.length > 0) {
+		if (this.mode !== SceneEditor.SELECT) 
+		{
+			while (Editor.selection.length > 0) 
+			{
 				Editor.unselectObject(Editor.selection[0]);
 			}
 		}
 	}
 
-	if (this.mode != SceneEditor.SELECT_MULTIPLE) {
+	if (this.mode != SceneEditor.SELECT_MULTIPLE) 
+	{
 		this.clearMultipleSelections();
 	}
 
@@ -1452,10 +1530,13 @@ SceneEditor.prototype.selectTool = function(tool)
 
 	this.toolBar.selectTool(tool);
 
-	if (this.mode == SceneEditor.INSERT) {
-		if (this.insertModeToolBar.lastSelectedObject) {
+	if (this.mode == SceneEditor.INSERT) 
+	{
+		if (this.insertModeToolBar.lastSelectedObject) 
+		{
 			this.helperInsertModeObject = this.insertModeToolBar.lastSelectedObject.clone(true);
-			this.helperInsertModeObject.material = this.helperInsertModeObject.material.map(function(material) {
+			this.helperInsertModeObject.material = this.helperInsertModeObject.material.map(function(material) 
+			{
 				var newMaterial = material.clone();
 				newMaterial.wireframe = true;
 				return newMaterial;
@@ -1466,8 +1547,11 @@ SceneEditor.prototype.selectTool = function(tool)
 
 		this.insertModeToolBar.setVisibility(true);
 		this.insertModeToolBar.updateInterface();
-	} else {
-		if (this.helperInsertModeObject) {
+	}
+	else 
+	{
+		if (this.helperInsertModeObject) 
+		{
 			this.scene.remove(this.helperInsertModeObject);
 			this.helperInsertModeObject = null;
 		}

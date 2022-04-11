@@ -477,7 +477,8 @@ return target.set(x, y, z);`;
 	cameras.addOption(Global.FILE_PATH + "icons/camera/orthographic.png", function()
 	{
 		var camera = new OrthographicCamera(3, 2, OrthographicCamera.RESIZE_HORIZONTAL);
-		if (Editor.getCoordsSystem() == 'xzy') {
+		if (Editor.getCoordsSystem() == 'xzy') 
+		{
 			camera.rotation.x = Math.PI / 2;
 			camera.rotation.y = Math.PI;
 		}
@@ -491,11 +492,12 @@ return target.set(x, y, z);`;
 	scripts.setImage(Global.FILE_PATH + "icons/script/script.png");
 	this.buttons.push(scripts);
 
-	if (DEVELOPMENT) {
+	if (DEVELOPMENT) 
+	{
 		// Fennel script
 		scripts.addOption(Global.FILE_PATH + "icons/script/fennel.png", function()
 		{
-				Editor.addObject(new FennelScript(), self.editor.scene);
+			Editor.addObject(new FennelScript(), self.editor.scene);
 		}, Locale.fennel);
 
 		// Lua script

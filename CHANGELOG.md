@@ -7,6 +7,7 @@
 - Removed textures related code from editor (cube textures, compressed textures)
 - Removed particles related code from editor
 - Removed positional audio related code from editor
+- Cleaned up code (linting)
 
 ### V0.110
 

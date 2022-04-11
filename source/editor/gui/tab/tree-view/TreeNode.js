@@ -209,9 +209,13 @@ function TreeNode(container)
 				if (self.object instanceof Script)
 				{
 					context.addOption(Locale.scriptEditor, openScriptTab);
-				} else if (self.object instanceof LuaScript) {
+				}
+				else if (self.object instanceof LuaScript) 
+				{
 					context.addOption(Locale.scriptEditor, openLuaScriptTab);
-				} else if (self.object instanceof FennelScript) {
+				}
+				else if (self.object instanceof FennelScript) 
+				{
 					context.addOption(Locale.scriptEditor, openFennelScriptTab);
 				}
 			}
@@ -623,9 +627,10 @@ function TreeNode(container)
 			else if (self.object instanceof LuaScript)
 			{
 				openTab(LuaScriptEditor, self.object);
-			} else if (self.object instanceof FennelScript)
+			}
+			else if (self.object instanceof FennelScript)
 			{
-					openTab(FennelScriptEditor, self.object);
+				openTab(FennelScriptEditor, self.object);
 			}
 			else if (self.object instanceof Scene)
 			{

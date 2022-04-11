@@ -81,9 +81,7 @@ LuaToolbar.prototype.updateSize = function()
 	Component.prototype.updateSize.call(this);
 
 	this.buttons[0].attachTo(this);
-	//this.buttons[i].size.set(size, size);
 	this.buttons[0].position.set(0, 0);
-	//this.buttons[i].optionsSize.set(size, size);
 	this.buttons[0].visible = true;
 	this.buttons[0].updateInterface();
 

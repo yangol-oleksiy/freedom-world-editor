@@ -247,13 +247,13 @@ function Program()
 	 */
 	this.xrMode = Program.XR_NONE;
 
-  /**
-   * Indicates the XR mode currently active.
-   *
-   * @property xrMode
-   * @type {number}
-   */
-  this.coordsSystem = Program.CS_XZY;
+	/**
+	 * Coordinates system active currently, can be CS_ZXY or CS_XYZ
+	 *
+	 * @property coordsSystem
+	 * @type {number}
+	 */
+	this.coordsSystem = Program.CS_XZY;
 }
 
 /**

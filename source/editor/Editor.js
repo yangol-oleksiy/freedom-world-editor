@@ -14,6 +14,7 @@ import {FWE} from "../core/FWE.js";
 import {ObjectLoader} from "../core/loaders/ObjectLoader.js";
 import {Keyboard} from "../core/input/Keyboard.js";
 import {FileSystem} from "../core/FileSystem.js";
+import {AmbientLight} from "../core/objects/lights/AmbientLight";
 import {Locale} from "./locale/LocaleManager.js";
 import {VirtualClipboard} from "./utils/VirtualClipboard.js";
 import {Settings} from "./Settings.js";
@@ -33,7 +34,6 @@ import {Interface} from "./gui/Interface.js";
 import {Global} from "./Global.js";
 import {LoadingModal} from "./components/modal/LoadingModal.js";
 import {DocumentBody} from "./components/DocumentBody.js";
-import {AmbientLight} from "../core/objects/lights/AmbientLight";
 
 /**
  * Main editor entry point.
@@ -851,7 +851,7 @@ Editor.createNewProgram = function()
 Editor.createNewXYZProgram = function()
 {
 	var program = new Program();
-  program.coordsSystem = Program.CS_XYZ;
+	program.coordsSystem = Program.CS_XYZ;
 
 	Editor.createDefaultResources();
 	Editor.setProgram(program);
@@ -867,7 +867,7 @@ Editor.createNewXYZProgram = function()
 Editor.createNewXZYProgram = function()
 {
 	var program = new Program();
-  program.coordsSystem = Program.CS_XZY;
+	program.coordsSystem = Program.CS_XZY;
 
 	Editor.createDefaultResources();
 	Editor.setProgram(program);
@@ -883,14 +883,14 @@ Editor.createNewXZYProgram = function()
  */
 Editor.maybeCreateStandardMaterial = function(material)
 {
-  if (material === undefined)
+	if (material === undefined)
 	{
 		material = new MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
 		material.name = "default";
 	}
 
-  return material;
-}
+	return material;
+};
 
 /**
  * Create a scene using a default template.
@@ -902,8 +902,8 @@ Editor.maybeCreateStandardMaterial = function(material)
  */
 Editor.addDefaultScene = function(material)
 {
-  Editor.addXZYScene(material);
-}
+	Editor.addXZYScene(material);
+};
 
 /**
  * Create a scene using a XYZ coordinate system template.
@@ -913,9 +913,9 @@ Editor.addDefaultScene = function(material)
  */
 Editor.addXYZScene = function(material)
 {
-  THREE.Object3D.DefaultUp.set(0, 1, 0);
+	THREE.Object3D.DefaultUp.set(0, 1, 0);
 
-  material = this.maybeCreateStandardMaterial(material);
+	material = this.maybeCreateStandardMaterial(material);
 
 	// Create new scene
 	var scene = new Scene();
@@ -957,18 +957,18 @@ Editor.addXYZScene = function(material)
  */
 Editor.addXZYScene = function(material)
 {
-  THREE.Object3D.DefaultUp.set(0, 0, 1);
+	THREE.Object3D.DefaultUp.set(0, 0, 1);
 
-  material = this.maybeCreateStandardMaterial(material);
+	material = this.maybeCreateStandardMaterial(material);
 
 	// Create new scene
 	var scene = new Scene();
 
 	// Sky
-  var sky = new Sky(undefined, undefined, undefined, undefined, 'xzy');
+	var sky = new Sky(undefined, undefined, undefined, undefined, 'xzy');
 	sky.autoUpdate = false;
 
-  sky.rotation.x = 90 / 180 * 3.14;//XXX
+	sky.rotation.x = 90 / 180 * 3.14;// XXX
 
 	scene.add(sky);
 
@@ -1204,6 +1204,6 @@ Editor.isSceneRotationAllowed = function()
 {
 	var tab = Editor.gui.tab.getTab(SceneEditor);
 	return tab.mode != SceneEditor.SELECT_MULTIPLE && tab.mode != SceneEditor.INSERT;
-}
+};
 
 export {Editor};

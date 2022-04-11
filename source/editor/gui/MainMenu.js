@@ -11,9 +11,9 @@ import {Editor} from "../Editor.js";
 import {DropdownMenu} from "../components/dropdown/DropdownMenu.js";
 import {Component} from "../components/Component.js";
 import {ButtonText} from "../components/buttons/ButtonText.js";
+import {ObjectLibraryLoader} from "../utils/ObjectLibraryLoader";
 import {AboutTab} from "./tab/about/AboutTab.js";
 import {SettingsTab} from "./tab/settings/SettingsTab.js";
-import {ObjectLibraryLoader} from "../utils/ObjectLibraryLoader";
 
 /**
  * Main menu of the application is displayed on top of the window, contains all global operations that can be applied to the project.
@@ -62,7 +62,7 @@ function MainMenu(parent)
 		Editor.gui.newXYZProgram();
 	}, Global.FILE_PATH + "icons/misc/new.png");
 
-  // New XZY project
+	// New XZY project
 	fileMenu.addOption(Locale.newXZY, function()
 	{
 		Editor.gui.newXZYProgram();
@@ -97,7 +97,8 @@ function MainMenu(parent)
 		tab.select();
 	}, Global.FILE_PATH + "icons/misc/settings.png");
 
-	if (DEVELOPMENT) {
+	if (DEVELOPMENT) 
+	{
 		// Load test library
 		fileMenu.addOption("Load test library", function()
 		{
