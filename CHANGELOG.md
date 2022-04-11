@@ -1,5 +1,10 @@
 # Changelog
 
+### V0.110
+
+- Removed messy file exporters from editor
+- Removed materials menu from editor bottom block
+
 ### V0.109
 
 - Removed cannon-es library support completely from editor
@@ -7,7 +12,6 @@
 - Removed cordova related code from editor
 - Removed jszip related code from editor
 - Removed game project load/save related code from editor
-- Removed messy file exporters from editor
 
 ### V0.108
 

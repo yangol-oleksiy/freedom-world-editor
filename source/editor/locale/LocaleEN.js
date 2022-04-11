@@ -10,7 +10,7 @@ var LocaleEN = {
 	{
 		language: "EN",
 		name: "English",
-		version: 7
+		version: 8
 	},
 
 	// Actions
@@ -110,25 +110,6 @@ var LocaleEN = {
 	canvasTexture: "Canvas Texture",
 	videoTexture: "Video Texture",
 	webcamTexture: "Webcam Texture",
-
-	// Materials
-	standardMaterial: "Standard Material",
-	physicalMaterial: "Physical Material",
-	phongMaterial: "Phong Material",
-	basicMaterial: "Basic Material",
-	toonMaterial: "Toon Material",
-	lambertMaterial: "Lambert Material",
-	matcapMaterial: "Matcap Material",
-	spriteMaterial: "Sprite Material",
-	pointsMaterial: "Points Material",
-	lineMaterial: "Line Material",
-	lineDashedMaterial: "Line Dashed Material",
-	shaderMaterial: "Shader Material",
-	rawShaderMaterial: "Raw Shader Material",
-	normalMaterial: "Normal Material",
-	depthMaterial: "Depth Material",
-	distanceMaterial: "Distance Material",
-	shadowMaterial: "Shadow Material",
 
 	// Properties
 	sizeAttenuation: "Size Attenuation",
@@ -518,7 +499,6 @@ var LocaleEN = {
 	image: "Image",
 	video: "Video",
 	file: "File",
-	material: "Material",
 	geometry: "Geometry",
 	font: "Font",
 	models3D: "3D Models",
