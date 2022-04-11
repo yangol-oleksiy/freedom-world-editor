@@ -20,22 +20,6 @@
 		"!doc": "Abstract base class for cameras. This class should always be inherited when you build a new camera.",
 		"!type": "fn()"
 	},
-	"CubeCamera": {
-		"!url": "http:// threejs.org/docs/#api/cameras/CubeCamera",
-		"prototype": {
-			"!proto": "Object3D.prototype",
-			"renderTarget": {
-				"!type": "+WebGLRenderTargetCube",
-				"!doc": "The cube texture that gets generated."
-			},
-			"updateCubeMap": {
-				"!type": "fn(renderer: todo, scene: todo) -> todo",
-				"!doc": "Call this to update the renderTarget."
-			}
-		},
-		"!doc": "Creates 6 cameras that render to a [page:WebGLRenderTargetCube].",
-		"!type": "fn(near: number, far: number, cubeResolution: number)"
-	},
 	"OrthographicCamera": {
 		"!url": "http:// threejs.org/docs/#api/cameras/OrthographicCamera",
 		"prototype": {
@@ -905,24 +889,12 @@
 				"!type": "fn(width: number, height: number, color: number) -> +DataTexture",
 				"!doc": "Generates a texture of a single color. It is a DataTexture with format, RGBFormat."
 			},
-			"parseDDS": {
-				"!type": "fn(buffer: string, loadMipmaps: boolean) -> +CompressedTexture",
-				"!doc": "Parses a DDS Image from the string into a CompressedTexture."
-			},
-			"loadCompressedTexture": {
-				"!type": "fn(url: todo, mapping: todo, onLoad: todo, onError: todo) -> todo",
-				"!doc": "todo"
-			},
 			"loadTexture": {
 				"!type": "fn(url: string, mapping: UVMapping, onLoad: function, onError: function) -> todo",
 				"!doc": "todo"
 			},
 			"getNormalMap": {
 				"!type": "fn(image: todo, depth: todo) -> todo",
-				"!doc": "todo"
-			},
-			"loadCompressedTextureCube": {
-				"!type": "fn(array: todo, mapping: todo, onLoad: todo, onError: todo) -> todo",
 				"!doc": "todo"
 			},
 			"loadTextureCube": {
@@ -4955,18 +4927,6 @@
 		"!doc": "A render target is a buffer where the video card draws pixels for a scene that is being rendered in the background. It is used in different effects.",
 		"!type": "fn(width: number, height: number, options: object)"
 	},
-	"WebGLRenderTargetCube": {
-		"!url": "http:// threejs.org/docs/#api/renderers/WebGLRenderTargetCube",
-		"prototype": {
-			"!proto": "WebGLRenderTarget.prototype",
-			"activeCubeFace": {
-				"!type": "integer",
-				"!doc": "The activeCubeFace property corresponds to a cube side (PX 0, NX 1, PY 2, NY 3, PZ 4, NZ 5) and is\n\t\tused and set internally by the [page:CubeCamera]."
-			}
-		},
-		"!doc": "[page:CubeCamera] uses this as its [page:WebGLRenderTarget]",
-		"!type": "fn(width: number, height: number, options: object)"
-	},
 	"WebGLRenderer": {
 		"!url": "http:// threejs.org/docs/#api/renderers/WebGLRenderer",
 		"prototype": {
@@ -5129,10 +5089,6 @@
 			"setRenderTarget": {
 				"!type": "fn(renderTarget: +WebGLRenderTarget)",
 				"!doc": "This method sets the active rendertarget."
-			},
-			"supportsCompressedTextureS3TC": {
-				"!type": "fn() -> boolean",
-				"!doc": "This method returns true if the webgl implementation supports compressed textures of the format S3TC."
 			},
 			"getMaxAnisotropy": {
 				"!type": "fn() -> number",
@@ -5304,22 +5260,6 @@
 		},
 		"!doc": "Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.",
 		"!type": "fn()"
-	},
-	"CompressedTexture": {
-		"!url": "http:// threejs.org/docs/#api/textures/CompressedTexture",
-		"prototype": {
-			"!proto": "Texture.prototype",
-			"flipY": {
-				"!type": "boolean",
-				"!doc": "False by default. Flipping textures does not work for compressed textures."
-			},
-			"generateMipmaps": {
-				"!type": "boolean",
-				"!doc": "False by default. Mipmaps can't be generated for compressed textures"
-			}
-		},
-		"!doc": "Creates a texture based on data in compressed form.",
-		"!type": "fn(mipmaps: [], width: number, height: number, format: number, type: number, mapping: number, wrapS: number, wrapT: number, magFilter: number, minFilter: number, anisotropy: number)"
 	},
 	"DataTexture": {
 		"!url": "http:// threejs.org/docs/#api/textures/DataTexture",

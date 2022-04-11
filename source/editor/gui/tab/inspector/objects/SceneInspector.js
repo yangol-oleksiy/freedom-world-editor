@@ -7,7 +7,6 @@ import {VectorBox} from "../../../../components/input/VectorBox.js";
 import {NumberBox} from "../../../../components/input/NumberBox.js";
 import {Slider} from "../../../../components/input/Slider.js";
 import {DropdownList} from "../../../../components/input/DropdownList.js";
-import {CubeTextureBox} from "../../../../components/input/CubeTextureBox.js";
 import {ColorChooser} from "../../../../components/input/ColorChooser.js";
 import {CheckBox} from "../../../../components/input/CheckBox.js";
 import {ButtonText} from "../../../../components/buttons/ButtonText.js";
@@ -79,17 +78,6 @@ function SceneInspector(parent, object)
 		Editor.addAction(new ChangeAction(self.object, "background", null));
 	});
 	this.form.add(this.backgroundTransparent);
-	this.form.nextRow();
-
-	// Environment map
-	this.form.addText(Locale.environmentMap);
-	this.environment = new CubeTextureBox(this.form);
-	this.environment.size.set(0, 100);
-	this.environment.setOnChange(function()
-	{
-		Editor.addAction(new ChangeAction(self.object, "environment", self.environment.getValue()));
-	});
-	this.form.add(this.environment);
 	this.form.nextRow();
 
 	// Fog

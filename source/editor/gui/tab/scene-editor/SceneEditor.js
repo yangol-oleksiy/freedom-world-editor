@@ -7,8 +7,6 @@ import {AudioEmitter} from "../../../../core/objects/audio/AudioEmitter.js";
 import {ButtonIcon} from "../../../components/buttons/ButtonIcon.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
 import {Component} from "../../../components/Component.js";
-import {CubeCamera} from "../../../../core/objects/cameras/CubeCamera.js";
-import {CubeTexture} from "../../../../core/texture/CubeTexture.js";
 import {DragBuffer} from "../../DragBuffer.js";
 import {DropdownList} from "../../../components/input/DropdownList.js";
 import {Editor} from "../../../Editor.js";
@@ -268,15 +266,6 @@ function SceneEditor(parent, closeable, container, index)
 								copyDetails(newObject, object);
 								Editor.addAction(new SwapAction(object, newObject, true));
 							}
-						}
-					}
-					// Cubemap
-					else if (draggedObject.isCubeTexture === true)
-					{
-						if (object.material instanceof Material)
-						{
-							Editor.addAction(new ChangeAction(object.material, "envMap", draggedObject));
-							self.canvas.reloadContext();
 						}
 					}
 					// Texture
@@ -1090,37 +1079,6 @@ SceneEditor.prototype.render = function()
 			camera.resize(width, height, viewport);
 			camera.setupRenderer(renderer);
 			camera.render(renderer, this.scene);
-		}
-		// Preview cube camera
-		else if (Editor.selection[0] instanceof CubeCamera)
-		{
-			var cameras = Editor.selection[0].cameras;
-			var self = this;
-
-			function renderCamera(index, x, y, w, h)
-			{
-				renderer.setViewport(x, y, w, h);
-				renderer.setScissor(x, y, w, h);
-				renderer.clear(true, true, true);
-
-				cameras[index].updateMatrixWorld();
-				cameras[index].render(renderer, self.scene);
-			}
-
-			// Change viewport to 4:3 ratio
-			viewport.size = new Vector2(Editor.settings.editor.cameraPreviewSize * (4.0 / 3.0), Editor.settings.editor.cameraPreviewSize);;
-			viewport.update();
-
-			var size = viewport.viewport.w / 3;
-			var x = viewport.viewport.x;
-			var y = viewport.viewport.y;
-
-			renderCamera(CubeTexture.LEFT, x, y + size, size, size);
-			renderCamera(CubeTexture.FRONT, x + size, y + size, size, size);
-			renderCamera(CubeTexture.RIGHT, x + size * 2, y + size, size, size);
-			renderCamera(CubeTexture.BACK, x + size * 3, y + size, size, size);
-			renderCamera(CubeTexture.TOP, x + size, y, size, size);
-			renderCamera(CubeTexture.BOTTOM, x + size, y + size * 2, size, size);
 		}
 		// Preview all cameras in use
 		else if (this.scene.cameras !== undefined && this.scene.cameras.length > 0)

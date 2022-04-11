@@ -4,6 +4,7 @@
 
 - Removed materials editors from editor
 - Removed sprite menu item from sidebar
+- Removed textures related code from editor (cube textures, compressed textures)
 
 ### V0.110
 

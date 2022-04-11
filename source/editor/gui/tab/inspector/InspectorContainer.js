@@ -16,7 +16,6 @@ import {OrbitControls} from "../../../../core/objects/controls/OrbitControls.js"
 import {FirstPersonControls} from "../../../../core/objects/controls/FirstPersonControls.js";
 import {PerspectiveCamera} from "../../../../core/objects/cameras/PerspectiveCamera.js";
 import {OrthographicCamera} from "../../../../core/objects/cameras/OrthographicCamera.js";
-import {CubeCamera} from "../../../../core/objects/cameras/CubeCamera.js";
 import {Global} from "../../../Global.js";
 import {Editor} from "../../../Editor.js";
 import {Text} from "../../../components/Text.js";
@@ -36,7 +35,6 @@ import {ProgramInspector} from "./objects/ProgramInspector.js";
 import {ObjectInspector} from "./objects/ObjectInspector.js";
 import {SkyInspector} from "./objects/misc/SkyInspector.js";
 import {ParticleEmitterInspector} from "./objects/misc/ParticleEmitterInspector.js";
-import {CubeCameraInspector} from "./objects/misc/CubeCameraInspector.js";
 import {MeshInspector} from "./objects/mesh/MeshInspector.js";
 import {InstancedMeshInspector} from "./objects/mesh/InstancedMeshInspector.js";
 import {LockedInspector} from "./objects/LockedInspector.js";
@@ -219,10 +217,6 @@ InspectorContainer.prototype.updateSelection = function()
 		else if (object instanceof OrthographicCamera)
 		{
 			this.panel = new OrthographicCameraInspector(this, object);
-		}
-		else if (object instanceof CubeCamera)
-		{
-			this.panel = new CubeCameraInspector(this, object);
 		}
 		else if (object instanceof Audio)
 		{

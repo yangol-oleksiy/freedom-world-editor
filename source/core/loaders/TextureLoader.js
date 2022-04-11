@@ -1,10 +1,7 @@
 import {DefaultLoadingManager, FileLoader} from "three";
 import {VideoTexture} from "../texture/VideoTexture.js";
 import {Texture} from "../texture/Texture.js";
-import {SpriteSheetTexture} from "../texture/SpriteSheetTexture.js";
 import {DataTexture} from "../texture/DataTexture.js";
-import {CubeTexture} from "../texture/CubeTexture.js";
-import {CompressedTexture} from "../texture/CompressedTexture.js";
 import {CanvasTexture} from "../texture/CanvasTexture.js";
 
 /**
@@ -175,41 +172,7 @@ TextureLoader.prototype.parse = function(json, onLoad)
 		texture.setPlaybackRate(json.playbackRate);
 		texture.setVolume(json.volume);
 	}
-	// Compressed texture
-	else if (category === "Compressed")
-	{
-		if (json.isCubeTexture)
-		{
-			texture = new CompressedTexture();
-			texture.image = [];
-			texture.isCubeTexture = true;
 
-			for (var j = 0; j < json.image.length; j++)
-			{
-				for (var i = 0; i < json.image[j].mipmaps.length; i++)
-				{
-					if (json.image[j].mipmaps[i].data.toArrayBuffer !== undefined)
-					{
-						json.image[j].mipmaps[i].data = new Uint8Array(json.image[j].mipmaps[i].data.toArrayBuffer());
-					}
-				}
-
-				texture.image.push(json.image[j]);
-			}
-		}
-		else
-		{
-			for (var i = 0; i < json.mipmaps.length; i++)
-			{
-				if (json.mipmaps[i].data.toArrayBuffer !== undefined)
-				{
-					json.mipmaps[i].data = new Uint8Array(json.mipmaps[i].data.toArrayBuffer());
-				}
-			}
-
-			texture = new CompressedTexture(json.mipmaps, json.width, json.height);
-		}
-	}
 	// Cube texture
 	else if (category === "Cube")
 	{
@@ -225,10 +188,6 @@ TextureLoader.prototype.parse = function(json, onLoad)
 			images.push(this.images[json.images[i]]);
 		}
 
-		texture = new CubeTexture();
-		texture.setImages(images, json.mode);
-		texture.setSize(json.size);
-		texture.updateImages();
 	}
 	// Canvas texture
 	else if (category === "Canvas")
@@ -254,23 +213,7 @@ TextureLoader.prototype.parse = function(json, onLoad)
 			console.warn("Freedom World Editor: TextureLoader, undefined image", json.image);
 		}
 
-		// SpriteSheet texture
-		if (category === "SpriteSheet")
-		{
-			// TODO <REMOVE THIS>
-			console.log(this.images[json.image], json.framesHorizontal, json.framesVertical, json.totalFrames);
-
-			texture = new SpriteSheetTexture(this.images[json.image], json.framesHorizontal, json.framesVertical, json.totalFrames);
-			texture.loop = json.loop;
-			texture.animationSpeed = json.animationSpeed;
-			texture.beginFrame = json.beginFrame;
-			texture.endFrame = json.endFrame;
-		}
-		// Texture
-		else
-		{
-			texture = new Texture(this.images[json.image]);
-		}
+		texture = new Texture(this.images[json.image]);
 	}
 
 	texture.needsUpdate = true;

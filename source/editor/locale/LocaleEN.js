@@ -10,7 +10,7 @@ var LocaleEN = {
 	{
 		language: "EN",
 		name: "English",
-		version: 10
+		version: 11
 	},
 
 	// Actions
@@ -65,7 +65,6 @@ var LocaleEN = {
 	rectAreaLight: "Rectarea Light",
 	lighProbe: "Light Probe",
 	particleEmitter: "Particle Emitter",
-	cubeCamera: "Cube camera",
 	positionalAudio: "Positional Audio",
 	audio: "Audio",
 	container: "Container",
@@ -276,7 +275,6 @@ var LocaleEN = {
 	displacementMap: "Displacement Map",
 	emissiveMap: "Emissive Map",
 	alphaMap: "Alpha Map",
-	environmentMap: "Environment Map",
 	ambientOcclusion: "Ambient Occlusion",
 	sky: "Sky",
 	castShadows: "Cast Shadows",

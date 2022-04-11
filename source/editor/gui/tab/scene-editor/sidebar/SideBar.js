@@ -25,7 +25,6 @@ import {AmbientLight} from "../../../../../core/objects/lights/AmbientLight.js";
 import {OrbitControls} from "../../../../../core/objects/controls/OrbitControls.js";
 import {PerspectiveCamera} from "../../../../../core/objects/cameras/PerspectiveCamera.js";
 import {OrthographicCamera} from "../../../../../core/objects/cameras/OrthographicCamera.js";
-import {CubeCamera} from "../../../../../core/objects/cameras/CubeCamera.js";
 import {PositionalAudio} from "../../../../../core/objects/audio/PositionalAudio.js";
 import {AudioEmitter} from "../../../../../core/objects/audio/AudioEmitter.js";
 import {TerrainBufferGeometry} from "../../../../../core/geometries/TerrainBufferGeometry.js";
@@ -554,12 +553,6 @@ return target.set(x, y, z);`;
 	{
 		Editor.addObject(new BillboardGroup(), self.editor.scene);
 	}, Locale.billboardGroup);
-
-	// Cube Camera
-	effects.addOption(Global.FILE_PATH + "icons/misc/probe.png", function()
-	{
-		Editor.addObject(new CubeCamera(), self.editor.scene);
-	}, Locale.cubeCamera);
 
 	// Audio
 	effects.addOption(Global.FILE_PATH + "icons/misc/audio.png", function()

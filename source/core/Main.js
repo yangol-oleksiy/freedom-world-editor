@@ -54,10 +54,7 @@ export {VideoStream} from "./resources/VideoStream.js";
 export {Texture} from "./texture/Texture.js";
 export {CanvasTexture} from "./texture/CanvasTexture.js";
 export {VideoTexture} from "./texture/VideoTexture.js";
-export {CubeTexture} from "./texture/CubeTexture.js";
 export {DataTexture} from "./texture/DataTexture.js";
-export {CompressedTexture} from "./texture/CompressedTexture.js";
-export {SpriteSheetTexture} from "./texture/SpriteSheetTexture.js";
 
 export {FontLoader} from "./loaders/FontLoader.js";
 export {ImageLoader} from "./loaders/ImageLoader.js";
@@ -95,7 +92,6 @@ export {LightProbe} from "./objects/lights/LightProbe.js";
 export {Viewport} from "./objects/cameras/Viewport.js";
 export {PerspectiveCamera} from "./objects/cameras/PerspectiveCamera.js";
 export {OrthographicCamera} from "./objects/cameras/OrthographicCamera.js";
-export {CubeCamera} from "./objects/cameras/CubeCamera.js";
 
 export {AudioEmitter} from "./objects/audio/AudioEmitter.js";
 export {PositionalAudio} from "./objects/audio/PositionalAudio.js";

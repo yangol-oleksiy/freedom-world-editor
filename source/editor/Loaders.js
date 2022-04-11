@@ -33,7 +33,6 @@ import {Font} from "../core/resources/Font.js";
 import {Image} from "../core/resources/Image.js";
 import {TextFile} from "../core/resources/TextFile.js";
 import {Video} from "../core/resources/Video.js";
-import {CompressedTexture} from "../core/texture/CompressedTexture.js";
 import {Texture} from "../core/texture/Texture.js";
 import {VideoTexture} from "../core/texture/VideoTexture.js";
 import {DocumentBody} from "./components/DocumentBody.js";
@@ -61,51 +60,6 @@ function Loaders() {}
 Loaders.loadTexture = function(file, onLoad)
 {
 	// Load compressed texture from data parsed by the texture loaders.
-	function loadCompressedTexture(data)
-	{
-		var texture = new CompressedTexture();
-
-		if (data.isCubemap === true)
-		{
-			var faces = data.mipmaps.length / data.mipmapCount;
-
-			texture.isCubeTexture = true;
-			texture.image = [];
-
-			for (var f = 0; f < faces; f++)
-			{
-				texture.image[f] = {mipmaps: []};
-
-				for (var i = 0; i < data.mipmapCount; i ++)
-				{
-					texture.image[f].mipmaps.push(data.mipmaps[f * data.mipmapCount + i]);
-					texture.image[f].format = data.format;
-					texture.image[f].width = data.width;
-					texture.image[f].height = data.height;
-				}
-			}
-
-			texture.magFilter = LinearFilter;
-			texture.minFilter = LinearFilter;
-			texture.mapping = CubeReflectionMapping;
-		}
-		else
-		{
-			texture.image.width = data.width;
-			texture.image.height = data.height;
-			texture.mipmaps = data.mipmaps;
-		}
-
-		if (data.mipmapCount === 1)
-		{
-			texture.minFilter = LinearFilter;
-		}
-
-		texture.format = data.format;
-		texture.needsUpdate = true;
-
-		return texture;
-	}
 
 	var name = FileSystem.getFileName(file.name);
 	var extension = FileSystem.getFileExtension(file.name);
@@ -113,28 +67,7 @@ Loaders.loadTexture = function(file, onLoad)
 	var reader = new FileReader();
 	reader.onload = function()
 	{
-		if (extension === "dds")
-		{
-			var loader = new DDSLoader();
-			var texture = loadCompressedTexture(loader.parse(reader.result));
-			texture.name = name;
-			Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
-		}
-		else if (extension === "pvr")
-		{
-			var loader = new PVRLoader();
-			var texture = loadCompressedTexture(loader.parse(reader.result));
-			texture.name = name;
-			Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
-		}
-		else if (extension === "ktx")
-		{
-			var loader = new KTXLoader();
-			var texture = loadCompressedTexture(loader.parse(reader.result));
-			texture.name = name;
-			Editor.addAction(new AddResourceAction(texture, Editor.program, "textures"));
-		}
-		else if (extension === "tga")
+		if (extension === "tga")
 		{
 			var loader = new TGALoader();
 			var jpeg = loader.parse(reader.result).toDataURL("image/jpeg", 1.0);

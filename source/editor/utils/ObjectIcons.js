@@ -43,7 +43,6 @@ ObjectIcons.icons = new Map([
 	["SkinnedMesh", ObjectIcons.path + "misc/skeleton.png"],
 	["Mesh", ObjectIcons.path + "models/cube.png"],
 	["ParticleEmiter", ObjectIcons.path + "misc/particles.png"],
-	["Sprite", ObjectIcons.path + "misc/image.png"],
 	["Points", ObjectIcons.path + "models/points.png"],
 	["Line", ObjectIcons.path + "misc/nodes.png"],
 	["LineSegments", ObjectIcons.path + "misc/nodes.png"],
@@ -69,7 +68,6 @@ ObjectIcons.icons = new Map([
 
 	// Others
 	["Object3D", ObjectIcons.path + "misc/scene.png"],
-	["CubeCamera", ObjectIcons.path + "misc/probe.png"],
 	["Bone", ObjectIcons.path + "misc/bone.png"],
 	["Group", ObjectIcons.path + "misc/container.png"],
 	["BillboardGroup", ObjectIcons.path + "misc/rotate.png"],
