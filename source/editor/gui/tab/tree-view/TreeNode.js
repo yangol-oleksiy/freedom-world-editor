@@ -10,7 +10,6 @@ import {LuaScript} from "../../../../core/objects/script/LuaScript.js";
 import {FennelScript} from "../../../../core/objects/script/FennelScript.js";
 import {Scene} from "../../../../core/objects/Scene.js";
 import {Program} from "../../../../core/objects/Program.js";
-import {ParticleEmitter} from "../../../../core/objects/particle/ParticleEmitter.js";
 import {Group} from "../../../../core/objects/misc/Group.js";
 import {LightProbe} from "../../../../core/objects/lights/LightProbe.js";
 import {ObjectLoader} from "../../../../core/loaders/ObjectLoader.js";
@@ -23,7 +22,6 @@ import {AddAction} from "../../../history/action/objects/AddAction.js";
 import {ChangeAction} from "../../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../../history/action/ActionBundle.js";
 import {SceneEditor} from "../scene-editor/SceneEditor.js";
-import {ParticleEditor} from "../particle-editor/ParticleEditor.js";
 import {ScriptEditor} from "../code/ScriptEditor.js";
 import {PythonScriptEditor} from "../code/PythonScriptEditor.js";
 import {LuaScriptEditor} from "../code/LuaScriptEditor.js";
@@ -215,10 +213,6 @@ function TreeNode(container)
 					context.addOption(Locale.scriptEditor, openLuaScriptTab);
 				} else if (self.object instanceof FennelScript) {
 					context.addOption(Locale.scriptEditor, openFennelScriptTab);
-				}
-				else if (self.object instanceof ParticleEmitter)
-				{
-					context.addOption(Locale.particleEditor, openParticleTab);
 				}
 			}
 
@@ -637,10 +631,6 @@ function TreeNode(container)
 			{
 				openTab(SceneEditor, self.object);
 			}
-			else if (self.object instanceof ParticleEmitter)
-			{
-				openTab(ParticleEditor, self.object);
-			}
 			else if (self.object instanceof Camera)
 			{
 				openTab(CameraEditor, self.object);
@@ -688,10 +678,6 @@ function TreeNode(container)
 		openTab(FennelScriptEditor, self.object);
 	}
 
-	function openParticleTab()
-	{
-		openTab(ParticleEditor, self.object);
-	}
 }
 
 TreeNode.ARROW_DOWN = "files/icons/misc/arrow_down.png";

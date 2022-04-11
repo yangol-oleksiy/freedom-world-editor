@@ -99,13 +99,10 @@ export {PositionalAudio} from "./objects/audio/PositionalAudio.js";
 export {Script} from "./objects/script/Script.js";
 export {NodeScript} from "./objects/script/NodeScript.js";
 
-export {ParticleEmitterControl} from "./objects/particle/core/ParticleEmitterControl.js";
-export {ParticleGroup} from "./objects/particle/core/ParticleGroup.js";
 export {ShaderUtils} from "./objects/particle/core/ShaderUtils.js";
 export {ShaderAttribute} from "./objects/particle/helpers/ShaderAttribute.js";
 export {TypedArrayHelper} from "./objects/particle/helpers/TypedArrayHelper.js";
 export {ParticleShaders} from "./objects/particle/shaders/ParticleShaders.js";
-export {ParticleEmitter} from "./objects/particle/ParticleEmitter.js";
 
 export {Sky} from "./objects/misc/Sky.js";
 export {Group} from "./objects/misc/Group.js";

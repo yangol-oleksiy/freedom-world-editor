@@ -8,7 +8,6 @@ import {Font} from "../../core/resources/Font.js";
 import {Audio} from "../../core/resources/Audio.js";
 import {TextSprite} from "../../core/objects/text/TextSprite.js";
 import {TextBitmap} from "../../core/objects/text/TextBitmap.js";
-import {ParticleEmitter} from "../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../core/objects/misc/Sky.js";
 import {LensFlare} from "../../core/objects/misc/LensFlare.js";
 import {Editor} from "../Editor.js";
@@ -251,7 +250,7 @@ ResourceCrawler.searchObject = function(object, manager, target)
 		}
 
 		// Material/textures
-		if (child.material !== undefined && !(child instanceof TextBitmap || child instanceof TextSprite ||child instanceof LensFlare || child instanceof ParticleEmitter || child instanceof Sky))
+		if (child.material !== undefined && !(child instanceof TextBitmap || child instanceof TextSprite ||child instanceof LensFlare || child instanceof Sky))
 		{
 			if (child.material instanceof Material)
 			{

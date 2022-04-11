@@ -11,7 +11,6 @@ import {LightProbe} from "../objects/lights/LightProbe.js";
 import {Mesh} from "../objects/mesh/Mesh.js";
 import {OrbitControls} from "../objects/controls/OrbitControls.js";
 import {OrthographicCamera} from "../objects/cameras/OrthographicCamera.js";
-import {ParticleEmitter} from "../objects/particle/ParticleEmitter.js";
 import {PerspectiveCamera} from "../objects/cameras/PerspectiveCamera.js";
 import {PointLight} from "../objects/lights/PointLight.js";
 import {PositionalAudio} from "../objects/audio/PositionalAudio.js";
@@ -436,10 +435,6 @@ ObjectLoader.prototype.parseObject = function(data)
 			}
 			object.distanceModel = data.distanceModel;
 			object.panningModel = data.panningModel;
-			break;
-
-		case "ParticleEmiter":
-			object = ParticleEmitter.fromJSON(data, this);
 			break;
 
 		case "LensFlare":

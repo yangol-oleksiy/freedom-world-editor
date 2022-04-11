@@ -1,5 +1,4 @@
 import {Object3D, Material, MeshBasicMaterial, SpriteMaterial, Sprite, Texture} from "three";
-import {ParticleEmitter} from "../objects/particle/ParticleEmitter.js";
 import {Video} from "./Video.js";
 import {ResourceContainer} from "./ResourceContainer.js";
 import {Resource} from "./Resource.js";
@@ -9,11 +8,11 @@ import {Audio} from "./Audio.js";
 
 /**
  * Resource manager is used to manage available resources used by objects
- * 
+ *
  * The resource manager is used to extend Object3D elements and is not meant to be used as a standalone.
  *
  * For standalone resource management use the resource container.
- * 
+ *
  * @class ResourceManager
  * @module Resources
  * @extends {Object3D}
@@ -50,7 +49,7 @@ ResourceManager.prototype.dispose = function()
 
 /**
  * Remove geometry from the list and replace by other.
- * 
+ *
  * @method removeGeometry
  * @param {Resource} geometry
  */
@@ -69,7 +68,7 @@ ResourceManager.prototype.removeGeometry = function(geometry, defaultGeometry)
 
 /**
  * Get resource by name.
- * 
+ *
  * @method getResourceByName
  * @param {string} name Resource name
  * @return {Resource} Resource if found else null
@@ -90,7 +89,7 @@ ResourceManager.prototype.getResourceByName = function(name)
 
 /**
  * Add resource to resources manager.
- * 
+ *
  * @method addResource
  * @param {Resource} Resource to add.
  */
@@ -104,7 +103,7 @@ ResourceManager.prototype.addResource = function(resource)
 
 /**
  * Remove resource from font list.
- * 
+ *
  * @method removeResource
  * @param {Resource} resource
  */
@@ -115,7 +114,7 @@ ResourceManager.prototype.removeResource = function(resource)
 
 /**
  * Get image by name.
- * 
+ *
  * @method getImageByName
  * @param {string} name Image name
  * @return {Image} Image if found else null
@@ -136,7 +135,7 @@ ResourceManager.prototype.getImageByName = function(name)
 
 /**
  * Remove image.
- * 
+ *
  * @param {Image} image
  * @method removeImage
  */
@@ -151,7 +150,7 @@ ResourceManager.prototype.removeImage = function(image)
 
 /**
  * Get video by name.
- * 
+ *
  * @method getVideoByName
  * @param {string} name Video name
  * @return {Video} Video if found else null
@@ -172,7 +171,7 @@ ResourceManager.prototype.getVideoByName = function(name)
 
 /**
  * Remove video.
- * 
+ *
  * @param {Video} video
  * @method removeVideo
  */
@@ -186,7 +185,7 @@ ResourceManager.prototype.removeVideo = function(video)
 
 /**
  * Get material by its name.
- * 
+ *
  * @method getMaterialByName
  * @param {string} name Material name
  * @return {Material} Material if found else null
@@ -207,7 +206,7 @@ ResourceManager.prototype.getMaterialByName = function(name)
 
 /**
  * Add material to materials list.
- * 
+ *
  * @method addMaterial
  * @param {Material} material Material to be added
  */
@@ -221,7 +220,7 @@ ResourceManager.prototype.addMaterial = function(material)
 
 /**
  * Remove material from materials list, also receives default material used to replace.
- * 
+ *
  * @method removeMaterial
  * @param {Material} material Material to be removed from manager.
  * @param {Material} defaultMeshMaterial Default mesh material to replace objects mesh materials.
@@ -242,7 +241,7 @@ ResourceManager.prototype.removeMaterial = function(material, defaultMeshMateria
 	if (material instanceof Material)
 	{
 		delete this.materials[material.uuid];
-		
+
 		this.traverse(function(child)
 		{
 			if (child.material !== undefined && child.material.uuid === material.uuid)
@@ -262,7 +261,7 @@ ResourceManager.prototype.removeMaterial = function(material, defaultMeshMateria
 
 /**
  * Get texture by name.
- * 
+ *
  * @method getTextureByName
  * @param {string} name Texture name.
  * @return {Texture} Texture is found else null.
@@ -283,7 +282,7 @@ ResourceManager.prototype.getTextureByName = function(name)
 
 /**
  * Add texture to texture list.
- * 
+ *
  * @method addTexture
  * @param {Texture} texture
  */
@@ -297,7 +296,7 @@ ResourceManager.prototype.addTexture = function(texture)
 
 /**
  * Remove texture from textures list (also receives default used to replace).
- * 
+ *
  * @method removeTexture
  * @param {Texture} texture
  * @param {Texture} defaultTexture
@@ -313,13 +312,13 @@ ResourceManager.prototype.removeTexture = function(texture, defaultTexture)
 	if (texture instanceof Texture)
 	{
 		delete this.textures[texture.uuid];
-		
+
 		this.traverse(function(child)
 		{
 			if (child.material !== undefined)
 			{
 				var material = child.material;
-				
+
 				if (material.map && material.map.uuid === texture.uuid)
 				{
 					material.map = defaultTexture;
@@ -371,20 +370,13 @@ ResourceManager.prototype.removeTexture = function(texture, defaultTexture)
 					material.needsUpdate = true;
 				}
 			}
-			else if (child instanceof ParticleEmitter)
-			{
-				if (child.group.texture.uuid === texture.uuid)
-				{
-					child.group.texture = defaultTexture;
-				}
-			}
 		});
 	}
 };
 
 /**
  * Get font by name.
- * 
+ *
  * @method getFontByName
  * @param {string} name
  * @return {Font} Font if found, else null
@@ -405,7 +397,7 @@ ResourceManager.prototype.getFontByName = function(name)
 
 /**
  * Add font to fonts list.
- * 
+ *
  * @method addFont
  * @param {Font} font
  */
@@ -419,7 +411,7 @@ ResourceManager.prototype.addFont = function(font)
 
 /**
  * Remove font from font list.
- * 
+ *
  * @method removeFont
  * @param {Font} font
  * @param {Font} defaultFont
@@ -434,7 +426,7 @@ ResourceManager.prototype.removeFont = function(font, defaultFont)
 	if (font instanceof Font)
 	{
 		delete this.fonts[font.uuid];
-		
+
 		this.traverse(function(child)
 		{
 			if (child.font !== undefined && child.font.uuid === font.uuid)
@@ -447,7 +439,7 @@ ResourceManager.prototype.removeFont = function(font, defaultFont)
 
 /**
  * Get audio by name.
- * 
+ *
  * @method getAudioByName
  * @param {string} name
  * @return {Audio} Audio if found, else null
@@ -468,7 +460,7 @@ ResourceManager.prototype.getAudioByName = function(name)
 
 /**
  * Add audio to audio list.
- * 
+ *
  * @param {Audio} audio
  * @method addAudio
  */
@@ -482,7 +474,7 @@ ResourceManager.prototype.addAudio = function(audio)
 
 /**
  * Remove audio resource from the manager, replace on objects that are using it with another resource.
- * 
+ *
  * @param {Audio} audio
  * @param {Audio} defaultAudio
  * @method removeAudio
@@ -497,7 +489,7 @@ ResourceManager.prototype.removeAudio = function(audio, defaultAudio)
 	if (audio instanceof Audio)
 	{
 		delete this.audio[audio.uuid];
-		
+
 		this.traverse(function(child)
 		{
 			if (child.audio !== undefined && child.audio.uuid === audio.uuid)

@@ -9,7 +9,6 @@ import {Script} from "../../../../../core/objects/script/Script.js";
 import {NodeScript} from "../../../../../core/objects/script/NodeScript.js";
 import {LuaScript} from "../../../../../core/objects/script/LuaScript.js";
 import {FennelScript} from "../../../../../core/objects/script/FennelScript.js";
-import {ParticleEmitter} from "../../../../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../../../../core/objects/misc/Sky.js";
 import {LensFlare} from "../../../../../core/objects/misc/LensFlare.js";
 import {Group} from "../../../../../core/objects/misc/Group.js";
@@ -532,15 +531,6 @@ return target.set(x, y, z);`;
 	var effects = new ButtonDrawer(this);
 	effects.setImage(Global.FILE_PATH + "icons/misc/particles.png");
 	this.buttons.push(effects);
-
-	// Particle emitter
-	effects.addOption(Global.FILE_PATH + "icons/misc/particles.png", function()
-	{
-		var particle = new ParticleEmitter();
-		particle.texture = Editor.defaultTextureParticle;
-		particle.reload();
-		Editor.addObject(particle, self.editor.scene);
-	}, Locale.particleEmitter);
 
 	// Group
 	effects.addOption(Global.FILE_PATH + "icons/misc/container.png", function()

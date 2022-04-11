@@ -9,7 +9,6 @@ import {TextBitmap} from "../../../../core/objects/text/TextBitmap.js";
 import {Script} from "../../../../core/objects/script/Script.js";
 import {Scene} from "../../../../core/objects/Scene.js";
 import {Program} from "../../../../core/objects/Program.js";
-import {ParticleEmitter} from "../../../../core/objects/particle/ParticleEmitter.js";
 import {Sky} from "../../../../core/objects/misc/Sky.js";
 import {InstancedMesh} from "../../../../core/objects/mesh/InstancedMesh.js";
 import {OrbitControls} from "../../../../core/objects/controls/OrbitControls.js";
@@ -34,7 +33,6 @@ import {SceneInspector} from "./objects/SceneInspector.js";
 import {ProgramInspector} from "./objects/ProgramInspector.js";
 import {ObjectInspector} from "./objects/ObjectInspector.js";
 import {SkyInspector} from "./objects/misc/SkyInspector.js";
-import {ParticleEmitterInspector} from "./objects/misc/ParticleEmitterInspector.js";
 import {MeshInspector} from "./objects/mesh/MeshInspector.js";
 import {InstancedMeshInspector} from "./objects/mesh/InstancedMeshInspector.js";
 import {LockedInspector} from "./objects/LockedInspector.js";
@@ -146,10 +144,6 @@ InspectorContainer.prototype.updateSelection = function()
 		if (object.locked)
 		{
 			this.panel = new LockedInspector(this, object);
-		}
-		else if (object instanceof ParticleEmitter)
-		{
-			this.panel = new ParticleEmitterInspector(this, object);
 		}
 		else if (object instanceof InstancedMesh)
 		{
