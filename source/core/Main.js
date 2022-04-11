@@ -79,7 +79,6 @@ export {SkinnedMesh} from "./objects/mesh/SkinnedMesh.js";
 export {InstancedMesh} from "./objects/mesh/InstancedMesh.js";
 
 export {CanvasSprite} from "./objects/sprite/CanvasSprite.js";
-export {Sprite} from "./objects/sprite/Sprite.js";
 
 export {TextMesh} from "./objects/text/TextMesh.js";
 export {TextBitmap} from "./objects/text/TextBitmap.js";

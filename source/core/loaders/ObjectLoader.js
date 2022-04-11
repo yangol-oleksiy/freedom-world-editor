@@ -24,7 +24,6 @@ import {Script} from "../objects/script/Script.js";
 import {SkinnedMesh} from "../objects/mesh/SkinnedMesh.js";
 import {Sky} from "../objects/misc/Sky.js";
 import {SpotLight} from "../objects/lights/SpotLight.js";
-import {Sprite} from "../objects/sprite/Sprite.js";
 import {PythonScript} from "../objects/script/PythonScript.js";
 import {TextBitmap} from "../objects/text/TextBitmap.js";
 import {TextFile} from "../resources/TextFile.js";
@@ -834,10 +833,6 @@ ObjectLoader.prototype.parseObject = function(data)
 		case "PointCloud":
 		case "Points":
 			object = new Points(this.getGeometry(data.geometry), this.getMaterial(data.material));
-			break;
-
-		case "Sprite":
-			object = new Sprite(this.getMaterial(data.material));
 			break;
 
 		case "Group":

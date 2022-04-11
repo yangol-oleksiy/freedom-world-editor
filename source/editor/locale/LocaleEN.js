@@ -10,7 +10,7 @@ var LocaleEN = {
 	{
 		language: "EN",
 		name: "English",
-		version: 9
+		version: 10
 	},
 
 	// Actions
@@ -71,7 +71,6 @@ var LocaleEN = {
 	container: "Container",
 	group: "Group",
 	billboardGroup: "Billboard Group",
-	sprite: "Sprite",
 	perspectiveCamera: "Perspective Camera",
 	orthographicCamera: "Orthographic Camera",
 	lensFlare: "Lens flare",

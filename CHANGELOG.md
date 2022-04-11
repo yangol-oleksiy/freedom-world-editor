@@ -3,6 +3,7 @@
 ### V0.111
 
 - Removed materials editors from editor
+- Removed sprite menu item from sidebar
 
 ### V0.110
 

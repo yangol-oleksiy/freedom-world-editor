@@ -534,12 +534,6 @@ return target.set(x, y, z);`;
 	effects.setImage(Global.FILE_PATH + "icons/misc/particles.png");
 	this.buttons.push(effects);
 
-	// Sprite
-	effects.addOption(Global.FILE_PATH + "icons/misc/sprite.png", function()
-	{
-		Editor.addObject(new Sprite(Editor.defaultSpriteMaterial), self.editor.scene);
-	}, Locale.sprite);
-
 	// Particle emitter
 	effects.addOption(Global.FILE_PATH + "icons/misc/particles.png", function()
 	{
