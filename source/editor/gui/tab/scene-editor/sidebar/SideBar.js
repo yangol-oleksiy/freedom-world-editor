@@ -492,6 +492,20 @@ return target.set(x, y, z);`;
 	scripts.setImage(Global.FILE_PATH + "icons/script/script.png");
 	this.buttons.push(scripts);
 
+	if (DEVELOPMENT) {
+		// Fennel script
+		scripts.addOption(Global.FILE_PATH + "icons/script/fennel.png", function()
+		{
+				Editor.addObject(new FennelScript(), self.editor.scene);
+		}, Locale.fennel);
+
+		// Lua script
+		scripts.addOption(Global.FILE_PATH + "icons/script/lua.png", function()
+		{
+			Editor.addObject(new LuaScript(), self.editor.scene);
+		}, Locale.lua);
+	}
+
 	// Javascript script
 	scripts.addOption(Global.FILE_PATH + "icons/script/javascript.png", function()
 	{
@@ -511,18 +525,6 @@ return target.set(x, y, z);`;
 		{
 			Editor.addObject(new NodeScript(), self.editor.scene);
 		}, Locale.nodeGraph);
-
-		// Lua script
-		scripts.addOption(Global.FILE_PATH + "icons/script/lua.png", function()
-		{
-			Editor.addObject(new LuaScript(), self.editor.scene);
-		}, Locale.lua);
-
-		// Fennel script
-		scripts.addOption(Global.FILE_PATH + "icons/script/fennel.png", function()
-		{
-			Editor.addObject(new FennelScript(), self.editor.scene);
-		}, Locale.fennel);
 	}
 
 	scripts.updateOptions();
