@@ -2,7 +2,7 @@
 	"name": "freedom-world-editor",
 	"description": "Freedom World Editor is a web based world editing software for 3D online role playing game World of Freedom",
 	"main": "index.html",
-	"version": "0.110.1",
+	"version": "0.110.2",
 	"author": "Tentone, Oleksiy Pustovit, Oleksiy Zamkoviy",
 	"license": "MIT",
 	"homepage": "",
@@ -23,7 +23,7 @@
 		"build": "npm version --no-commit-hooks patch && npm run build-runtime && npm run build-page",
 		"build-page": "cd ./source/page && npm run build && cd ../.. && npm run docs && npm run build-editor",
 		"build-runtime": "webpack --config webpack.runtime.js",
-		"build-editor": "webpack --config webpack.prod.js",
+		"build-editor": "webpack --config webpack.prod.js"
 	},
 	"repository": {
 		"type": "git",
