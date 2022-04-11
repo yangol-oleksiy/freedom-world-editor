@@ -462,7 +462,7 @@ Editor.getCoordsSystem = function()
 {
 	var scene = Editor.getScene();
 
-	return scene.parent.coordsSystem == Program.CS_XYZ ? 'xyz' : 'xzy';
+	return scene.parent.coordsSystem === Program.CS_XYZ ? 'xyz' : 'xzy';
 };
 
 /**
@@ -1203,7 +1203,7 @@ Editor.exit = function()
 Editor.isSceneRotationAllowed = function()
 {
 	var tab = Editor.gui.tab.getTab(SceneEditor);
-	return tab.mode != SceneEditor.SELECT_MULTIPLE && tab.mode != SceneEditor.INSERT;
+	return tab.mode !== SceneEditor.SELECT_MULTIPLE && tab.mode !== SceneEditor.INSERT;
 };
 
 export {Editor};

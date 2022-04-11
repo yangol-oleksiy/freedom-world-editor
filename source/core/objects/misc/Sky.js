@@ -27,7 +27,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time, coordsSystem)
 
 	this.name = "sky";
 	this.type = "Sky";
-	
+
 	/**
 	 * Array with top sky colors.
 	 *
@@ -108,7 +108,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time, coordsSystem)
 	var material = new ShaderMaterial(
 		{
 			vertexShader: SkyVertexShader,
-			fragmentShader: coordsSystem == 'xyz' ? SkyFragmentShaderXYZ : SkyFragmentShaderXZY,
+			fragmentShader: coordsSystem === 'xyz' ? SkyFragmentShaderXYZ : SkyFragmentShaderXZY,
 			uniforms: uniforms,
 			side: BackSide
 		});

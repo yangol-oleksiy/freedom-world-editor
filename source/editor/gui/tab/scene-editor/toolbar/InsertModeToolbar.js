@@ -45,10 +45,10 @@ InsertModeToolBar.prototype.selectTool = function(id)
 {
 	this.lastSelectedId = id;
 	var th = this;
-	this.allButtons.forEach(function(btn) 
+	this.allButtons.forEach(function(btn)
 	{
-		btn.setSelected(btn.id == id);
-		if (btn.id == id) 
+		btn.setSelected(btn.id === id);
+		if (btn.id === id)
 		{
 			th.lastSelectedObject = btn.object;
 		}
@@ -94,9 +94,9 @@ InsertModeToolBar.prototype.updateGroups = function()
 	}
 };
 
-InsertModeToolBar.prototype.maybeSelectFirstOption = function() 
+InsertModeToolBar.prototype.maybeSelectFirstOption = function()
 {
-	if (!this.lastSelectedId && this.allButtons.length > 0) 
+	if (!this.lastSelectedId && this.allButtons.length > 0)
 	{
 		this.selectTool(this.allButtons[0].id);
 		this.parent.selectTool(this.parent.mode);

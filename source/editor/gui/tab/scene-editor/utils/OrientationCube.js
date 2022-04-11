@@ -52,7 +52,7 @@ function OrientationCube()
 	this.xPos = new Mesh(plane, new MeshBasicMaterial({map: texture}));
 	this.xPos.code = OrientationCube.X_POS;
 	this.xPos.position.set(0.5, 0, 0);
-	this.xPos.rotation.set(Editor.getCoordsSystem() == 'xzy' ? Math.PI / 2 : 0, Math.PI / 2, 0);
+	this.xPos.rotation.set(Editor.getCoordsSystem() === 'xzy' ? Math.PI / 2 : 0, Math.PI / 2, 0);
 	this.xPos.matrixAutoUpdate = false;
 	this.xPos.updateMatrix();
 	this.scene.add(this.xPos);
@@ -62,7 +62,7 @@ function OrientationCube()
 	this.xNeg = new Mesh(plane, new MeshBasicMaterial({map: texture}));
 	this.xNeg.code = OrientationCube.X_NEG;
 	this.xNeg.position.set(-0.5, 0, 0);
-	this.xNeg.rotation.set(Editor.getCoordsSystem() == 'xzy' ? Math.PI / 2 : 0, -Math.PI / 2, 0);
+	this.xNeg.rotation.set(Editor.getCoordsSystem() === 'xzy' ? Math.PI / 2 : 0, -Math.PI / 2, 0);
 	this.xNeg.matrixAutoUpdate = false;
 	this.xNeg.updateMatrix();
 	this.scene.add(this.xNeg);
@@ -72,7 +72,7 @@ function OrientationCube()
 	this.yPos = new Mesh(plane, new MeshBasicMaterial({map: texture}));
 	this.yPos.code = OrientationCube.Y_POS;
 	this.yPos.position.set(0, 0.5, 0);
-	this.yPos.rotation.set(-Math.PI / 2, 0, Editor.getCoordsSystem() == 'xzy' ? Math.PI : 0);
+	this.yPos.rotation.set(-Math.PI / 2, 0, Editor.getCoordsSystem() === 'xzy' ? Math.PI : 0);
 	this.yPos.matrixAutoUpdate = false;
 	this.yPos.updateMatrix();
 	this.scene.add(this.yPos);

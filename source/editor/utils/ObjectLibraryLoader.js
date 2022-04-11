@@ -15,21 +15,21 @@ import {Locale} from "../locale/LocaleManager.js";
  */
 function ObjectLibraryLoader() {}
 
-function maybeApplyCoordinatesTransformation(obj, objSystem, sceneSystem) 
+function maybeApplyCoordinatesTransformation(obj, objSystem, sceneSystem)
 {
-	if (objSystem == sceneSystem) 
+	if (objSystem === sceneSystem)
 	{
 		return obj;
 	}
 
-	if (objSystem == 'xzy') 
+	if (objSystem === 'xzy')
 	{ // XZY -> XYZ
 		obj.rotation.x = - Math.PI / 2;
 		obj.rotation.y = 0;
 		obj.rotation.z = 0;
 		return obj;
 	}
-	else 
+	else
 	{
 		Editor.alert("Unimplemented, ObjectLibraryLoader");
 	}
@@ -55,7 +55,7 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 	var tool = insertModeToolBar.addGroup();
 	var importId = 'import' + Date.now() + Math.floor(Math.random() * 1000);
 
-	loader.load(libraryPath + 'lib.yaml', function(data) 
+	loader.load(libraryPath + 'lib.yaml', function(data)
 	{
 		var library = YAML.load(data);
 
@@ -67,7 +67,7 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 
 			fbxLoader.load(objectPath, function(group)
 			{
-				if (elem.pluginInsert) 
+				if (elem.pluginInsert)
 				{
 					models.addOption(Global.FILE_PATH + "icons/models/figures.png", function()
 					{
@@ -80,7 +80,7 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 					sidebar.updateInterface();
 				}
 
-				if (elem.pluginInsertMode) 
+				if (elem.pluginInsertMode)
 				{
 					var iconPath = elem.iconPath
 						? library.iconsBase.replace(/[/]$/, '') + '/' + elem.iconPath.replace(/^[/]/, '')

@@ -196,14 +196,14 @@ EditorOrbitControls.prototype.setOrientation = function(code)
 	this.updateControls();
 };
 
-EditorOrbitControls.prototype.getUpDirectionVector = function() 
+EditorOrbitControls.prototype.getUpDirectionVector = function()
 {
-	if (!this.coordsSystem) 
+	if (!this.coordsSystem)
 	{
-		throw 'No coords system where it should be (case 2)';
+		throw new Error('No coords system where it should be (case 2)');
 	}
 
-	return this.coordsSystem == 'xyz' ? EditorOrbitControls.UP_XYZ : EditorOrbitControls.UP_XZY;
+	return this.coordsSystem === 'xyz' ? EditorOrbitControls.UP_XYZ : EditorOrbitControls.UP_XZY;
 };
 
 EditorOrbitControls.prototype.update = function(mouse, keyboard)
@@ -230,11 +230,11 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 	{
 		if (this.smooth === true)
 		{
-			this.speedCenter[this.coordsSystem == 'xyz' ? 'y' : 'z'] += this.speed * Editor.settings.editor.mouseLookSensitivity * mouse.delta.y * this.distance;
+			this.speedCenter[this.coordsSystem === 'xyz' ? 'y' : 'z'] += this.speed * Editor.settings.editor.mouseLookSensitivity * mouse.delta.y * this.distance;
 		}
 		else
 		{
-			this.center[this.coordsSystem == 'xyz' ? 'y' : 'z'] += mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
+			this.center[this.coordsSystem === 'xyz' ? 'y' : 'z'] += mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
 		}
 
 		this.needsUpdate = true;
@@ -243,8 +243,8 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 	if (mouse.buttonPressed(Mouse.RIGHT))
 	{
 		var direction = this.getWorldDirection(this.tempVector);
-		var up = this.coordsSystem == 'xyz' ? direction.y > 0 : direction.z > 0;
-		direction[this.coordsSystem == 'xyz' ? 'y' : 'z'] = 0;
+		var up = this.coordsSystem === 'xyz' ? direction.y > 0 : direction.z > 0;
+		direction[this.coordsSystem === 'xyz' ? 'y' : 'z'] = 0;
 		direction.normalize();
 
 		if (this.smooth === true)
@@ -264,11 +264,11 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 			var y = mouse.delta.y * Editor.settings.editor.mouseLookSensitivity * this.distance;
 			this.center.x += up ? -direction.x * y : direction.x * y;
 
-			if (this.coordsSystem == 'xyz') 
+			if (this.coordsSystem === 'xyz')
 			{
 				this.center.z += up ? -direction.z * y : direction.z * y;
 			}
-			else 
+			else
 			{
 				this.center.z += up ? -direction.z * y : direction.z * y;
 			}
@@ -278,11 +278,11 @@ EditorOrbitControls.prototype.update = function(mouse, keyboard)
 			var x = mouse.delta.x * Editor.settings.editor.mouseLookSensitivity * this.distance;
 			this.center.x -= direction.x * x;
 
-			if (this.coordsSystem == 'xyz') 
+			if (this.coordsSystem === 'xyz')
 			{
 				this.center.z -= direction.z * x;
 			}
-			else 
+			else
 			{
 				this.center.y -= direction.y * x;
 			}
@@ -417,16 +417,16 @@ EditorOrbitControls.prototype.updateControls = function()
 
 	var cos = this.distance * Math.cos(this.orientation.y);
 
-	if (!this.coordsSystem) 
+	if (!this.coordsSystem)
 	{
-		throw 'No coords system where it should be';
+		throw new Error('No coords system where it should be');
 	}
 
-	if (this.coordsSystem == 'xyz') 
+	if (this.coordsSystem === 'xyz')
 	{
 	   this.position.set(Math.cos(this.orientation.x) * cos, this.distance * Math.sin(this.orientation.y), Math.sin(this.orientation.x) * cos);
 	}
-	else 
+	else
 	{
 		this.position.set(-Math.cos(this.orientation.x) * cos, Math.sin(this.orientation.x) * cos, this.distance * Math.sin(this.orientation.y));
 	}
