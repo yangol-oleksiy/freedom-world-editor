@@ -6,6 +6,7 @@
 - Removed sprite menu item from sidebar
 - Removed textures related code from editor (cube textures, compressed textures)
 - Removed particles related code from editor
+- Removed positional audio related code from editor
 
 ### V0.110
 

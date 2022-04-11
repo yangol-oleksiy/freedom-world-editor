@@ -13,7 +13,6 @@ import {OrbitControls} from "../objects/controls/OrbitControls.js";
 import {OrthographicCamera} from "../objects/cameras/OrthographicCamera.js";
 import {PerspectiveCamera} from "../objects/cameras/PerspectiveCamera.js";
 import {PointLight} from "../objects/lights/PointLight.js";
-import {PositionalAudio} from "../objects/audio/PositionalAudio.js";
 import {Program} from "../objects/Program.js";
 import {RectAreaLight} from "../objects/lights/RectAreaLight.js";
 import {ResourceContainer} from "../resources/ResourceContainer.js";
@@ -421,20 +420,6 @@ ObjectLoader.prototype.parseObject = function(data)
 			{
 				object.volume = data.volume;
 			}
-			break;
-
-		case "PositionalAudio":
-			object = new PositionalAudio(this.getAudio(data.audio));
-			object.autoplay = data.autoplay;
-			object.startTime = data.startTime;
-			object.playbackRate = data.playbackRate;
-			object.loop = data.source !== undefined ? data.source.loop : data.loop;
-			if (data.volume !== undefined)
-			{
-				object.volume = data.volume;
-			}
-			object.distanceModel = data.distanceModel;
-			object.panningModel = data.panningModel;
 			break;
 
 		case "LensFlare":

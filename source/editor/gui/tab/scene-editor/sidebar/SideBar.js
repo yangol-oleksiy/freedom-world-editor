@@ -24,7 +24,6 @@ import {AmbientLight} from "../../../../../core/objects/lights/AmbientLight.js";
 import {OrbitControls} from "../../../../../core/objects/controls/OrbitControls.js";
 import {PerspectiveCamera} from "../../../../../core/objects/cameras/PerspectiveCamera.js";
 import {OrthographicCamera} from "../../../../../core/objects/cameras/OrthographicCamera.js";
-import {PositionalAudio} from "../../../../../core/objects/audio/PositionalAudio.js";
 import {AudioEmitter} from "../../../../../core/objects/audio/AudioEmitter.js";
 import {TerrainBufferGeometry} from "../../../../../core/geometries/TerrainBufferGeometry.js";
 import {RoundedBoxBufferGeometry} from "../../../../../core/geometries/RoundedBoxBufferGeometry.js";
@@ -551,12 +550,6 @@ return target.set(x, y, z);`;
 	{
 		Editor.addObject(new AudioEmitter(Editor.defaultAudio), self.editor.scene);
 	}, Locale.audio);
-
-	// Positional Audio
-	effects.addOption(Global.FILE_PATH + "icons/misc/audio_positional.png", function()
-	{
-		Editor.addObject(new PositionalAudio(Editor.defaultAudio), self.editor.scene);
-	}, Locale.positionalAudio);
 
 	// Lens flare
 	effects.addOption(Global.FILE_PATH + "icons/misc/flare.png", function()
