@@ -37,6 +37,7 @@ function InsertModeToolBar(parent)
 
 	this.lastSelectedId = null;
 	this.lastSelectedObject = null;
+	this.lastSelectedObjectOptions = null;
 }
 
 InsertModeToolBar.prototype = Object.create(Component.prototype);
@@ -51,6 +52,7 @@ InsertModeToolBar.prototype.selectTool = function(id)
 		if (btn.id === id)
 		{
 			th.lastSelectedObject = btn.object;
+			th.lastSelectedObjectOptions = btn.libraryOptions;
 		}
 	});
 };

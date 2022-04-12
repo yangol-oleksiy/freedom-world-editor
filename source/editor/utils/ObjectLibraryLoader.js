@@ -116,6 +116,7 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 					});
 					option.id = id;
 					option.object = object;
+					option.libraryOptions = elem;
 
 					insertModeToolBar.allButtons.push(option);
 				}

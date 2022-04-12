@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.112
+
+- completePreview option implementation for libraries
+
 ### V0.111
 
 - Removed materials editors from editor

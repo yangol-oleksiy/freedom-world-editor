@@ -1486,8 +1486,18 @@ function insertModeUpdate(th)
 
 	var transformMaterial = function(material)
 	{
-		var newMaterial = material.clone();
-		newMaterial.wireframe = true;
+		var newMaterial = null;
+
+		if (th.insertModeToolBar.lastSelectedObjectOptions.completePreview)
+		{
+			newMaterial = material.clone(true);
+		}
+		else
+		{
+			newMaterial = new MeshPhongMaterial( {visible: true, color: 0xffff00, transparent: true, opacity: 1} );
+			newMaterial.wireframe = true;
+		}
+
 		return newMaterial;
 	};
 
