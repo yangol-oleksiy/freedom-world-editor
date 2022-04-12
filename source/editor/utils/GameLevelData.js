@@ -8,6 +8,8 @@ import {Editor} from '../Editor.js';
 function GameLevelData()
 {
 	this.objectsCache = {};
+	this.lastInsertedX = null;
+	this.lastInsertedY = null;
 }
 
 GameLevelData.prototype.processSceneObjectsBeforeSetting = function(scene, newObj, objOptions, key)
@@ -75,6 +77,9 @@ GameLevelData.prototype.setSceneObject = function(scene, obj, objOptions = {})
 	scene.add(obj);
 
 	this.processSceneObjectsAfterSetting(scene, obj, objOptions, key);
+
+	this.lastInsertedX = obj.position.x;
+	this.lastInsertedY = Editor.getCoordsSystem() === 'xzy' ? obj.position.y : obj.position.z;
 };
 
 export {GameLevelData};

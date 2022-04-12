@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.114
+
+- Implemented terrain painting in insert mode
+
 ### V0.113
 
 - Improved inserting objects logic, old objects removed upon inserting new ones

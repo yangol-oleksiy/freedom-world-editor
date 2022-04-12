@@ -1235,6 +1235,17 @@ function onAreaSelectionEnd(th, elem, helperCube)
 	});
 }
 
+function onDragInInsertMode(th, elem, xPos, yPos)
+{
+	if (xPos !== th.levelData.lastInsertedX || yPos !== th.levelData.lastInsertedY)
+	{
+		th.levelData.lastInsertedX = xPos;
+		th.levelData.lastInsertedY = yPos;
+
+		onClickInInsertMode(th, elem);
+	}
+}
+
 function onClickInInsertMode(th, elem)
 {
 	if (th.insertModeToolBar.lastSelectedObject)
@@ -1373,12 +1384,22 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 							helperCube.position.x = Math.round(elem.point.x);
 							helperCube.position.y = Math.round(elem.point.y);
 							helperCube.position.z = 0;
+
+							if (th.mode === SceneEditor.INSERT && th.mouse.buttonPressed(Mouse.LEFT))
+							{
+								onDragInInsertMode(th, elem, helperCube.position.x, helperCube.position.y);
+							}
 						}
 						else
 						{
 							helperCube.position.x = Math.round(elem.point.x);
 							helperCube.position.y = 0;
 							helperCube.position.z = Math.round(elem.point.z);
+
+							if (th.mode === SceneEditor.INSERT && th.mouse.buttonPressed(Mouse.LEFT))
+							{
+								onDragInInsertMode(th, elem, helperCube.position.x, helperCube.position.z);
+							}
 						}
 					}
 
