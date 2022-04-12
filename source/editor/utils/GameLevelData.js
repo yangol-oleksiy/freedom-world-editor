@@ -19,11 +19,22 @@ GameLevelData.prototype.processSceneObjectsBeforeSetting = function(scene, newOb
 
 	var th = this;
 
+	// Removing objects from scene if needed
 	this.objectsCache[key].forEach(function(oldObj)
 	{
 		th.processSceneObjectBeforeSettingNewOne(scene, newObj, objOptions, key, oldObj.object, oldObj.options);
 	});
 };
+
+GameLevelData.prototype.processSceneObjectsAfterSetting = function(scene, newObj, objOptions, key)
+{
+	// Removing objects from cache if we removed objects from scene
+	this.objectsCache[key] = this.objectsCache[key].filter(function(obj)
+	{
+		return Boolean(obj.object.getScene());
+	});
+};
+
 
 // Copied from here https://stackoverflow.com/questions/1885557/simplest-code-for-array-intersection-in-javascript
 // Return elements of array a that are also in b in linear time:
@@ -62,6 +73,8 @@ GameLevelData.prototype.setSceneObject = function(scene, obj, objOptions = {})
 	});
 
 	scene.add(obj);
+
+	this.processSceneObjectsAfterSetting(scene, obj, objOptions, key);
 };
 
 export {GameLevelData};
