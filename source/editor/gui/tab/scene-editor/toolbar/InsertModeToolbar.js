@@ -80,18 +80,37 @@ InsertModeToolBar.prototype.addGroup = function()
  */
 InsertModeToolBar.prototype.updateGroups = function()
 {
-	this.size.x = 0;
+	this.position.x = 0;
 
+	var allGroupsSize = 0;
 	for (var i = 0; i < this.groups.length; i++)
 	{
-		this.groups[i].position.x = this.size.x;
-		this.groups[i].updateInterface();
-
-		this.size.x += this.groups[i].size.x;
+		allGroupsSize += this.groups[i].size.x;
 
 		if (i + 1 < this.groups.length)
 		{
-			this.size.x += this.spacing;
+			allGroupsSize += this.spacing;
+		}
+	}
+
+	var startLeft = (this.parent.size.x - allGroupsSize) / 2;
+	if (startLeft < 0)
+	{
+		console.log('Unimplemented case');
+		return;
+	}
+
+	var x = startLeft;
+	for (var i = 0; i < this.groups.length; i++)
+	{
+		this.groups[i].position.x = x;
+		this.groups[i].updateInterface();
+
+		x += this.groups[i].size.x;
+
+		if (i + 1 < this.groups.length)
+		{
+			x += this.spacing;
 		}
 	}
 };

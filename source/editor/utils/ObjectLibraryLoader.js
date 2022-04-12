@@ -73,6 +73,7 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 
 		library.items.forEach(function(origElem)
 		{
+			var isLastItem = library.items[library.items.length - 1] === origElem;
 			var elem = Object.assign({}, library.defaultOptions, origElem);
 			var objectPath = libraryPath + elem.model;
 			var iconPath = elem.iconPath
@@ -119,14 +120,16 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 					insertModeToolBar.allButtons.push(option);
 				}
 
-				insertModeToolBar.maybeSelectFirstOption();
-				sidebar.updateInterface();
+				if (isLastItem)
+				{
+					sidebar.updateInterface();
+					insertModeToolBar.maybeSelectFirstOption();
+					insertModeToolBar.updateGroups();
+					sceneEditor.updateInterface();
+				}
 			});
 		});
 	});
-
-	insertModeToolBar.updateGroups();
-	sceneEditor.updateInterface();
 };
 
 export {ObjectLibraryLoader};

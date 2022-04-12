@@ -1752,8 +1752,9 @@ SceneEditor.prototype.updateSize = function()
 	this.toolBar.position.set(this.size.x / 2 - this.toolBar.size.x / 2, 5);
 	this.toolBar.updateInterface();
 
-	this.insertModeToolBar.position.set(this.size.x / 2 - this.insertModeToolBar.size.x / 2, this.size.y - this.insertModeToolBar.size.y - 5);
+	this.insertModeToolBar.position.y = this.size.y - this.insertModeToolBar.size.y - 5;
 	this.insertModeToolBar.updateInterface();
+	this.insertModeToolBar.updateGroups();
 
 	var width = this.size.x - this.sideBar.size.x;
 	var height = this.size.y;

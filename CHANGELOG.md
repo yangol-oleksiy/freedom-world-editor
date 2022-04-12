@@ -3,6 +3,7 @@
 ### V0.114
 
 - Implemented terrain painting in insert mode
+- Fixed insert toolbar position bug
 
 ### V0.113
 
