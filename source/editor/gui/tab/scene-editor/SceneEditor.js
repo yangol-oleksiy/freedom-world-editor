@@ -32,6 +32,7 @@ import {TabComponent} from "../../../components/tabs/TabComponent.js";
 import {Video} from "../../../../core/resources/Video.js";
 import {VideoTexture} from "../../../../core/texture/VideoTexture.js";
 import {Viewport} from "../../../../core/objects/cameras/Viewport.js";
+import {GameLevelData} from "../../../utils/GameLevelData.js";
 import {TransformControls} from "./transform/TransformControls.js";
 import {ToolBar} from "./toolbar/ToolBar.js";
 import {InsertModeToolBar} from "./toolbar/InsertModeToolBar.js";
@@ -688,6 +689,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.selectedAreas = [];
 	this.selectedWithAreaObjects = [];
 	this.canvas.resetCanvas();
+	this.levelData = new GameLevelData();
 }
 
 SceneEditor.ORTHOGRAPHIC = 20;
@@ -1241,8 +1243,8 @@ function onClickInInsertMode(th, elem)
 		newObj.position.x = Math.round(elem.point.x);
 		newObj.position.y = Math.round(elem.point.y);
 		newObj.position.z = Math.round(elem.point.z);
-		newObj.userData.selectable = true;
-		th.scene.add(newObj);
+
+		th.levelData.setSceneObject(th.scene, newObj, th.insertModeToolBar.lastSelectedObjectOptions);
 	}
 	else
 	{

@@ -1,8 +1,13 @@
 # Changelog
 
+### V0.113
+
+- Improved inserting objects logic, old objects removed upon inserting new ones
+- Implemented itemTypes option for objects libraries
+
 ### V0.112
 
-- completePreview option implementation for libraries
+- Implemented completePreview option for objects libraries
 
 ### V0.111
 

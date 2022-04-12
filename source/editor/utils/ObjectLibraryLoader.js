@@ -92,13 +92,11 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 					return material;
 				});
 
-				obj.userData.selectable = true;
-
 				if (elem.pluginInsert)
 				{
 					models.addOption(iconPath, function()
 					{
-						Editor.getScene().add(obj);
+						sceneEditor.levelData.setSceneObject(Editor.getScene(), obj, elem);
 					}, elem.name);
 
 					models.updateOptions();
