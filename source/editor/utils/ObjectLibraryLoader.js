@@ -35,6 +35,18 @@ function maybeApplyCoordinatesTransformation(obj, objSystem, sceneSystem)
 	}
 }
 
+function applyToMaterials(materials, func)
+{
+	if (materials.forEach)
+	{
+		return materials.map(func);
+	}
+	else
+	{
+		return func(materials);
+	}
+}
+
 ObjectLibraryLoader.loadTestLibs = function(variable)
 {
 	var loader = new FileLoader();
@@ -61,18 +73,31 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 
 		library.items.forEach(function(origElem)
 		{
-			var elem = Object.assign(library.defaultOptions, origElem);
+			var elem = Object.assign({}, library.defaultOptions, origElem);
 			var objectPath = libraryPath + elem.model;
-
+			var iconPath = elem.iconPath
+				? library.iconsBase.replace(/[/]$/, '') + '/' + elem.iconPath.replace(/^[/]/, '')
+				: Global.FILE_PATH + "icons/models/figures.png";
 
 			fbxLoader.load(objectPath, function(group)
 			{
+				var obj = maybeApplyCoordinatesTransformation(group.children[0], elem.coordinatesSystem, Editor.getCoordsSystem()).clone(true);
+
+				obj.material = applyToMaterials(obj.material, function(material)
+				{
+					material.emissive.r = 0.2;
+					material.emissive.g = 0.2;
+					material.emissive.b = 0.2;
+
+					return material;
+				});
+
+				obj.userData.selectable = true;
+
 				if (elem.pluginInsert)
 				{
-					models.addOption(Global.FILE_PATH + "icons/models/figures.png", function()
+					models.addOption(iconPath, function()
 					{
-						var obj = maybeApplyCoordinatesTransformation(group.children[0], elem.coordinatesSystem, Editor.getCoordsSystem()).clone(true);
-						obj.userData.selectable = true;
 						Editor.getScene().add(obj);
 					}, elem.name);
 
@@ -82,15 +107,12 @@ ObjectLibraryLoader.loadTestLibs = function(variable)
 
 				if (elem.pluginInsertMode)
 				{
-					var iconPath = elem.iconPath
-						? library.iconsBase.replace(/[/]$/, '') + '/' + elem.iconPath.replace(/^[/]/, '')
-						: Global.FILE_PATH + "icons/tools/select.png";
-
 					var id = importId + elem.name;
-					var object = maybeApplyCoordinatesTransformation(group.children[0], elem.coordinatesSystem, Editor.getCoordsSystem()).clone(true);
+					var object = obj;
 					var option = tool.addToggleOption(elem.name, iconPath, function()
 					{
 						insertModeToolBar.selectTool(id);
+						insertModeToolBar.parent.selectTool(insertModeToolBar.parent.mode);
 					});
 					option.id = id;
 					option.object = object;

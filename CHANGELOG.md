@@ -8,6 +8,7 @@
 - Removed particles related code from editor
 - Removed positional audio related code from editor
 - Cleaned up code (linting)
+- Library loading fixes
 
 ### V0.110
 

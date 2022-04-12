@@ -1476,6 +1476,38 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	}
 };
 
+function insertModeUpdate(th)
+{
+	if (th.helperInsertModeObject)
+	{
+		th.scene.remove(th.helperInsertModeObject);
+	}
+	th.helperInsertModeObject = th.insertModeToolBar.lastSelectedObject.clone(true);
+
+	var transformMaterial = function(material)
+	{
+		var newMaterial = material.clone();
+		newMaterial.wireframe = true;
+		return newMaterial;
+	};
+
+	var maybeUpdateMaterialWithFunc = function(obj, func)
+	{
+		if (obj.material.forEach)
+		{
+			obj.material = obj.material.map(transformMaterial);
+		}
+		else
+		{
+			obj.material = transformMaterial(obj.material);
+		}
+	};
+
+	maybeUpdateMaterialWithFunc(th.helperInsertModeObject, transformMaterial);
+
+	th.scene.add(th.helperInsertModeObject);
+}
+
 /**
  * Select transform tool, possible values are:
  * - SceneEditor.MOVE
@@ -1534,15 +1566,8 @@ SceneEditor.prototype.selectTool = function(tool)
 	{
 		if (this.insertModeToolBar.lastSelectedObject)
 		{
-			this.helperInsertModeObject = this.insertModeToolBar.lastSelectedObject.clone(true);
-			this.helperInsertModeObject.material = this.helperInsertModeObject.material.map(function(material)
-			{
-				var newMaterial = material.clone();
-				newMaterial.wireframe = true;
-				return newMaterial;
-			});
-
-			this.scene.add(this.helperInsertModeObject);
+			// Switching to insert mode or changing insert mode object
+			insertModeUpdate(this);
 		}
 
 		this.insertModeToolBar.setVisibility(true);
