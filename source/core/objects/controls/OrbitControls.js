@@ -200,12 +200,12 @@ OrbitControls.prototype.update = function(delta)
 	{
 		if (this.smooth === true)
 		{
-			this.speedOrientation.y += this.speed * this.sensitivity * (this.invertNavigation ? this.mouse.delta.y : -this.mouse.delta.y);
+			this.speedOrientation.y += this.speed * this.sensitivity * (this.invertNavigation ? -this.mouse.delta.y : this.mouse.delta.y);
 			this.speedOrientation.x -= this.speed * this.sensitivity * this.mouse.delta.x;
 		}
 		else
 		{
-			this.vector.y -= this.sensitivity * (this.invertNavigation ? this.mouse.delta.y : -this.mouse.delta.y);
+			this.vector.y -= this.sensitivity * (this.invertNavigation ? -this.mouse.delta.y : this.mouse.delta.y);
 			this.vector.x -= this.sensitivity * this.mouse.delta.x;
 		}
 		needsUpdate = true;

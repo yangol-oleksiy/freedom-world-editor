@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.115
+
+- Changed default settings for invert options (horizontal + vertical)
+
 ### V0.114
 
 - Implemented terrain painting in insert mode
