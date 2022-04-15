@@ -4,6 +4,7 @@
 
 - Implemented terrain painting in insert mode
 - Fixed insert toolbar position bug
+- Fixed linux build project bug
 
 ### V0.113
 
