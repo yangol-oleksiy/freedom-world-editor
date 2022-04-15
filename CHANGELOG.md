@@ -2,6 +2,10 @@
 
 ### V0.115
 
+- Removed docs folder from repository
+
+### V0.115
+
 - Changed default settings for invert options (horizontal + vertical)
 
 ### V0.114
