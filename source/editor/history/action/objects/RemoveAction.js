@@ -2,6 +2,7 @@ import {Object3D, Camera} from "three";
 import {Action} from "../Action.js";
 import {Editor} from "../../../Editor.js";
 import {AddAction} from "./AddAction.js";
+import {MultipleSelection} from "../../../gui/tab/scene-editor/utils/MultipleSelection.js";
 
 /**
  * Remove object from the scene.
@@ -14,7 +15,7 @@ import {AddAction} from "./AddAction.js";
 function RemoveAction(object, parent)
 {
 	Action.call(this);
-	
+
 	this.object = object;
 
 	this.parent = parent !== undefined ? parent : object.parent;
@@ -31,8 +32,11 @@ RemoveAction.prototype.apply = function()
 			scene.removeCamera(this.object);
 		}
 	}
-	
+
 	this.index = this.parent.children.indexOf(this.object);
+
+	MultipleSelection.maybeDeleteBoundingBoxForObject(this.parent, this.object);
+
 	this.parent.remove(this.object);
 
 	RemoveAction.updateGUI(this.object, this.parent);

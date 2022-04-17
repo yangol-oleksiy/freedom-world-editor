@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.119
+
+- Implemented delete functionality in multiple selection mode
+
 ### V0.118
 
 - Removed sidebar from editor visual part

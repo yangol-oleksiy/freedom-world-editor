@@ -45,6 +45,7 @@ import {OrientationCube} from "./utils/OrientationCube.js";
 import {ObjectIconHelper} from "./helpers/ObjectIconHelper.js";
 import {LineHelper} from "./helpers/LineHelper.js";
 import {LightProbeHelper} from "./helpers/LightProbeHelper.js";
+import {MultipleSelection} from "./utils/MultipleSelection.js";
 import {GridHelper} from "./helpers/GridHelper.js";
 import {EditorPlanarControls} from "./controls/EditorPlanarControls.js";
 import {EditorOrbitControls} from "./controls/EditorOrbitControls.js";
@@ -689,7 +690,6 @@ function SceneEditor(parent, closeable, container, index)
 	});
 
 	this.selectedAreas = [];
-	this.selectedWithAreaObjects = [];
 	this.canvas.resetCanvas();
 	this.levelData = new GameLevelData();
 }
@@ -1128,22 +1128,11 @@ SceneEditor.prototype.updateRaycasterFromMouse = function()
 	this.raycaster.setFromCamera(this.normalized, this.camera);
 };
 
-function cleanAreaSelectionBoundingBoxes(th)
-{
-	th.selectedWithAreaObjects.forEach(function(child)
-	{
-		if (child.userData.selectionHelper)
-		{
-			th.scene.remove(child);
-		}
-	});
-}
-
 SceneEditor.prototype.clearMultipleSelections = function()
 {
 	var th = this;
 
-	cleanAreaSelectionBoundingBoxes(this);
+	MultipleSelection.clearAreaSelectionBoundingBoxes(this);
 
 	this.selectedAreas.forEach(function(area)
 	{
@@ -1227,15 +1216,14 @@ function onAreaSelectionEnd(th, elem, helperCube)
 
 	});
 
+	// Reset selection
+	Editor.selection = [];
+
 	selectedChildren.forEach(function(child)
 	{
-		var boundingBox = new THREE.Box3();
-		boundingBox.setFromObject(child, true);
-		const helper = new THREE.Box3Helper( boundingBox, 0xff0000 );
-		helper.userData.selectionHelper = true;
-		th.selectedWithAreaObjects.push(helper);
+		Editor.selection.push(child);
 
-		th.scene.add(helper);
+		MultipleSelection.addBoundingBoxToSelectedObject(th.scene, child);
 	});
 }
 
