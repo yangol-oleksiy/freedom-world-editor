@@ -10,7 +10,7 @@ var LocaleEN = {
 	{
 		language: "EN",
 		name: "English",
-		version: 13
+		version: 14
 	},
 
 	// Actions
@@ -488,6 +488,7 @@ var LocaleEN = {
 	theme: "Theme",
 	historySize: "History size",
 	hintHistory: "How many changes are stored in the history.",
+	librariesSettings: "Objects Libraries",
 
 	// Resources
 	image: "Image",

@@ -8,6 +8,7 @@ import {JSHintSettingsTab} from "./JSHintSettingsTab.js";
 import {GeneralSettingsTab} from "./GeneralSettingsTab.js";
 import {EditorSettingsTab} from "./EditorSettingsTab.js";
 import {CodeSettingsTab} from "./CodeSettingsTab.js";
+import {LibrariesSettingsTab} from "./LibrariesSettingsTab.js";
 
 
 function SettingsTab(parent, closeable, container, index)
@@ -24,6 +25,7 @@ function SettingsTab(parent, closeable, container, index)
 	this.tab.addTab(RenderSettingsTab, false);
 	this.tab.addTab(CodeSettingsTab, false);
 	this.tab.addTab(JSHintSettingsTab, false);
+	this.tab.addTab(LibrariesSettingsTab, false);
 }
 
 SettingsTab.prototype = Object.create(TabComponent.prototype);

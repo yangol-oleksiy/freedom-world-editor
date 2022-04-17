@@ -1,6 +1,10 @@
 # Changelog
 
-### V0.115
+### V0.117
+
+- Implemented libraries internal setting (no editing yet)
+
+### V0.116
 
 - Removed docs folder from repository
 

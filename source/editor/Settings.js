@@ -220,6 +220,10 @@ Settings.prototype.loadDefault = function()
 		wsh: false, // Windows Scripting Host
 		yui: false // Yahoo User Interface
 	};
+
+	this.libraries = [
+		document.location.protocol + '//' + document.location.host + '/files/3dlib/'
+	];
 };
 
 /**

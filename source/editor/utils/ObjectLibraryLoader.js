@@ -47,12 +47,21 @@ function applyToMaterials(materials, func)
 	}
 }
 
-ObjectLibraryLoader.loadTestLibs = function(variable)
+ObjectLibraryLoader.loadSettingsLibraries = function()
 {
+	var th = this;
+
+	Editor.settings.libraries.forEach(function(libraryPath)
+	{
+		th.loadLibrary(libraryPath);
+	});
+};
+
+ObjectLibraryLoader.loadLibrary = function(libraryPath)
+{
+	console.log('Loading library ' + libraryPath);
 	var loader = new FileLoader();
 	var fbxLoader = new FBXLoader();
-
-	var libraryPath = document.location.protocol + '//' + document.location.host + '/files/3dlib/';
 
 	var editor = Editor.gui.tab.getTab(SceneEditor);
 	var sidebar = editor.sideBar;

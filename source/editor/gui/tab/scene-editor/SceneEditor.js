@@ -33,6 +33,7 @@ import {Video} from "../../../../core/resources/Video.js";
 import {VideoTexture} from "../../../../core/texture/VideoTexture.js";
 import {Viewport} from "../../../../core/objects/cameras/Viewport.js";
 import {GameLevelData} from "../../../utils/GameLevelData.js";
+import {ObjectLibraryLoader} from "../../../utils/ObjectLibraryLoader";
 import {TransformControls} from "./transform/TransformControls.js";
 import {ToolBar} from "./toolbar/ToolBar.js";
 import {InsertModeToolBar} from "./toolbar/InsertModeToolBar.js";
@@ -60,6 +61,7 @@ import {WireframeHelper} from "./helpers/WireframeHelper.js";
  */
 function SceneEditor(parent, closeable, container, index)
 {
+
 	TabComponent.call(this, parent, closeable, container, index, Locale.scene, Global.FILE_PATH + "icons/misc/scene.png");
 
 	var self = this;
@@ -897,6 +899,8 @@ SceneEditor.prototype.attach = function(scene)
 	this.scene.add(this.helperCube);
 
 	this.updateCameraControls(Editor.settings.editor.navigation, coordsSystem);
+
+	ObjectLibraryLoader.loadSettingsLibraries();
 };
 
 /**
