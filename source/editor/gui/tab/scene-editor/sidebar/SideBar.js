@@ -149,6 +149,12 @@ SideBar.prototype.updateSize = function()
  */
 SideBar.prototype.createObject = function()
 {
+	// TOOO: Remove return clause to show sidebar after cleanup
+	if (true)
+	{
+		return;
+	}
+
 	var self = this;
 
 	// Add Models
@@ -477,7 +483,7 @@ return target.set(x, y, z);`;
 	cameras.addOption(Global.FILE_PATH + "icons/camera/orthographic.png", function()
 	{
 		var camera = new OrthographicCamera(3, 2, OrthographicCamera.RESIZE_HORIZONTAL);
-		if (Editor.getCoordsSystem() === 'xzy') 
+		if (Editor.getCoordsSystem() === 'xzy')
 		{
 			camera.rotation.x = Math.PI / 2;
 			camera.rotation.y = Math.PI;

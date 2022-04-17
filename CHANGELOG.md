@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.118
+
+- Removed sidebar from editor visual part
+
 ### V0.117
 
 - Implemented libraries internal setting (no editing yet)
