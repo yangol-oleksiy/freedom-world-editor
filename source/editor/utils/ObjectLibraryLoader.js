@@ -7,6 +7,7 @@ import {SceneEditor} from "../gui/tab/scene-editor/SceneEditor.js";
 import {ButtonDrawer} from "../components/buttons/ButtonDrawer.js";
 import {Global} from "../Global.js";
 import {Locale} from "../locale/LocaleManager.js";
+import {MultipleSelection} from "../gui/tab/scene-editor/utils/MultipleSelection.js";
 
 /**
  * Utility class for loading 3d objects libraries.
@@ -106,7 +107,27 @@ ObjectLibraryLoader.loadLibrary = function(libraryPath)
 				{
 					models.addOption(iconPath, function()
 					{
-						sceneEditor.levelData.setSceneObject(Editor.getScene(), obj, elem);
+						if (sceneEditor.mode === SceneEditor.SELECT_MULTIPLE)
+						{
+							MultipleSelection.doEachSelectedField(function(x, y)
+							{
+								if (Editor.getCoordsSystem() === 'xzy')
+								{
+									var newObj = obj.clone(true);
+									newObj.position.x = x;
+									newObj.position.y = y;
+									sceneEditor.levelData.setSceneObject(Editor.getScene(), newObj, elem);
+								}
+								else
+								{
+									alert('Unimplemented');
+								}
+							});
+						}
+						else
+						{
+							sceneEditor.levelData.setSceneObject(Editor.getScene(), obj, elem);
+						}
 					}, elem.name);
 
 					models.updateOptions();

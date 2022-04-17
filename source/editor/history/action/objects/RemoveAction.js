@@ -1,8 +1,8 @@
 import {Object3D, Camera} from "three";
 import {Action} from "../Action.js";
 import {Editor} from "../../../Editor.js";
-import {AddAction} from "./AddAction.js";
 import {MultipleSelection} from "../../../gui/tab/scene-editor/utils/MultipleSelection.js";
+import {AddAction} from "./AddAction.js";
 
 /**
  * Remove object from the scene.

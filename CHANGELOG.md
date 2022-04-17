@@ -1,8 +1,12 @@
 # Changelog
 
+### V0.120
+
+- Implemented fill selected area functionality for area select mode
+
 ### V0.119
 
-- Implemented delete functionality in multiple selection mode
+- Implemented delete selected objects functionality for area select mode
 
 ### V0.118
 

@@ -689,7 +689,6 @@ function SceneEditor(parent, closeable, container, index)
 		}
 	});
 
-	this.selectedAreas = [];
 	this.canvas.resetCanvas();
 	this.levelData = new GameLevelData();
 }
@@ -1128,19 +1127,6 @@ SceneEditor.prototype.updateRaycasterFromMouse = function()
 	this.raycaster.setFromCamera(this.normalized, this.camera);
 };
 
-SceneEditor.prototype.clearMultipleSelections = function()
-{
-	var th = this;
-
-	MultipleSelection.clearAreaSelectionBoundingBoxes(this);
-
-	this.selectedAreas.forEach(function(area)
-	{
-		th.scene.remove(area);
-	});
-	this.selectedAreas = [];
-};
-
 function onAreaSelectionStart(th, elem)
 {
 	th.areaSelectStartPoint = {
@@ -1151,80 +1137,14 @@ function onAreaSelectionStart(th, elem)
 
 	if (!th.keyboard.keyPressed(Keyboard.CTRL))
 	{
-		th.clearMultipleSelections();
+		MultipleSelection.clearMultipleSelections(th);
 	}
 }
 
 
 function onAreaSelectionEnd(th, elem, helperCube)
 {
-	var selectedArea = helperCube.clone();
-	selectedArea.name = 'selectedArea';
-
-	th.scene.add(selectedArea);
-	th.selectedAreas.push(selectedArea);
-	var selectedChildren = th.scene.children.filter(function(child)
-	{
-		if (!child.userData.selectable)
-		{
-			return false;
-		}
-
-		var lessX, lessY, biggerX, biggerY;
-
-		if (th.areaSelectStartPoint.x > Math.round(elem.point.x))
-		{
-			lessX = Math.round(elem.point.x);
-			biggerX = th.areaSelectStartPoint.x;
-		}
-		else
-		{
-			lessX = th.areaSelectStartPoint.x;
-			biggerX = Math.round(elem.point.x);
-		}
-
-		if (Editor.getCoordsSystem() === 'xzy')
-		{
-			if (th.areaSelectStartPoint.y > Math.round(elem.point.y))
-			{
-				lessY = Math.round(elem.point.y);
-				biggerY = th.areaSelectStartPoint.y;
-			}
-			else
-			{
-				lessY = th.areaSelectStartPoint.y;
-				biggerY = Math.round(elem.point.y);
-			}
-
-			return child.position.x >= lessX && child.position.y >= lessY && child.position.x <= biggerX && child.position.y <= biggerY;
-		}
-		else
-		{
-			if (th.areaSelectStartPoint.z > Math.round(elem.point.z))
-			{
-				lessY = Math.round(elem.point.z);
-				biggerY = th.areaSelectStartPoint.z;
-			}
-			else
-			{
-				lessY = th.areaSelectStartPoint.z;
-				biggerY = Math.round(elem.point.z);
-			}
-
-			return child.position.x >= lessX && child.position.z >= lessY && child.position.x <= biggerX && child.position.z <= biggerY;
-		}
-
-	});
-
-	// Reset selection
-	Editor.selection = [];
-
-	selectedChildren.forEach(function(child)
-	{
-		Editor.selection.push(child);
-
-		MultipleSelection.addBoundingBoxToSelectedObject(th.scene, child);
-	});
+	MultipleSelection.confirmSelectedArea(th, elem, helperCube);
 }
 
 function onDragInInsertMode(th, elem, xPos, yPos)
@@ -1578,7 +1498,7 @@ SceneEditor.prototype.selectTool = function(tool)
 
 	if (this.mode !== SceneEditor.SELECT_MULTIPLE)
 	{
-		this.clearMultipleSelections();
+		MultipleSelection.clearMultipleSelections(this);
 	}
 
 	this.sideBar.setVisibility(this.mode !== SceneEditor.INSERT);
