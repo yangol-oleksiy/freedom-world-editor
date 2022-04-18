@@ -831,7 +831,7 @@ SceneEditor.prototype.updateSettings = function()
 	this.transform.space = Editor.settings.editor.transformationSpace;
 	this.transform.snap = Editor.settings.editor.snap;
 	this.transform.translationSnap = Editor.settings.editor.gridSpacing;
-	this.transform.rotationSnap = Editor.settings.editor.snapAngle;
+	this.transform.rotationSnap = Math.PI / 8;
 };
 
 SceneEditor.prototype.destroy = function()

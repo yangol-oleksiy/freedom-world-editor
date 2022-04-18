@@ -121,19 +121,6 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.add(this.snap);
 	this.form.nextRow();
 
-	// Snap angle
-	this.form.addText("Snap angle");
-	this.snapAngle = new NumberBox(this.form);
-	this.snapAngle.size.set(60, 18);
-	this.snapAngle.setRange(0.01, 3.14);
-	this.snapAngle.setStep(0.01);
-	this.snapAngle.setOnChange(function()
-	{
-		Editor.settings.editor.snapAngle = self.snapAngle.getValue();
-	});
-	this.form.add(this.snapAngle);
-	this.form.nextRow();
-
 	// Tranformations space
 	this.form.addText("Transformations space");
 	this.transformationSpace = new DropdownList(this.form);
@@ -398,7 +385,6 @@ EditorSettingsTab.prototype.activate = function()
 
 	// Editor
 	this.snap.setValue(Editor.settings.editor.snap);
-	this.snapAngle.setValue(Editor.settings.editor.snapAngle);
 	this.gridEnabled.setValue(Editor.settings.editor.gridEnabled);
 	this.gridSize.setValue(Editor.settings.editor.gridSize);
 	this.gridSpacing.setValue(Editor.settings.editor.gridSpacing);

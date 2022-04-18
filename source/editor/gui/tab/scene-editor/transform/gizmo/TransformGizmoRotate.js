@@ -16,8 +16,8 @@ function TransformGizmoRotate()
 {
 	this.handleGizmos =
 	{
-		X: [[new Line(new CircleGeometry(1, "x", 0.5), GizmoLineMaterial.red)]],
-		Y: [[new Line(new CircleGeometry(1, "y", 0.5), GizmoLineMaterial.green)]],
+		// X: [[new Line(new CircleGeometry(1, "x", 0.5), GizmoLineMaterial.red)]],
+		// Y: [[new Line(new CircleGeometry(1, "y", 0.5), GizmoLineMaterial.green)]],
 		Z: [[new Line(new CircleGeometry(1, "z", 0.5), GizmoLineMaterial.blue)]],
 		E: [[new Line(new CircleGeometry(1.25, "z", 1), GizmoLineMaterial.yellow)]],
 		XYZE: [[new Line(new CircleGeometry(1, "z", 1), GizmoLineMaterial.grey)]]
@@ -152,18 +152,18 @@ TransformGizmoRotate.prototype.applyChanges = function(controls)
 		actions.push(new ChangeAction(object, "z", object.z, controls.attributes[i].oldQuaternion.z));
 		actions.push(new ChangeAction(object, "w", object.w, controls.attributes[i].oldQuaternion.w));
 	}
-	
+
 	Editor.addAction(new ActionBundle(actions));
 };
 
 TransformGizmoRotate.prototype.transformObject = function(controls)
 {
 	var planeIntersect = controls.intersectObjects([controls.gizmo.activePlane]);
-	if (planeIntersect === false) 
+	if (planeIntersect === false)
 	{
 		return;
 	}
-	
+
 	for (var i = 0; i < controls.objects.length; i++)
 	{
 		controls.point.copy(planeIntersect.point);

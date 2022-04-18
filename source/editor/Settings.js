@@ -98,7 +98,6 @@ Settings.prototype.loadDefault = function()
 	this.editor =
 	{
 		snap: false,
-		snapAngle: 0.1,
 		keepTransformMove: true,
 		gridSize: 500,
 		gridSpacing: 5,
