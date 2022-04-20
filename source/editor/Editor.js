@@ -925,16 +925,11 @@ Editor.addXYZScene = function(material)
 	sky.autoUpdate = false;
 	scene.add(sky);
 
-	// Box
-	var model = new Mesh(Editor.defaultGeometry, material);
-	model.name = "box";
-	scene.add(model);
-
 	// Floor
 	var ground = new BoxBufferGeometry(20, 1, 20);
 	ground.name = "ground";
 
-	model = new Mesh(ground, material);
+	var model = new Mesh(ground, material);
  	model.position.set(0, -1.0, 0);
 	model.name = "ground";
 	scene.add(model);
@@ -972,16 +967,11 @@ Editor.addXZYScene = function(material)
 
 	scene.add(sky);
 
-	// Box
-	var model = new Mesh(Editor.defaultGeometry, material);
-	model.name = "box";
-	scene.add(model);
-
 	// Floor
 	var ground = new BoxBufferGeometry(20, 20, 1);
 	ground.name = "ground";
 
-	model = new Mesh(ground, material);
+	var model = new Mesh(ground, material);
  	model.position.set(0, 0, -1.0);
 	model.name = "ground" ;
 	scene.add(model);
