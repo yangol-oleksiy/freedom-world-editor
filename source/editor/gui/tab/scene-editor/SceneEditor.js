@@ -1,4 +1,4 @@
-import {AxesHelper, Bone, BoxHelper, BufferGeometry, Camera, CameraHelper, DirectionalLight, DirectionalLightHelper, Geometry, HemisphereLight, HemisphereLightHelper, Light, LightProbe, Line, LineBasicMaterial, Material, Mesh, MeshStandardMaterial, Object3D, PointLight, PointLightHelper, Points, PointsMaterial, Raycaster, RectAreaLight, Scene, ShaderMaterial, SkinnedMesh, SpotLight, SpotLightHelper, Sprite, SpriteMaterial, Texture, Vector2, PlaneGeometry, MeshBasicMaterial, MeshPhongMaterial, BoxGeometry} from "three";
+import {AxesHelper, Bone, BoxHelper, BufferGeometry, Camera, CameraHelper, DirectionalLight, DirectionalLightHelper, Geometry, HemisphereLight, HemisphereLightHelper, Light, LightProbe, Line, LineBasicMaterial, Material, Mesh, MeshStandardMaterial, Object3D, PointLight, PointLightHelper, Points, PointsMaterial, Raycaster, RectAreaLight, Scene, ShaderMaterial, SkinnedMesh, SpotLight, SpotLightHelper, Sprite, SpriteMaterial, Texture, Vector2, PlaneGeometry, MeshBasicMaterial, MeshPhongMaterial, BoxGeometry, Vector3, Quaternion, Euler} from "three";
 import {ActionBundle} from "../../../history/action/ActionBundle.js";
 import {AddResourceAction} from "../../../history/action/resources/AddResourceAction.js";
 import {Audio} from "../../../../core/resources/Audio.js";
@@ -1334,20 +1334,26 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 
 		if (this.mode === SceneEditor.SELECT && selectedObj)
 		{
+			var actualObject = selectedObj.object;
+
+			while (actualObject.parent != th.scene) {
+				actualObject = actualObject.parent;
+			}
+
 			if (this.keyboard.keyPressed(Keyboard.CTRL))
 			{
-				if (Editor.isSelected(selectedObj.object))
+				if (Editor.isSelected(actualObject))
 				{
-					Editor.unselectObject(selectedObj.object);
+					Editor.unselectObject(actualObject);
 				}
 				else
 				{
-					Editor.addToSelection(selectedObj.object);
+					Editor.addToSelection(actualObject);
 				}
 			}
 			else
 			{
-				Editor.selectObject(selectedObj.object);
+				Editor.selectObject(actualObject);
 			}
 		}
 	}
@@ -1618,6 +1624,11 @@ SceneEditor.prototype.updateSelection = function()
 		{
 			this.objectHelper.add(new SkeletonHelper(object.parent));
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
+		}
+		// Mesh with
+		else if (object instanceof Object3D && object.userData.isRotationFixObject)
+		{
+			this.objectHelper.add(new WireframeHelper(object.children[0], 0xFFFF00));
 		}
 		// Mesh
 		else if (object instanceof Mesh)
