@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.122
+
+- Project readme rewrite
+
 ### V0.121
 
 - Removed xy coordinates for rotation controls, removed snapAngle option, set snap angle to 22.5 degrees (1/16 of complete circle)

@@ -1,52 +1,100 @@
-# Freedom world editor
 
-- Freedom World Editor is an open source scene editor for Freedom World online role playing game.
-- Freedom World Editor is forked from nunuStudio project https://github.com/tentone/nunuStudio
-- Powered by [three.js](https://github.com/mrdoob/three.js).
-- Fully featured visual editor, supports a wide range of file formats, the tools are open source and completely free to use for both personal and commercial usage.
-- Visual scene editor, code editor, visual tools to edit textures, materials, particle emitters and a powerful scripting API that allows the creation of complex applications using [JavaScript](https://www.javascript.com/) or [Python](https://www.python.org/).
-- Fully featured [web version](https://www.nunustudio.org/build/editor/index.html) of the original nunuStudio editor is available on the nunuStudio project page.
+# Freedom World Editor
 
-<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/web.png">
+## The main goal of Freedom World Editor
 
-- nunuStudio [API Documentation](https://nunustudio.org/docs) with full details about the inner working of every module are available. These can also be generated from the project source code by running `npm run docs`.
-- To build the project first install [Node.js LTS](https://nodejs.org/en/) and NPM:
-  - The building system generates minified builds for the runtime and for the editor
-  - Documentation generation uses [YuiDocs](https://yui.github.io/yuidoc/)
-  - Install dependencies from npm by running `npm install --legacy-peer-deps` and additional non-npm packages using `npm run napa`
-  - Build  editor, runtime and documentation, run `npm run build`
+### In short
 
+**Freedom World Editor** (**FWE**) is a mapmaking tool and it is about placing, managing map objects on a 2d/3d game grid.
+And it tends to be extensible enough for everything other, map-related and project-specific.
 
-### Screenshots
+### What maps can be made using Freedom World Editor ?
 
-<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/2.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/3.png">
-<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/4.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/1.png">
-<img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/5.png"><img src="https://raw.githubusercontent.com/tentone/nunuStudio/master/source/page/src/assets/github/6.png">
+Has potential to be used in 90+% of games you make.
+Can be easily used for near 30% of games at this point.
+Hard to use for some games once but easy if you'll adapt editor for your needs. So usability of **FWE** software depends much on developer who uses it.
 
+#### Well suited for
+Top-down games (simple RTS, RPG, shooters), platformers,
+any other games with grid structure of levels.
 
-### Features
+#### Hard to use for
+* Any games with hex grid. Hex grid is not supported now but could be.
+* Games with many unique models on level.
 
-- Visual application editor
-  - Drag and drop files directly into the project (images, video, models, ...)
-  - Manage project resources.
-  - Edit material, textures, shaders, code, ...
-- Built on [three.js](https://threejs.org/) library
-  - Real time lighting and shadow map support
-  - three.js libraries can be imported into the editor
-  - Wide range of file formats supported (gltf, dae, obj, fbx, 3ds, ...)
-- Compatible with [WebXR](https://www.w3.org/TR/webxr/) for Virtual Reality and Augmented Reality
+#### Not suited for
+* Complex (heightmap-based) terrain editing. It's not supported now. No terrain editing but you can place some terrain inside of editor as an object. Also you are able to create and use some plugin for terrain.
+* Creating unique design buildings (it's complex feature and shouldn't be done soon)
 
+## Multi project tool
 
-- The project uses [Webpack](https://webpack.js.org/) to build and bundle its code base.
-  - The building system generates minified builds for the runtime and for the editor
-  - JavaScript is optimized and minified using [Uglify](https://www.npmjs.com/package/uglify-js)
-  - Documentation generation uses [YuiDocs](https://yui.github.io/yuidoc/)
-- To build the project first install [Java](https://www.oracle.com/java/technologies/javase-jdk8-downloads.html), [Node.js](https://nodejs.org/en/) and NPM and ensure that java command is working properly.
-- Install dependencies from npm by running `npm install` some dependencies are not available on npm and have to be installed by running `npm install napa`
-- Install the dependencies for the project webpage running `cd source/page && npm install`
-- Build  editor, runtime and documentation, run `npm run build`
+Freedom World Editor is designed to be used for any game project in general.
+This is why it called **Freedom** World Editor.
 
-### License
+This could be accomplished because of editor design.
 
-- The project is distributed under a MIT license that allow for commercial usage of the platform without any cost.
-- The license is available on the project GitHub page
+Here are base concepts which give **FWE** flexibility and power.
+
+* Libraries concept (flexibility for level designers mostly)
+* Placeholders concept (flexibility for developers and level designers)
+* Open source and extensibility (flexibility for game developers mostly)
+ * Simple level import/export format (ability connecting to other software)
+
+### Libraries concept
+
+Objects you can place on a map are organized into libraries.
+
+**Library of objects** is a set of 3d models in specific format and configuration that glues all in one and allows all the libraries to appear inside of editor.
+
+Libraries can be created once and be open sourced and shared or unavailable to others.
+
+You can use one library for dark gothic game and other library for nice and light nature scenes. Libraries created once and can be reusable. So it's a subject for sharing and contributing. And also you can create different maps/games based on different libraries.
+
+#### Libraries examples
+* Game based libraries
+	* Library of 2d tiles for platformer
+	* Library of 3d objects for some RTS
+	* etc...
+* Game setting based libraries
+	* Library of objects in multiplication setting
+	* Library of objects in dark setting
+	* etc...
+* Scene specific libraries
+	* Library of nature objects (trees, plants etc)
+	* Library of house objects (table, chair etc)
+	* Library of wrecks to use it in post-apocalyptic worlds
+	* etc...
+* Game specific libraries
+	* Library with unique objects that can't be reused because of closing source
+	* Library of placeholder objects for specific game logic
+
+So if you are game developer you are configuring **FWE** for using specific libraries, extend it as you need and you can deliver **simple game-specific unique level editor** to level designers.
+
+And that is much power and flexibility.
+
+### Placeholders concept
+
+**FWE** is good for managing objects of few types.  If you need a wood part with 10 unique trees there is no point to make library of 10 trees for it. It is an option but there are other options.
+
+You can
+* Create area placeholder object and programmatically place 10 different trees on that area during level run. So you'll see some placeholder object during level design
+* Using single placeholder object of "tree" type and programmatically make different trees during level run. So during level design you'll see single tree type 10 times but during level running you'll see different trees.
+* Make a plugin "random tree" so you'll have single button "tree" to place trees but any tree will have option to choose different model in place
+
+There is much potential in using placeholders concept and it gives editor flexibility and power.
+
+### Open source and extensibility
+
+Currently **FWE** is open source software so you can do almost anything you want with it. **MIT** license gives a lot of freedom.
+You need to know **JavaScript** to extend editor.
+
+There are some plans to make API for plugin making but currently only modifications to the source is the way.
+
+### Simple level import/export format
+Any object of level is a simple data consisting of
+
+* Coordinates
+* Rotation
+* Object type
+
+So it's easy to import/export levels using json structure.
