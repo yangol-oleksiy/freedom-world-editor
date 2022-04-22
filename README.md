@@ -102,3 +102,7 @@ So it's easy to import/export levels using json structure.
 ## Deatiled features List
 
 [Here is detailed features list](FEATURES.md)
+
+## CHANGELOG
+
+[Here is a changelog](CHANGELOG.md)

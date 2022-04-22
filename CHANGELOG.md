@@ -4,6 +4,7 @@
 
 - Rewritten project readme
 - Added features document page
+- Updated readme with a changelog link 
 
 ### V0.121
 
