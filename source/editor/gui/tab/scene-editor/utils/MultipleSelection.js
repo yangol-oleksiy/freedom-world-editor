@@ -43,7 +43,10 @@ MultipleSelection.clearAreaSelectionBoundingBoxes = function(th)
 	{
 		if (child.userData.selectionHelper)
 		{
-			th.scene.remove(child);
+			if (th.scene)
+			{
+				th.scene.remove(child);
+			}
 		}
 	});
 };

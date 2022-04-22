@@ -18,18 +18,18 @@ function TransformGizmoRotate()
 	{
 		// X: [[new Line(new CircleGeometry(1, "x", 0.5), GizmoLineMaterial.red)]],
 		// Y: [[new Line(new CircleGeometry(1, "y", 0.5), GizmoLineMaterial.green)]],
-		Z: [[new Line(new CircleGeometry(1, "z", 0.5), GizmoLineMaterial.blue)]],
+		Z: [[new Line(new CircleGeometry(1, "z", 0.5), GizmoLineMaterial.blue)]]
 		// E: [[new Line(new CircleGeometry(1.25, "z", 1), GizmoLineMaterial.yellow)]],
 		// XYZE: [[new Line(new CircleGeometry(1, "z", 1), GizmoLineMaterial.grey)]]
 	};
 
 	this.pickerGizmos =
 	{
-		//X: [[new Mesh(TransformGizmoRotate.torus, TransformGizmo.pickerMaterial), [0, 0, 0], [0, - Math.PI / 2, - Math.PI / 2]]],
-		//Y: [[new Mesh(TransformGizmoRotate.torus, TransformGizmo.pickerMaterial), [0, 0, 0], [Math.PI / 2, 0, 0]]],
-		Z: [[new Mesh(TransformGizmoRotate.torus, TransformGizmo.pickerMaterial), [0, 0, 0], [0, 0, - Math.PI / 2]]],
-		//E: [[new Mesh(TransformGizmoRotate.torusBig, TransformGizmo.pickerMaterial)]],
-		//XYZE: [[new Mesh(new Geometry())]]
+		// X: [[new Mesh(TransformGizmoRotate.torus, TransformGizmo.pickerMaterial), [0, 0, 0], [0, - Math.PI / 2, - Math.PI / 2]]],
+		// Y: [[new Mesh(TransformGizmoRotate.torus, TransformGizmo.pickerMaterial), [0, 0, 0], [Math.PI / 2, 0, 0]]],
+		Z: [[new Mesh(TransformGizmoRotate.torus, TransformGizmo.pickerMaterial), [0, 0, 0], [0, 0, - Math.PI / 2]]]
+		// E: [[new Mesh(TransformGizmoRotate.torusBig, TransformGizmo.pickerMaterial)]],
+		// XYZE: [[new Mesh(new Geometry())]]
 	};
 
 	TransformGizmo.call(this);

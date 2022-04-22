@@ -61,6 +61,22 @@ GameLevelData.prototype.processSceneObjectBeforeSettingNewOne = function(scene, 
 
 GameLevelData.prototype.setSceneObject = function(scene, obj, objOptions = {})
 {
+	if (obj.rotation.x !== 0 || obj.rotation.y !== 0 || obj.rotation.z !== 0)
+	{
+		var newObj = new THREE.Object3D();
+		newObj.add(obj);
+		newObj.name = 'rotationFixObject';
+		newObj.userData.isRotationFixObject = true;
+		newObj.position.copy(obj.position);
+		newObj.parent = scene;
+
+		obj.position.x = 0;
+		obj.position.y = 0;
+		obj.position.z = 0;
+
+		obj = newObj;
+	}
+
 	obj.userData.selectable = true;
 
 	var key = Editor.getCoordsSystem() === 'xzy'
@@ -74,22 +90,14 @@ GameLevelData.prototype.setSceneObject = function(scene, obj, objOptions = {})
 		options: objOptions
 	});
 
-	// We only use Z rotation (21.04.2022) so it's ok if z is non-zero, rotation controls work well with it
-	if (obj.rotation.x !== 0 || obj.rotation.y !== 0) {
-		var newObj = new THREE.Object3D();
-		newObj.add(obj);
-		newObj.name = 'rotationFixObject';
-		newObj.userData.isRotationFixObject = true;
-		scene.add(newObj);
-	} else {
-		scene.add(obj);
-	}
-
+	scene.add(obj);
 
 	this.processSceneObjectsAfterSetting(scene, obj, objOptions, key);
 
 	this.lastInsertedX = obj.position.x;
 	this.lastInsertedY = Editor.getCoordsSystem() === 'xzy' ? obj.position.y : obj.position.z;
+
+	return obj;
 };
 
 export {GameLevelData};

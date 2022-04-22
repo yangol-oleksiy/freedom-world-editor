@@ -1336,7 +1336,8 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 		{
 			var actualObject = selectedObj.object;
 
-			while (actualObject.parent != th.scene) {
+			while (actualObject.parent !== th.scene)
+			{
 				actualObject = actualObject.parent;
 			}
 
