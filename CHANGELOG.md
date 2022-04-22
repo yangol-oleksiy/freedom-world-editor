@@ -2,7 +2,8 @@
 
 ### V0.122
 
-- Project readme rewrite
+- Rewritten project readme
+- Added features document page
 
 ### V0.121
 

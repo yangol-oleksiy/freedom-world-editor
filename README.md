@@ -98,3 +98,7 @@ Any object of level is a simple data consisting of
 * Object type
 
 So it's easy to import/export levels using json structure.
+
+## Deatiled features List
+
+[Here is detailed features list](FEATURES.md)
