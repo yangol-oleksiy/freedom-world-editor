@@ -21,17 +21,17 @@
 * [x] Load scene
 * [x] Load objects library internal function
 * [ ] Library features
-  * [x] Choose object name (item option *name*)
-	* [x] Choose object 3d model (item option *model*)
+  * [x] Choose object name (item option **name**)
+	* [x] Choose object 3d model (item option **model**)
     * [x] Import object in fbx model format
-  * [x] Choose object icon path to display in menu (item option *iconPath*)
+  * [x] Choose object icon path to display in menu (item option **iconPath**)
   * [x] Flags (boolean item options)
-    * [x] Flag *completePreview* for previewing object before insert in wireframe mode or complete mode
-    * [x] Flag *pluginInsert* to enable/disable inserting object in select mode
-    * [x] Flag *pluginInsertMode* to enable/disable inserting object in insert mode
-  * [x] Choose object item types (array) option *itemTypes*
-    * [x] *tile* item type for 1x1 meter objects and guaranties other tile objects are removed on place before inserting new one
-    * [x] Other item types (*tree*, *house* etc.)
-  * [x] Classify library object to XZY or XYZ coordinate system so it can be imported properly (option *coordinatesSystem* with value "*XZY*" or "*XYZ*")
-  * [x] Set initial scale (**initialScale** item option) for library object
+    * [x] Flag **completePreview** for previewing object before insert in wireframe mode or complete mode
+    * [x] Flag **pluginInsert** to enable/disable inserting object in select mode
+    * [x] Flag **pluginInsertMode** to enable/disable inserting object in insert mode
+  * [x] Choose object item types (array) option **itemTypes**
+    * [x] **tile** item type for 1x1 meter objects and guaranties other tile objects are removed on place before inserting new one
+    * [x] Other item types (**tree**, **house** etc.)
+  * [x] Classify library object to XZY or XYZ coordinate system so it can be imported properly (option **coordinatesSystem** with value "**XZY**" or "**XYZ**")
+  * [x] Setting initial scale (**initialScale** item option) for library object
   * [x] Choose icon base path for library (root option *iconsBase*), so icons paths can be relative
