@@ -20,3 +20,17 @@
 * [x] Save scene
 * [x] Load scene
 * [x] Load objects library internal function
+* [ ] Library features
+  * [x] Choose object name
+	* [x] Choose object 3d model
+    * [x] Import object in fbx model format
+  * [x] Choose object icon path to display in menu
+  * [x] Flags
+    * [x] Flag for previewing object before insert in wireframe mode or complete mode
+    * [x] Flag to enable/disable inserting object in select mode
+    * [x] Flag to enable/disable inserting object in insert mode
+  * [x] Choose object item types (array)
+    * [x] tile item type for 1x1 meter objects and guaranties other tile objects are removed on place before inserting new one
+    * [x] Other item types (tree, house etc.)
+  * [x] Classify library object to XZY or XYZ coordinate system so it can be imported properly
+  * [x] Choose icon base path for library, so icons paths can be relative
