@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.123
+
+- Implemented initialScale item option for object library configuration
+
 ### V0.122
 
 - Rewritten project readme

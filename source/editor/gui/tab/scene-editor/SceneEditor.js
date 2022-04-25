@@ -1424,6 +1424,7 @@ function insertModeUpdate(th)
 	{
 		th.scene.remove(th.helperInsertModeObject);
 	}
+
 	th.helperInsertModeObject = th.insertModeToolBar.lastSelectedObject.clone(true);
 
 	var transformMaterial = function(material)
@@ -1457,7 +1458,22 @@ function insertModeUpdate(th)
 
 	maybeUpdateMaterialWithFunc(th.helperInsertModeObject, transformMaterial);
 
-	th.scene.add(th.helperInsertModeObject);
+		if (th.insertModeToolBar.lastSelectedObjectOptions.initialScale)
+		{
+			var object3dWrapper = new Object3D();
+			object3dWrapper.add(th.helperInsertModeObject);
+
+			object3dWrapper.scale.x = th.insertModeToolBar.lastSelectedObjectOptions.initialScale;
+			object3dWrapper.scale.y = th.insertModeToolBar.lastSelectedObjectOptions.initialScale;
+			object3dWrapper.scale.z = th.insertModeToolBar.lastSelectedObjectOptions.initialScale;
+			th.helperInsertModeObject = object3dWrapper;
+
+			scene.add(object3dWrapper)
+		}
+		else
+		{
+			th.scene.add(th.helperInsertModeObject);
+		}
 }
 
 /**

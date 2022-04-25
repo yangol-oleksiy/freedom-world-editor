@@ -77,6 +77,12 @@ GameLevelData.prototype.setSceneObject = function(scene, obj, objOptions = {})
 		obj = newObj;
 	}
 
+	if (objOptions.initialScale) {
+		obj.scale.x = objOptions.initialScale;
+		obj.scale.y = objOptions.initialScale;
+		obj.scale.z = objOptions.initialScale;
+	}
+
 	obj.userData.selectable = true;
 
 	var key = Editor.getCoordsSystem() === 'xzy'

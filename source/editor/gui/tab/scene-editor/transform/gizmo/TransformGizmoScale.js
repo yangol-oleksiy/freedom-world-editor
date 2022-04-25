@@ -1,4 +1,4 @@
-import {Geometry, Mesh, BoxGeometry, BufferGeometry, Float32BufferAttribute, Line, BoxBufferGeometry, CylinderBufferGeometry, Matrix4} from "three";
+import {Geometry, Mesh, BoxGeometry, BufferGeometry, Float32BufferAttribute, Line, BoxBufferGeometry, CylinderBufferGeometry, SphereBufferGeometry, Matrix4} from "three";
 import {ChangeAction} from "../../../../../history/action/ChangeAction.js";
 import {ActionBundle} from "../../../../../history/action/ActionBundle.js";
 import {GizmoMaterial} from "../GizmoMaterial.js";
@@ -35,7 +35,7 @@ function TransformGizmoScale()
 		X: [[new Mesh(arrowGeometry, GizmoMaterial.red), [0.5, 0, 0], [0, 0, - Math.PI / 2]], [new Line(x, GizmoLineMaterial.red)]],
 		Y: [[new Mesh(arrowGeometry, GizmoMaterial.green), [0, 0.5, 0]], [new Line(y, GizmoLineMaterial.green)]],
 		Z: [[new Mesh(arrowGeometry, GizmoMaterial.blue), [0, 0, 0.5], [Math.PI / 2, 0, 0]], [new Line(z, GizmoLineMaterial.blue)]],
-		XYZ: [[new Mesh(new BoxBufferGeometry(0.125, 0.125, 0.125), GizmoMaterial.whiteAlpha)]]
+		XYZ: [[new Mesh(new SphereBufferGeometry(0.4, 0.4, 0.4), GizmoMaterial.whiteAlpha)]]
 	};
 
 	this.pickerGizmos =
@@ -43,7 +43,7 @@ function TransformGizmoScale()
 		X: [[new Mesh(new CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0.6, 0, 0], [0, 0, - Math.PI / 2]]],
 		Y: [[new Mesh(new CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0.6, 0]]],
 		Z: [[new Mesh(new CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0, 0.6], [Math.PI / 2, 0, 0]]],
-		XYZ: [[new Mesh(new BoxBufferGeometry(0.4, 0.4, 0.4), TransformGizmo.pickerMaterial)]]
+		XYZ: [[new Mesh(new SphereBufferGeometry(0.4, 0.4, 0.4), TransformGizmo.pickerMaterial)]]
 	};
 
 	TransformGizmo.call(this);
@@ -107,6 +107,11 @@ TransformGizmoScale.prototype.applyChanges = function(controls)
 	Editor.addAction(new ActionBundle(actions));
 };
 
+function snapScale(scale)
+{
+	return Math.floor(scale * 10) / 10;
+}
+
 TransformGizmoScale.prototype.transformObject = function(controls)
 {
 	var planeIntersect = controls.intersectObjects([controls.gizmo.activePlane]);
@@ -123,7 +128,7 @@ TransformGizmoScale.prototype.transformObject = function(controls)
 
 		if (controls.axis === "XYZ")
 		{
-			controls.toolScale = 1 + controls.point.y;
+			controls.toolScale = 1 + snapScale(controls.point.y);
 
 			controls.objects[i].scale.copy(controls.attributes[i].oldScale);
 			controls.objects[i].scale.multiplyScalar(controls.toolScale);
@@ -134,15 +139,15 @@ TransformGizmoScale.prototype.transformObject = function(controls)
 
 			if (controls.axis === "X")
 			{
-				controls.objects[i].scale.x = controls.attributes[i].oldScale.x * (1 + controls.point.x);
+				controls.objects[i].scale.x = snapScale(controls.attributes[i].oldScale.x * (1 + controls.point.x));
 			}
 			else if (controls.axis === "Y")
 			{
-				controls.objects[i].scale.y = controls.attributes[i].oldScale.y * (1 + controls.point.y);
+				controls.objects[i].scale.y = snapScale(controls.attributes[i].oldScale.y * (1 + controls.point.y));
 			}
 			else if (controls.axis === "Z")
 			{
-				controls.objects[i].scale.z = controls.attributes[i].oldScale.z * (1 + controls.point.z);
+				controls.objects[i].scale.z = snapScale(controls.attributes[i].oldScale.z * (1 + controls.point.z));
 			}
 		}
 	}
