@@ -1468,7 +1468,7 @@ function insertModeUpdate(th)
 			object3dWrapper.scale.z = th.insertModeToolBar.lastSelectedObjectOptions.initialScale;
 			th.helperInsertModeObject = object3dWrapper;
 
-			scene.add(object3dWrapper)
+			th.scene.add(object3dWrapper)
 		}
 		else
 		{
