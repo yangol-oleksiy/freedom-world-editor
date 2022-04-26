@@ -34,4 +34,4 @@
     * [x] Other item types (**tree**, **house** etc.)
   * [x] Classify library object to XZY or XYZ coordinate system so it can be imported properly (option **coordinatesSystem** with value "**XZY**" or "**XYZ**")
   * [x] Setting initial scale (**initialScale** item option) for library object
-  * [x] Choose icon base path for library (root option *iconsBase*), so icons paths can be relative
+  * [x] Choose icon base path for library (root option **iconsBase**), so icons paths can be relative
