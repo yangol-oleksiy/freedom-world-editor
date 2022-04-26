@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.124
+
+- Improved library loading process (loading via promises)
+
 ### V0.123
 
 - Implemented initialScale item option for object library configuration
