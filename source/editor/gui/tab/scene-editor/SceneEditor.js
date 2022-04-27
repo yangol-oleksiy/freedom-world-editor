@@ -503,35 +503,6 @@ function SceneEditor(parent, closeable, container, index)
 	this.setCameraMode(SceneEditor.PERSPECTIVE);
 
 	/**
-	 * Transformation controls mode can be local or world.
-	 *
-	 * @attribute transformationSpace
-	 * @type {DropdownList}
-	 */
-	this.transformationSpace = new DropdownList(this);
-	this.transformationSpace.size.set(60, 30);
-	this.transformationSpace.position.set(145, 5);
-	this.transformationSpace.updatePosition(Component.BOTTOM_RIGHT);
-	this.transformationSpace.updateSize();
-	this.transformationSpace.addValue(Locale.local, TransformControls.LOCAL);
-	this.transformationSpace.addValue(Locale.world, TransformControls.WORLD);
-	this.transformationSpace.element.style.opacity = 0.5;
-	this.transformationSpace.setOnChange(function()
-	{
-		var space = self.transformationSpace.getValue();
-		Editor.settings.editor.transformationSpace = space;
-		self.transform.space = space;
-	});
-	this.transformationSpace.element.onmouseenter = function()
-	{
-		this.style.opacity = 1.0;
-	};
-	this.transformationSpace.element.onmouseleave = function()
-	{
-		this.style.opacity = 0.5;
-	};
-
-	/**
 	 * Dropdown to select the world navigation mode to use.
 	 *
 	 * @attribute navigation
@@ -827,8 +798,7 @@ SceneEditor.prototype.updateSettings = function()
 	this.navigation.setValue(Editor.settings.editor.navigation);
 
 	// Tool
-	this.transformationSpace.setValue(Editor.settings.editor.transformationSpace);
-	this.transform.space = Editor.settings.editor.transformationSpace;
+	this.transform.space = TransformControls.WORLD;
 	this.transform.snap = Editor.settings.editor.snap;
 	this.transform.translationSnap = Editor.settings.editor.gridSpacing;
 	this.transform.rotationSnap = Math.PI / 8;

@@ -122,19 +122,6 @@ function EditorSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	// Tranformations space
-	this.form.addText("Transformations space");
-	this.transformationSpace = new DropdownList(this.form);
-	this.transformationSpace.size.set(150, 18);
-	this.transformationSpace.addValue(Locale.local, "local");
-	this.transformationSpace.addValue(Locale.world, "world");
-	this.transformationSpace.setOnChange(function()
-	{
-		Editor.settings.editor.transformationSpace = self.transformationSpace.getValue();
-	});
-	this.form.add(this.transformationSpace);
-	this.form.nextRow();
-
-	// Tranformations space
 	this.form.addText("Keep pose move").setAltText("Recalculate the object transformation to keep its global position when it is moved.");
 	this.keepTransformMove = new CheckBox(this.form);
 	this.keepTransformMove.size.set(18, 18);
@@ -410,7 +397,6 @@ EditorSettingsTab.prototype.activate = function()
 
 	// Transformations
 	this.keepTransformMove.setValue(Editor.settings.editor.keepTransformMove);
-	this.transformationSpace.setValue(Editor.settings.editor.transformationSpace);
 };
 
 EditorSettingsTab.prototype.updateSize = function()

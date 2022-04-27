@@ -108,7 +108,6 @@ Settings.prototype.loadDefault = function()
 		cameraPreviewSize: 200,
 		cameraPreviewPosition: Viewport.BOTTOM_RIGHT,
 		lockMouse: true,
-		transformationSpace: "world",
 		navigation: Settings.ORBIT,
 		invertNavigation: false,
 		invertHorizontalNavigation: false,

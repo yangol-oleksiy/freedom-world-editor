@@ -1,5 +1,9 @@
 # Changelog
 
+### V0.125
+
+- Removed messy controls for objects moving
+
 ### V0.124
 
 - Improved library loading process (loading via promises)
