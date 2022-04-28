@@ -1,5 +1,10 @@
 # Changelog
 
+### V0.126
+
+- Removed messy first person controls
+- Fixed camera view bugs
+
 ### V0.125
 
 - Removed messy controls for objects moving

@@ -17,6 +17,8 @@
 * [x] Navigate scene
   * [x] Move camera on scene during editing
   * [x] Rotate scene
+  * [x] Side camera
+  * [x] Top camera
 * [x] Save scene
 * [x] Load scene
 * [x] Load objects library internal function

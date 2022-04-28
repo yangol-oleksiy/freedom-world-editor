@@ -14,6 +14,7 @@ function EditorPlanarControls(mode)
 {
 	EditorOrbitControls.call(this);
 
+	this.coordsSystem = Editor.getCoordsSystem();
 	this.setMode(mode !== undefined ? mode : Settings.PLANAR_LEFT);
 }
 
@@ -96,7 +97,7 @@ EditorPlanarControls.prototype.update = function(mouse)
 		this.distance += mouse.wheel * Editor.settings.editor.mouseWheelSensitivity * this.distance;
 		needsUpdate = true;
 	}
-	
+
 	/*
 	// WASD movement
 	if(Editor.settings.editor.keyboardNavigation)

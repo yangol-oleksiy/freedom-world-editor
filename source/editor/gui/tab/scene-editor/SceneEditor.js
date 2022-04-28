@@ -49,7 +49,6 @@ import {MultipleSelection} from "./utils/MultipleSelection.js";
 import {GridHelper} from "./helpers/GridHelper.js";
 import {EditorPlanarControls} from "./controls/EditorPlanarControls.js";
 import {EditorOrbitControls} from "./controls/EditorOrbitControls.js";
-import {EditorFreeControls} from "./controls/EditorFreeControls.js";
 import {WireframeHelper} from "./helpers/WireframeHelper.js";
 
 /**
@@ -514,7 +513,6 @@ function SceneEditor(parent, closeable, container, index)
 	this.navigation.position.set(40, 5);
 	this.navigation.updatePosition(Component.BOTTOM_RIGHT);
 	this.navigation.updateSize();
-	this.navigation.addValue(Locale.firstPerson, Settings.FIRST_PERSON);
 	this.navigation.addValue(Locale.orbit, Settings.ORBIT);
 	this.navigation.addValue(Locale.left, Settings.PLANAR_LEFT);
 	this.navigation.addValue(Locale.right, Settings.PLANAR_RIGHT);
@@ -526,7 +524,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.navigation.setOnChange(function()
 	{
 		Editor.settings.editor.navigation = self.navigation.getValue();
-		self.updateCameraControls(Editor.settings.editor.navigation);
+		self.updateCameraControls(Editor.settings.editor.navigation, Editor.getCoordsSystem());
 	});
 	this.navigation.element.onmouseenter = function()
 	{
@@ -756,11 +754,7 @@ SceneEditor.prototype.updateCameraControls = function(mode, coordsSystem)
 
 	this.controlsMode = mode;
 
-	if (mode === Settings.FIRST_PERSON)
-	{
-		this.controls = new EditorFreeControls();
-	}
-	else if (mode === Settings.ORBIT)
+	if (mode === Settings.ORBIT)
 	{
 		this.controls = new EditorOrbitControls();
 	}
